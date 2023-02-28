@@ -1,0 +1,29 @@
+@startuml use_cases__delete_comment
+left to right direction
+skinparam actorStyle Awesome
+!theme bluegray
+skinparam backgroundcolor White
+
+'Titre'
+title Use cases | Delete a comment
+
+'Acteur'
+actor "Administrateur" as Administrateur
+
+'Rectangle'
+rectangle {
+    'Authentification'
+    "«Authentication»" as (Authentification)
+
+    'Administrateur'
+    "Consult the comments dashboard" as (ConsulterTDBCommentaires)
+    "Select the comment" as (SelectionnerCommentaire)
+    "Delete comment" as (SupprimerCommentaire)
+
+    'Déroulement'
+    :Administrateur: -.> (ConsulterTDBCommentaires)
+    (ConsulterTDBCommentaires) -.> (SelectionnerCommentaire) : include
+    (SelectionnerCommentaire) -.> (SupprimerCommentaire) : include
+    (SupprimerCommentaire) -.> (Authentification) : include
+}
+@enduml

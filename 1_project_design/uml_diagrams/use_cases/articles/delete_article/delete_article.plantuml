@@ -1,0 +1,29 @@
+@startuml use_cases__delete_article
+left to right direction
+skinparam actorStyle Awesome
+!theme bluegray
+skinparam backgroundcolor White
+
+'Titre'
+title Use cases | Delete an article
+
+'Acteur'
+actor "Administrator" as Administrateur
+
+'Rectangle'
+rectangle {
+    'Authentification'
+    "«Authentication»" as (Authentification)
+
+    'Administrateur'
+    "Consult the article dashboard" as (ConsulterTDBArticles)
+    "Select the article" as (SelectionnerArticle)
+    "Delete the article" as (SupprimerArticle)
+
+    'Déroulement'
+    :Administrateur: -.> (ConsulterTDBArticles)
+    (ConsulterTDBArticles) -.> (SelectionnerArticle) : include
+    (SelectionnerArticle) -.> (SupprimerArticle) : include
+    (SupprimerArticle) -.> (Authentification) : include
+}
+@enduml

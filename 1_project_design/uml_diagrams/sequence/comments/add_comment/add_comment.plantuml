@@ -1,0 +1,20 @@
+@startuml sequence__add_comment
+hide footbox
+skinparam actorStyle awesome
+!theme aws-orange
+skinparam backgroundcolor White
+
+'Titre'
+title Sequence | Add a comment
+
+'Déroulement'
+User -> User : Fills in the form to add a comment
+User -> System : Sends the comment form
+System -> System : Checks the different values of the form
+System -> System : Saves the form in the database as unpublished
+System --> User : Displays a message warning that the comment has been sent but that it must be verified
+System -> Administrator : Warns the administrator by mail and on his dashboard, that a new comment needs validation
+Administrator -> System : Validate the comment
+System -> System : Change the status of the form to published in the database
+System --> Administrator: Displays an action confirmation message
+@enduml

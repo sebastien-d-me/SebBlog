@@ -1,0 +1,19 @@
+@startuml sequence__edit_article
+hide footbox
+skinparam actorStyle awesome
+!theme aws-orange
+skinparam backgroundcolor White
+
+'Titre'
+title Sequence | Edit an article
+
+'Déroulement'
+Administrator -> Administrator : Select an article
+Administrator -> System : Click on "Modify article"
+System --> Administrator: Redirects to the article editing page
+Administrator -> Administrator : Make the modifications
+Administrator -> System : Sends the request to save the modifications
+System -> System : Checks the form fields
+System -> System : Saves the changes in the database
+System --> Administrator: Displays an action confirmation message
+@enduml
