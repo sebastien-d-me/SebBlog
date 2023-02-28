@@ -1,0 +1,38 @@
+@startuml use_cases__add_comment
+left to right direction
+skinparam actorStyle Awesome
+!theme bluegray
+skinparam backgroundcolor White
+
+'Titre'
+title Use cases | Add a comment
+
+'Acteurs'
+actor "User" as Utilisateur
+actor "Administrator" as Administrateur
+Utilisateur <|- Administrateur
+
+'Rectangle'
+rectangle {
+    'Authentification'
+    "«Authentication»" as (Authentification)
+
+    'Utilisateur'
+    "Fill in the form" as (RemplirFormulaire)
+    "Send the form" as (EnvoyerFormulaire)
+
+    'Administrateur'
+    "Consult the comments dashboard" as (ConsulterTDBCommentaires)
+    "Reject comment(s)" as (RefuserCommentaire)
+    "Validate the comment(s)" as (ValiderCommentaire)
+
+    'Déroulement'
+    :Utilisateur: -.> (RemplirFormulaire)
+    (RemplirFormulaire) -.> (EnvoyerFormulaire) : include
+    (EnvoyerFormulaire) -.> (Authentification) : include
+    :Administrateur: -.> (ConsulterTDBCommentaires)
+    (ConsulterTDBCommentaires) -.> (ValiderCommentaire) : include
+    (ConsulterTDBCommentaires) -.> (RefuserCommentaire) : include
+    (ConsulterTDBCommentaires) -.> (Authentification) : include
+}
+@enduml

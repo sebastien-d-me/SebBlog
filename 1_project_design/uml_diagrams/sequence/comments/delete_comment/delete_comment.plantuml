@@ -1,0 +1,16 @@
+@startuml sequence__delete_comment
+hide footbox
+skinparam actorStyle awesome
+!theme aws-orange
+skinparam backgroundcolor White
+
+'Titre'
+title Sequence | Delete a comment
+
+'Déroulement'
+Administrator -> Administrator: Selects a comment
+Administrator -> System : Sends the request to delete the comment
+System -> System : Delete the comment
+System --> Administrator : Displays an action confirmation message
+System -> User : Notify the user by mail that his comment has been deleted
+@enduml

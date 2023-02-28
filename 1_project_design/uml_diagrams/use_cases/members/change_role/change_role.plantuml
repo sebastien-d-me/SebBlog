@@ -1,0 +1,31 @@
+@startuml use_cases__change_role
+left to right direction
+skinparam actorStyle Awesome
+!theme bluegray
+skinparam backgroundcolor White
+
+'Titre'
+title Use cases | Change role
+
+'Acteur'
+actor "Administrator" as Administrateur
+
+'Rectangle'
+rectangle {
+    'Authentification'
+    "«Authentication»" as (Authentification)
+
+    'Administrateur'
+    "Consult the members' dashboard" as (ConsulterTDBMembres)
+    "Select a member" as (SelectionnerMembre)
+    "Change the role of the member" as (ModifierRole)
+    "Save changes" as (EnregistrerModifications)
+
+    'Déroulement'
+    :Administrateur: -.> (ConsulterTDBMembres)
+    (ConsulterTDBMembres) -.> (SelectionnerMembre) : include
+    (SelectionnerMembre) -.> (ModifierRole) : include
+    (ModifierRole) -.> (EnregistrerModifications) : include
+    (EnregistrerModifications) -.> (Authentification) : include
+}
+@enduml

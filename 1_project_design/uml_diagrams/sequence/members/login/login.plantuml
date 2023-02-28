@@ -1,0 +1,16 @@
+@startuml sequence__login
+hide footbox
+skinparam actorStyle awesome
+!theme aws-orange
+skinparam backgroundcolor White
+
+'Titre'
+title Sequence | Login
+
+'Déroulement'
+Visitor -> Visitor: Fills in the login form correctly
+Visitor -> System: Sends the connection form
+System -> System: Checks the different values of the form
+System -> System: If authentication fails a third time, blocks the account for 30 minutes
+System --> Visitor: Logs the user into the site
+@enduml
