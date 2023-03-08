@@ -1,0 +1,25 @@
+.footer__block {
+    align-items: center;
+    background: $black;
+    color: $white;
+    display: flex;
+    filter: drop-shadow(0px -1px 2px $fullBlack);
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    min-height: 60px;
+    width: 100%;
+}
+
+// Copyright
+.copyright__text {
+    display: block;
+    text-align: center;
+}
+
+/// Responsive
+@media screen and (max-width: 1200px) {
+    .footer__block {
+        gap: 20px 0;
+        padding: 10px;
+    }
+}

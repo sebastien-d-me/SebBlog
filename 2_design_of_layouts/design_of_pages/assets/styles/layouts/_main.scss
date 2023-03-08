@@ -1,0 +1,12 @@
+.main__block {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 300px);
+}
+
+/// Responsive
+@media screen and (max-width: 1200px) {
+    .main__block {
+        width: 100%;
+    }
+}

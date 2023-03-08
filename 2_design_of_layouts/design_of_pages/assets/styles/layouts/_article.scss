@@ -1,0 +1,42 @@
+.article {
+    border-bottom: 2px solid $white;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+}
+
+// Title
+.article__title {
+    margin: 10px 0;
+}
+
+// Meta 
+.article__meta {
+    margin-bottom: 30px;
+}
+
+// Categories
+.article__categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 20px;
+}
+
+.categories__item {
+    text-transform: uppercase;
+}
+
+// Content
+.article__content {
+    text-align: left;
+}
+
+/// Responsive
+@media screen and (max-width: 1200px) {
+
+    // Categories
+    .article__categories {
+        gap: 0 10px;
+        justify-content: center;
+    }
+
+}
