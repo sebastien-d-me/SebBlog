@@ -1,0 +1,66 @@
+.header__block {
+    align-items: center;
+    background: $black;
+    color: $white;
+    display: flex;
+    filter: drop-shadow(0px 1px 2px $fullBlack);
+    justify-content: space-evenly;
+    min-height: 100px;
+    width: 100%;
+}
+
+// Banner
+.header__banner {
+    filter: drop-shadow(0 0 5px $fullBlack);
+    object-fit: cover;
+}
+
+// Mobile
+.header__mobile {
+    display: none;
+}
+
+// Logo
+.header__logo {
+    display: block;
+    font-family: "Dancing Script", sans-serif;
+    font-size: 40px;
+    margin: 0 auto 0 auto;
+    text-align: center;
+}
+
+// Menu
+.icon--close_sidebar {
+    display: none;
+}
+
+/// Responsive
+@media screen and (max-width: 1200px) {
+
+    // Banner
+    .header__banner {
+        display: none;
+    }
+
+    // Mobile 
+    .header__mobile {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        padding: 10px;
+    }
+
+    // Menu
+    .icon--open_sidebar {
+        font-size: 24px;
+    }
+
+    .icon--close_sidebar {
+        border-bottom: 1px solid $white;
+        display: none;
+        font-size: 30px;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+}
