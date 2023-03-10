@@ -1,5 +1,8 @@
 <?php
 
+// Load the model
+require_once("app/models/Test.php");
+
 class TestController {
     // Load Twig
     private $twig;
@@ -10,7 +13,9 @@ class TestController {
 
     // Functions of the controller
     function test() {
-        $html = $this->twig->render("test.html.twig");
+        $test = new Test();
+        $values = $test->getTests();
+        $html = $this->twig->render("test.html.twig", ["test" => $values]);
         return $html;
     }
 }

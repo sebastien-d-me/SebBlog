@@ -13,5 +13,8 @@ $routeFound = explode("::", $routes[$currentURL]);
 require_once("app/controllers/${routeFound[0]}.php");
 $controller = new $routeFound[0]($twig);
 
+// Load the database
+require_once("config/database.php");
+
 // Call the function of the controller
 echo $controller->{$routeFound[1]}();
