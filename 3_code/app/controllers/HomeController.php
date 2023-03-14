@@ -1,5 +1,8 @@
 <?php
 
+// Namespace
+namespace App\Controllers;
+
 class HomeController {
     // Load Twig
     private $twig;
