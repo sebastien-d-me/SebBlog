@@ -3,7 +3,7 @@
 // Namespace
 namespace App\Controllers;
 
-class HomeController {
+class BaseController {
     // Load Twig
     private $twig;
     

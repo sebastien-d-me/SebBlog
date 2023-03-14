@@ -2,5 +2,5 @@
 
 // Define the routes with the controller
 $routes = [
-    "/" => "HomeController::index",
+    "/" => "TestController::update",
 ];
