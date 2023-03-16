@@ -19,8 +19,8 @@ class BaseController extends DefaultController {
         var_dump($result);
     }
     
-    function getDataFiltered() {
-        $result = Base::all()->where("idTest", 58);
+    function getDataFiltered($id) {
+        $result = Base::all()->where("idTest", $id);
         var_dump($result);
     }
     
@@ -31,15 +31,15 @@ class BaseController extends DefaultController {
         $base->save();
     }
     
-    function updateData() {
-        $base = Base::find(59);
+    function updateData($id) {
+        $base = Base::find($id);
         $base->setFullName("John DOE");
         $base->setMail("test@test.com");
         $base->save();
     }
     
-    function deleteData() {
-        $base = Base::find(59);
+    function deleteData($id) {
+        $base = Base::find($id);
         $base->delete();
     }
 }

@@ -4,8 +4,8 @@
 $routes = [
     "/" => "BaseController::index",
     "/all" => "BaseController::getData",
-    "/filtered" => "BaseController::getDataFiltered",
+    "/filtered/{id}" => "BaseController::getDataFiltered",
     "/create" => "BaseController::createData",
-    "/update" => "BaseController::updateData",
-    "/delete" => "BaseController::deleteData"
+    "/update/{id}" => "BaseController::updateData",
+    "/delete/{id}" => "BaseController::deleteData"
 ];
