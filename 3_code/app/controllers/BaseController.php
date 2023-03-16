@@ -3,17 +3,11 @@
 // Namespace
 namespace App\Controllers;
 
-// Load model
+// Load
+use App\Controllers\DefaultController;
 use App\Models\Base;
 
-class BaseController {
-    // Load Twig
-    private $twig;
-    
-    public function __construct($twig) {
-        $this->twig = $twig;
-    }
-
+class BaseController extends DefaultController {
     // Functions of the controller
     function index() {
         $html = $this->twig->render("base.html.twig");
@@ -21,32 +15,31 @@ class BaseController {
     }
 
     function getData() {
-        $result = Base::getAll();
+        $result = Base::all();
         var_dump($result);
     }
     
     function getDataFiltered() {
-        $result = Base::getBy("idTest", 1);
+        $result = Base::all()->where("idTest", 58);
         var_dump($result);
     }
     
     function createData() {
-        $data = [
-            "fullName" => "Sébastien D.", 
-            "mail" => "seb@moi.com"
-        ];
-        Base::create($data);
+        $base = new Base();
+        $base->setFullName("Sébastien D.");
+        $base->setMail("seb@moi.com");
+        $base->save();
     }
     
     function updateData() {
-        $data = [
-            "fullName" => "John DOE", 
-            "mail" => "john@doe.com"
-        ];
-        Base::update(1, $data);
+        $base = Base::find(59);
+        $base->setFullName("John DOE");
+        $base->setMail("test@test.com");
+        $base->save();
     }
     
     function deleteData() {
-        Base::delete(1);
+        $base = Base::find(59);
+        $base->delete();
     }
 }

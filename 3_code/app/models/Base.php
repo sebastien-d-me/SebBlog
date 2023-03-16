@@ -5,36 +5,37 @@ namespace App\Models;
 
 // Load Capsule
 use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Database\Eloquent\Model;
 
-class Base {
-    // All
-    public static function getAll() {
-        return Capsule::table("test")->get();
+class Base extends Model {
+    // Parameters
+    protected $table = "test";
+    public $timestamps = false;
+
+    protected $primaryKey = "idTest";
+    protected $fillable = ["fullName", "mail"];
+
+    // Getter
+    public function getIdTest() {
+        return $this->idTest;
     }
 
-    // Filtered
-    public static function getBy($column, $value) {
-        return Capsule::table("test")->where($column, $value)->get();
+    public function getFullName() {
+        return $this->fullName;
     }
 
-    // Create
-    public static function create($data) {
-        Capsule::table("test")->insert([
-            "fullName" => $data["fullName"],
-            "mail" => $data["mail"]
-        ]);
+    public function getMail() {
+        return $this->mail;
     }
 
-    // Update
-    public static function update($id, $data) {
-        Capsule::table("test")->where("idTest", $id)->update([
-            "fullName" => $data["fullName"],
-            "mail" => $data["mail"]
-        ]);
+    // Setter
+    public function setFullName($fullName) {
+        $this->fullName = $fullName;
+        return $this;
     }
 
-    // Delete
-    public static function delete($id) {
-        Capsule::table("test")->where("idTest", $id)->delete();
+    public function setMail($mail) {
+        $this->mail = $mail;
+        return $this;
     }
 }
