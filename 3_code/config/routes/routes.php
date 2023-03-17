@@ -7,5 +7,7 @@ $routes = [
     "/filtered/{id}" => "BaseController::getDataFiltered",
     "/create" => "BaseController::createData",
     "/update/{id}" => "BaseController::updateData",
-    "/delete/{id}" => "BaseController::deleteData"
+    "/delete/{id}" => "BaseController::deleteData",
+    ////////
+    "/login" => "BaseController::login"
 ];

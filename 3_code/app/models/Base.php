@@ -13,29 +13,38 @@ class Base extends Model {
     public $timestamps = false;
 
     protected $primaryKey = "idTest";
-    protected $fillable = ["fullName", "mail"];
+    protected $fillable = ["username", "mail", "password"];
 
     // Getter
     public function getIdTest() {
         return $this->idTest;
     }
 
-    public function getFullName() {
-        return $this->fullName;
+    public function getUsername() {
+        return $this->username;
     }
 
     public function getMail() {
         return $this->mail;
     }
 
+    public function getPassword() {
+        return $this->password;
+    }
+
     // Setter
-    public function setFullName($fullName) {
-        $this->fullName = $fullName;
+    public function setUsername($username) {
+        $this->username = $username;
         return $this;
     }
 
     public function setMail($mail) {
         $this->mail = $mail;
+        return $this;
+    }
+
+    public function setPassword($password) {
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
         return $this;
     }
 }
