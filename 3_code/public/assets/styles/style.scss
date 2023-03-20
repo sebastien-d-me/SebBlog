@@ -3,8 +3,8 @@
 @import "./abstracts/mixins";
 
 /* Vendors */
-@import "../../node_modules/modern-normalize/modern-normalize.css";
-@import "../../node_modules/remixicon/fonts/remixicon.css";
+@import "./vendors/node_modules/modern-normalize/modern-normalize.css";
+@import "./vendors/node_modules/remixicon/fonts/remixicon.css";
 
 /* Base */
 @import "./base/fonts";

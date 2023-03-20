@@ -1,15 +1,21 @@
+{% set publicFolder = "/public/assets" %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SebBlog</title>
-    <link href="/public/assets/styles/style.css" rel="stylesheet">
+    <link href="{{publicFolder}}/styles/style.css" rel="stylesheet">
 </head>
 
 <body>
-
+    {% include "layouts/sidebar.html.twig" %}
+    {% include "layouts/main.html.twig" %}
+    <a class="link link--reset" href="#">
+        <i class="icon ri-arrow-up-circle-line scroll_up__icon"></i>
+    </a>
     <!-- Scripts -->
-    <script src="/public/assets/scripts/script.js"></script>
+    <script src="{{publicFolder}}/scripts/script.js"></script>
 </body>
 </html>
