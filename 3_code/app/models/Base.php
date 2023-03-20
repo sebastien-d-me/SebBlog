@@ -9,42 +9,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Base extends Model {
     // Parameters
-    protected $table = "test";
+    protected $table = "";
     public $timestamps = false;
 
-    protected $primaryKey = "idTest";
-    protected $fillable = ["username", "mail", "password"];
+    protected $primaryKey = "";
+    protected $fillable = [""];
 
     // Getter
-    public function getIdTest() {
-        return $this->idTest;
+    public function getAbc() {
+        return $this->abc;
     }
 
-    public function getUsername() {
-        return $this->username;
-    }
-
-    public function getMail() {
-        return $this->mail;
-    }
-
-    public function getPassword() {
-        return $this->password;
+    public function getDef() {
+        return $this->def;
     }
 
     // Setter
-    public function setUsername($username) {
-        $this->username = $username;
-        return $this;
-    }
-
-    public function setMail($mail) {
-        $this->mail = $mail;
-        return $this;
-    }
-
-    public function setPassword($password) {
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
+    public function setDef($def) {
+        $this->def = $def;
         return $this;
     }
 }
