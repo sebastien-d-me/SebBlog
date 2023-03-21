@@ -412,19 +412,23 @@ body {
   gap: 20px 0;
 }
 
-.recent_articles__list {
+.random_articles__list {
   display: flex;
   flex-direction: column;
   gap: 20px 0;
 }
-.recent_articles__list > .item__list {
+.random_articles__list > .item__list {
   display: flex;
   flex-direction: column;
   gap: 5px 0;
 }
 
-.recent_article__date {
+.random_article__date {
   display: block;
+}
+
+.random_articles__none {
+  text-align: center;
 }
 
 .sidebar__socials {

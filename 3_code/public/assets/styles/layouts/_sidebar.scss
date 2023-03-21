@@ -71,7 +71,7 @@
 }
 
 // Articles
-.recent_articles__list {
+.random_articles__list {
     display: flex;
     flex-direction: column;
     gap: 20px 0;
@@ -83,8 +83,12 @@
     }
 }
 
-.recent_article__date {
+.random_article__date {
     display: block;
+}
+
+.random_articles__none {
+    text-align: center;
 }
 
 // Socials
