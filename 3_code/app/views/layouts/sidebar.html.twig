@@ -5,7 +5,7 @@
         <i class="icon icon--close_sidebar ri-menu-5-line"></i>
     </section>
     <section aria-label="Search">
-        <form action="search.html" class="sidebar__form" method="get">
+        <form action="/search" class="sidebar__form" method="get">
             <input class="input" placeholder="Search..." type="search">
             <button class="btn btn--form" type="submit">
                 <i class="icon ri-search-line"></i>
@@ -17,13 +17,13 @@
         <nav>
             <ul class="list sidebar__list">
                 <li class="item__list">
-                    <a class="btn btn--link" href="">Home</a>
+                    <a class="btn btn--link{% if route == '/' %} active{% endif %}" href="/">Home</a>
                 </li>
                 <li class="item__list">
-                    <a class="btn btn--link" href="">Articles</a>
+                    <a class="btn btn--link{% if route == '/articles' %} active{% endif %}" href="/articles">Articles</a>
                 </li>
                 <li class="item__list">
-                    <a class="btn btn--link" href="">Login</a>
+                    <a class="btn btn--link{% if route == '/login' %} active{% endif %}" href="/login">Login</a>
                 </li>
             </ul>
         </nav>
@@ -32,7 +32,7 @@
         <h2 class="sidebar__category">Recent articles</h2>
         <ul class="list recent_articles__list">
             <li class="item__list">
-                <a class="link" href="">Nunc blandit dictum lectus sed auctor</a>
+                <a class="link" href="/">Nunc blandit dictum lectus sed auctor</a>
                 <time class="recent_article__date" datetime="2023-03-03">March 3, 2023</time>
             </li>
         </ul>
