@@ -3,45 +3,29 @@
 // Load the routes
 require_once("routes.php");
 
-// Get the current URL
+// Get the current URL and check if the route exist
 $currentURL = $_SERVER["REQUEST_URI"];
-
-// Check ID
-$checkID = is_numeric(substr($currentURL, strrpos($currentURL, "/") + 1));
-if($checkID === true) {
-    $id = substr($currentURL, strrpos($currentURL, "/") + 1);
-    $currentURL = dirname($currentURL)."/{id}";
-}
-
-// Check if the route exist
 if(!array_key_exists($currentURL, $routes)) {
     header("Location: /");
-    exit;
+    exit();
 }
 
-// Decompose the route of the controller
-$routeFound = explode("::", $routes[$currentURL]);
+// Get the route and the settings
+$route = $routes[$currentURL];
 
-// Search the controller file
+// Search the controller file and load it
 $controllerFilePath = array_merge(
-    glob("app/controllers/".$routeFound[0].".php"), 
-    glob("app/controllers"."/**/".$routeFound[0].".php")
+    glob("app/controllers/".$route["class"].".php"), 
+    glob("app/controllers"."/**/".$route["class"].".php")
 );
+require_once($controllerFilePath[0]);
 
-// Load the controller file
-$controllerFile = file_get_contents($controllerFilePath[0]);
+// Get the class and load it
+$classPath = "App\Controllers\\".$route["class"];
+$class = new $classPath($currentURL, $twig);
 
-// Get the namespace of the controller
-$regexNamespace = "/namespace\s+([^\s;]+)/";
-preg_match($regexNamespace, $controllerFile, $namespace);
-$classPath = $namespace[1]."\\".$routeFound[0];
+// Call the method of the class
+array_key_exists("parameters", $route) ? $class->{$route["method"]}($route["parameters"]) : $class->{$route["method"]}();
 
-// Load and create an instance of the controller
-$controller = new $classPath($currentURL, $twig);
-
-// Call the function of the controller
-if($checkID === true) {
-    echo $controller->{$routeFound[1]}($id);
-} else {
-    echo $controller->{$routeFound[1]}();
-}
+/// TODO
+// Add a verification for the security
