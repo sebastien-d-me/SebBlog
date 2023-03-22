@@ -4,10 +4,12 @@
 namespace App\Controllers;
 
 class DefaultController {
-    // Load Twig
+    // Load parameters
+    protected $route;
     protected $twig;
     
-    public function __construct($twig) {
+    public function __construct($route, $twig) {
         $this->twig = $twig;
+        $this->route = $route;
     }
 }

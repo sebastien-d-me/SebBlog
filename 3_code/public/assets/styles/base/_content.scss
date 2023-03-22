@@ -1,0 +1,29 @@
+// Fonts
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+// Display
+.show {
+    display: block !important;
+}
+
+.hide {
+    display: none !important;
+}
+
+// Image
+.img__responsive {
+    max-height: 100%;
+    max-width: 100%;
+    width: 100%;
+}
+
+// Scroll
+.scroll_up__icon {
+    font-size: 35px;
+    left: calc(100% - 50px);
+    top: calc(100% - 50px);
+    transition: 0.5s;
+    position: fixed;
+}

@@ -37,7 +37,7 @@ preg_match($regexNamespace, $controllerFile, $namespace);
 $classPath = $namespace[1]."\\".$routeFound[0];
 
 // Load and create an instance of the controller
-$controller = new $classPath($twig);
+$controller = new $classPath($currentURL, $twig);
 
 // Call the function of the controller
 if($checkID === true) {

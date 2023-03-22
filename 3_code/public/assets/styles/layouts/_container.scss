@@ -1,0 +1,25 @@
+.container__block {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    min-height: calc(100vh - 325px);
+    padding: 20px 75px;
+    width: 100%
+}
+
+// Title
+.container__title {
+    border-bottom: 1px solid $white;
+    font-size: 32px;
+    margin: 0 0 40px 0;
+    padding-bottom: 5px;
+    width: fit-content;
+}
+
+/// Responsive
+@media screen and (max-width: 1200px) {
+    .container__block {
+        min-height: calc(100vh - 140px);
+        padding: 20px;
+    }
+}

@@ -1,0 +1,69 @@
+.btn {
+    align-items: center;
+    background-color: $white;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: $black;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+    transition: 0.5s;
+    width: fit-content;
+
+    &:hover {
+        background-color: $red;
+        border-color: $white;
+        color: $white;
+        cursor: pointer;
+    }
+}
+
+// Form
+.btn--form {
+    background-color: transparent;
+    border: none;
+    border-radius: unset;
+    color: $white;
+    font-size: 20px;
+    height: 30px;
+    padding: unset;
+
+    &:hover {
+        background-color: transparent;
+        color: $red;
+    }
+}
+
+// Link
+.btn--link {
+    border-radius: 5px;
+    color: $black;
+    text-transform: uppercase;
+    text-decoration: none;
+    width: 100%;
+
+    &:hover {
+        background-color: transparent;
+        border-color: $white;
+        color: $white;
+    }
+
+    &.active {
+        background-color: $red;
+        color: $white;
+    }
+}
+
+// Secondary
+.btn--secondary {
+    background-color: $black;
+    border-color: $white;
+    color: $white;
+
+    &:hover {
+        border-color: $red;
+        color: $white;
+    }
+}
