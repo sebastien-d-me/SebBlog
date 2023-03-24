@@ -273,11 +273,30 @@ body {
   width: 100%;
 }
 .input.checkbox {
-  min-width: 30px;
+  height: 25px;
+  margin: auto 0;
+  min-width: unset;
+  width: 25px;
 }
 .input.textarea {
   min-height: 100px;
   resize: none;
+}
+
+.input--form {
+  width: 300px;
+}
+
+.form__row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px 0;
+  margin-bottom: 25px;
+}
+.form__row--stick {
+  align-items: center;
+  flex-direction: row;
+  gap: 0 20px;
 }
 
 .link {

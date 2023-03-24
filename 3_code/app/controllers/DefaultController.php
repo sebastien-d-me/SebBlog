@@ -9,7 +9,7 @@ class DefaultController {
     protected $twig;
     
     public function __construct($route, $twig) {
-        $this->twig = $twig;
         $this->route = $route;
+        $this->twig = $twig;
     }
 }
