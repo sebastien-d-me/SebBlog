@@ -10,9 +10,8 @@ class BaseController extends DefaultController {
     // Functions of the controller
     function index() {
         $html = $this->twig->render("pages/index.html.twig", [
-            "route" => $this->route,
-            "title" => "Home"
+            "route" => $this->route
         ]);
-        return $html;
+        echo $html;
     }
 }
