@@ -27,7 +27,10 @@ $classPath = "App\Controllers\\".$route["class"];
 $class = new $classPath($currentURL, $twig);
 
 // Call the method of the class
-array_key_exists("parameters", $route) ? $class->{$route["method"]}($route["parameters"]) : $class->{$route["method"]}();
-
+if(array_key_exists("parameters", $route)) {
+    echo $class->{$route["method"]}($route["parameters"]);
+} else {
+    echo $class->{$route["method"]}();
+}
 /// TODO
 // Add a verification for the security

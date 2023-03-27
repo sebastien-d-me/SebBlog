@@ -12,15 +12,15 @@ use App\Models\Activation;
 class RegistrationController extends DefaultController {
     // Functions of the controller
     function index() {
-        $html = $this->twig->render("pages/members/registration.html.twig", [
-            "route" => $this->route
-        ]);
-        echo $html;
-        
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $fields = $_POST;
             $this->checkFields($fields);
-        }
+        } else {
+            return $this->twig->render("pages/members/registration.html.twig", [
+                "message" => "",
+                "route" => $this->route
+            ]);
+        }        
     }
 
     function checkFields($fields) {
@@ -30,7 +30,15 @@ class RegistrationController extends DefaultController {
             $field === "" ? $correctFields = false : "";
         }
 
+        if(strlen($fields["field__username"]) < 3) {
+            $correctFields = false;
+        }
+
         if (!filter_var($fields["field__mail"], FILTER_VALIDATE_EMAIL)) {
+            $correctFields = false;
+        }
+
+        if(strlen($fields["field__password"]) < 8) {
             $correctFields = false;
         }
 
@@ -42,7 +50,7 @@ class RegistrationController extends DefaultController {
             $correctFields = false;
         }
 
-        $correctFields ? $this->saveMember($fields) : "";
+        $correctFields ? $this->saveMember($fields) : $this->showError();
     }
 
     function saveMember($fields) {
@@ -79,6 +87,18 @@ class RegistrationController extends DefaultController {
             "content" => "Click here to activate your account : $url"
         ];
         sendMail($values);
+
+        echo $this->twig->render("pages/members/login.html.twig", [
+            "message" => "Your account has been created.",
+            "route" => $this->route
+        ]);
+    }
+
+    function showError() {
+        echo $this->twig->render("pages/members/registration.html.twig", [
+            "message" => "Please verify the fields in the form.",
+            "route" => $this->route
+        ]);
     }
 
     function activateAccount() {
@@ -89,10 +109,9 @@ class RegistrationController extends DefaultController {
         $member->setIsActive(true);
         $member->save();
 
-        $html = $this->twig->render("pages/members/registration.html.twig", [
-            "message" => "Your account is now active",
+        echo $this->twig->render("pages/members/registration.html.twig", [
+            "message" => "Your account is now active.",
             "route" => $this->route
         ]);
-        echo $html;
     }
 }
