@@ -4,7 +4,6 @@
 namespace App\Controllers;
 
 // Load
-use App\Controllers\RegistrationController;
 use App\Models\LoginCredentials;
 use App\Models\Member;
 use App\Models\Activation;
@@ -25,6 +24,7 @@ class RegistrationController extends DefaultController {
 
     function checkFields($fields) {
         $correctFields = true;
+        $message = "";
 
         foreach($fields as $field) {
             $field === "" ? $correctFields = false : "";
@@ -50,7 +50,13 @@ class RegistrationController extends DefaultController {
             $correctFields = false;
         }
 
-        $correctFields ? $this->saveMember($fields) : $this->showError();
+        $checkExisting = LoginCredentials::where("username", $fields["field__username"])->orWhere("email", $fields["field__mail"])->first();
+        if ($checkExisting) {
+            $correctFields = false;
+            $message = "The username and/or email address is already in use.";
+        }
+
+        $correctFields ? $this->saveMember($fields) : $this->showError($message);
     }
 
     function saveMember($fields) {
@@ -88,15 +94,13 @@ class RegistrationController extends DefaultController {
         ];
         sendMail($values);
 
-        echo $this->twig->render("pages/members/login.html.twig", [
-            "message" => "Your account has been created.",
-            "route" => $this->route
-        ]);
+        header("Location: /login");
+        exit();
     }
 
-    function showError() {
+    function showError($message) {
         echo $this->twig->render("pages/members/registration.html.twig", [
-            "message" => "Please verify the fields in the form.",
+            "message" => $message,
             "route" => $this->route
         ]);
     }
