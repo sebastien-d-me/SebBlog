@@ -8,32 +8,63 @@ $routes = [
     "/" => [
         "class" => "BaseController",
         "method" => "index",
-        "security_level" => $securityLevel[0]
+        "permissions" => [
+            "Anonymous" => true,
+            "Member" => true,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Errors */
+    "/401" => [
+        "class" => "ErrorController",
+        "method" => "error401",
+        "permissions" => [
+            "Anonymous" => true,
+            "Member" => true,
+            "Administrator" => true
+        ]
     ],
 
     /* Members */
     "/register" => [
         "class" => "RegistrationController",
         "method" => "index",
-        "security_level" => $securityLevel[0]
+        "permissions" => [
+            "Anonymous" => true,
+            "Member" => false,
+            "Administrator" => false
+        ]
     ],
 
     "/activate" => [
         "class" => "RegistrationController",
         "method" => "activateAccount",
-        "security_level" => $securityLevel[0]
-    ],
+        "permissions" => [
+            "Anonymous" => true,
+            "Member" => false,
+            "Administrator" => false
+        ]
+    ],    
 
     "/login" => [
         "class" => "LoginController",
         "method" => "index",
-        "security_level" => $securityLevel[0]
+        "permissions" => [
+            "Anonymous" => true,
+            "Member" => false,
+            "Administrator" => false
+        ]
     ],
 
     "/logout" => [
         "class" => "LogoutController",
         "method" => "index",
-        "security_level" => $securityLevel[1]
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => true,
+            "Administrator" => true
+        ]
     ]
 ];
 
@@ -46,6 +77,10 @@ $routes = [
     "parameters" => [
         "id" => 1
     ],
-    "security_level" => $securityLevel[0]
+    "permissions" => [
+        "Anonymous" => true,
+        "Member" => true,
+        "Administrator" => true
+    ]
 ]
 */

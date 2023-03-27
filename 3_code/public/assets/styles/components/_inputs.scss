@@ -24,17 +24,3 @@
 .input--form {
     width: 300px;
 }
-
-// Rows
-.form__row {
-    display: flex;
-    flex-direction: column;
-    gap: 5px 0;
-    margin-bottom: 25px;
-
-    &--stick {
-        align-items: center;
-        flex-direction: row;
-        gap: 0 20px;
-    }
-}

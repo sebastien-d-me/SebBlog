@@ -24,7 +24,19 @@ require_once($controllerFilePath[0]);
 
 // Get the class and load it
 $classPath = "App\Controllers\\".$route["class"];
-$class = new $classPath($currentURL, $twig);
+$class = new $classPath($isLogged, $role, $currentURL, $twig);
+
+// Get the permissions
+if(!isset($_SESSION["roleMember"])) {
+    $currentRole = "Anonymous";
+} else {
+    $currentRole = $_SESSION["roleMember"];
+}
+
+if($route["permissions"][$currentRole] !== true) {
+    header("Location: /401");
+    exit();
+}
 
 // Call the method of the class
 if(array_key_exists("parameters", $route)) {
@@ -32,6 +44,3 @@ if(array_key_exists("parameters", $route)) {
 } else {
     echo $class->{$route["method"]}();
 }
-
-/// TODO
-// Add a verification for the security

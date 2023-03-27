@@ -15,9 +15,15 @@
         <label for="field__password">Password</label>
         <input class="input input--form" id="field__password" name="field__password" placeholder="*********" required type="password">
     </div>
-    <button class="btn" type="submit">
-        Login
-        <i class="ri-check-line"></i>
-    </button>
+    <div class="form__columns--inline">
+        <button class="btn" type="submit">
+            Login
+            <i class="ri-check-line"></i>
+        </button>
+        <a class="btn btn--link btn__reset--size btn--secondary" href="/register" type="button">
+            Register
+            <i class="ri-add-line"></i>
+        </a>
+    </div>
 </form>
 {% endblock %}

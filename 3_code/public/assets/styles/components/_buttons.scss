@@ -56,6 +56,11 @@
     }
 }
 
+// Reset Size
+.btn__reset--size {
+    width: fit-content;
+}
+
 // Secondary
 .btn--secondary {
     background-color: $black;
