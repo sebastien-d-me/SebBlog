@@ -20,6 +20,12 @@
     }
 }
 
+// Label
+.form__label::after {
+    color: $red;
+    content: " *";
+}
+
 // Form
 .input--form {
     width: 300px;

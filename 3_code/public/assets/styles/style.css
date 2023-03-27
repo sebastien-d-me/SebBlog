@@ -283,6 +283,11 @@ body {
   resize: none;
 }
 
+.form__label::after {
+  color: #D44240;
+  content: " *";
+}
+
 .input--form {
   width: 300px;
 }
