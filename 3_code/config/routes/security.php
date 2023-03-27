@@ -6,10 +6,12 @@ ini_set("session.gc_maxlifetime", 86400);
 session_set_cookie_params(86400);
 session_start();
 
+
 // Add the values to the sessions
-$isLogged = isset($_SESSION["idMember"]);
-if(isset($_SESSION["roleMember"])) {
-    switch($_SESSION["roleMember"]) {
+$isLogged = isset($_SESSION["member_id"]);
+
+if(isset($_SESSION["member_role"])) {
+    switch($_SESSION["member_role"]) {
         case 1:
             $role = "Administrator";
             break;

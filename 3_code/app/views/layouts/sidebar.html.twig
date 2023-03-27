@@ -4,37 +4,29 @@
         <span class="sidebar__catch_phrase">Welcome to my blog !</span>
         <i class="icon icon--close_sidebar ri-menu-5-line"></i>
     </section>
-    <section aria-label="Search">
-        <form action="/search" class="sidebar__form" method="get">
-            <input class="input" placeholder="Search..." type="search">
-            <button class="btn btn--form" type="submit">
-                <i class="icon ri-search-line"></i>
-            </button>
-        </form>
-    </section>
     <section>
         <h2 class="sidebar__category">Pages</h2>
         <nav>
             <ul class="list sidebar__list">
                 <li class="item__list">
-                    <a class="btn btn--link{% if route == '/' %} active{% endif %}" href="/">Home</a>
+                    <a class="btn btn--menu{% if route == '/' %} active{% endif %}" href="/">Home</a>
                 </li>
                 <li class="item__list">
-                    <a class="btn btn--link{% if route == '/articles' %} active{% endif %}" href="/articles">Articles</a>
+                    <a class="btn btn--menu{% if route == '/articles' %} active{% endif %}" href="/articles">Articles</a>
                 </li>
                 {% if isLogged == false %}
                     <li class="item__list">
-                        <a class="btn btn--link{% if route == '/login' %} active{% endif %}" href="/login">Login</a>
+                        <a class="btn btn--menu{% if route == '/login' %} active{% endif %}" href="/login">Login</a>
                     </li>
                 {% else %}
                     {% if role == "Administrator" %}
-                        <a class="btn btn--link{% if route == '/dashboard' %} active{% endif %}" href="/dashboard">Dashboard</a>
+                        <a class="btn btn--menu{% if route == '/dashboard' %} active{% endif %}" href="/dashboard">Dashboard</a>
                     {% endif %}
                     <li class="item__list">
-                        <a class="btn btn--link{% if route == '/profil' %} active{% endif %}" href="/profil">Profil</a>
+                        <a class="btn btn--menu{% if route == '/profil' %} active{% endif %}" href="/profil">Profil</a>
                     </li>
                     <li class="item__list">
-                        <a class="btn btn--link" href="/logout">Logout</a>
+                        <a class="btn btn--menu" href="/logout">Logout</a>
                     </li>
                 {% endif %}
             </ul>

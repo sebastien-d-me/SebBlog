@@ -1,12 +1,9 @@
 {% extends "layouts/container.html.twig" %}
 
-{% set title = "Error" %}
+{% set title = "Error " ~ code %}
 
 {% block container_content %}
-    <span>Error code : {{ code }}</span>
-    <p>{{ message }}</p>
-
-    <a class="btn btn--link btn__reset--size" href="/">
+    <a class="btn" href="/">
         Back to the home page
         <i class="ri-home-8-line"></i>
     </a>

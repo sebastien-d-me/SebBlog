@@ -3,6 +3,7 @@
 // Load the security
 require_once("security.php");
 
+
 // Define the routes with the controller
 $routes = [
     "/" => [
@@ -15,16 +16,18 @@ $routes = [
         ]
     ],
 
+
     /* Errors */
-    "/401" => [
+    "/error" => [
         "class" => "ErrorController",
-        "method" => "error401",
+        "method" => "index",
         "permissions" => [
             "Anonymous" => true,
             "Member" => true,
             "Administrator" => true
         ]
     ],
+
 
     /* Members */
     "/register" => [
@@ -46,6 +49,16 @@ $routes = [
             "Administrator" => false
         ]
     ],    
+
+    "/send-activation" => [
+        "class" => "RegistrationController",
+        "method" => "sendActivationAccount",
+        "permissions" => [
+            "Anonymous" => true,
+            "Member" => false,
+            "Administrator" => false
+        ]
+    ], 
 
     "/login" => [
         "class" => "LoginController",

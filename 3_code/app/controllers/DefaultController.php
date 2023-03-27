@@ -16,4 +16,15 @@ class DefaultController {
         $this->route = $route;
         $this->twig = $twig;
     }
+
+    
+    // Twig render
+    protected function twigRender($template, $data = []) {
+        $infosData = [
+            "isLogged" => $this->isLogged,
+            "role" => $this->role,
+            "route" => $this->route
+        ];
+        echo $this->twig->render($template, array_merge($infosData, $data));
+    }
 }

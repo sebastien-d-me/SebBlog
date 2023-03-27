@@ -8,8 +8,8 @@ class LogoutController extends DefaultController {
     function index() {
         session_start();
 
-        unset($_SESSION["idMember"]);
-        unset($_SESSION["roleMember"]);
+        unset($_SESSION["member_id"]);
+        unset($_SESSION["member_role"]);
         session_destroy();
 
         header("Location: /");

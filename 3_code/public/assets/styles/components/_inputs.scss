@@ -5,7 +5,7 @@
     height: 40px;
     min-width: 200px;
     padding: 10px;
-    width: 100%;
+    width: 300px;
 
     &.checkbox {
         height: 25px;
@@ -18,9 +18,4 @@
         min-height: 100px;
         resize: none;
     }
-}
-
-// Form
-.input--form {
-    width: 300px;
 }

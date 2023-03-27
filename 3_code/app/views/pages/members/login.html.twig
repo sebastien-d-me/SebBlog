@@ -4,21 +4,21 @@
 
 {% block container_content %}
 
-<p>{{ message }}</p>
+<p>{{ message | raw }}</p>
 
-<form action="#" method="post">
+<form action="#" class="form" method="post">
     <div class="form__row">
-        <label for="field__username_mail">Username or mail</label>
-        <input class="input input--form" id="field__username_mail" name="field__username_mail" placeholder="johndoe1 / john.doe@mail.com" required type="text">
+        <label for="login__username_mail">Username or mail</label>
+        <input class="input" id="login__username_mail" name="login__username_mail" placeholder="johndoe1 / john.doe@mail.com" required type="text">
     </div>
     <div class="form__row">
-        <label for="field__password">Password</label>
-        <input class="input input--form" id="field__password" name="field__password" placeholder="*********" required type="password">
+        <label for="login__password">Password</label>
+        <input class="input" id="login__password" name="login__password" placeholder="*********" required type="password">
     </div>
-    <div class="form__columns--inline">
+    <div class="form__row form__row--inline">
         <button class="btn" type="submit">
             Login
-            <i class="ri-check-line"></i>
+            <i class="ri-login-box-line"></i>
         </button>
         <a class="btn btn--link btn__reset--size btn--secondary" href="/register" type="button">
             Register

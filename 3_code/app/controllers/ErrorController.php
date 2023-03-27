@@ -7,16 +7,12 @@ namespace App\Controllers;
 use App\Controllers\DefaultController;
 
 class ErrorController extends DefaultController {
-    // Unauthorized error
+    // Display the error
+    function index() {
+        $errorCode = isset($_GET["code"]) ? $_GET["code"] : "Unknown";
 
-    function error401() {
-        $html = $this->twig->render("pages/error.html.twig", [
-            "code" => 401,
-            "message" => "You do not have access to this page.",
-            "isLogged" => $this->isLogged,
-            "role" => $this->role,
-            "route" => $this->route
+        $this->twigRender("pages/error.html.twig", [
+            "code" => $errorCode
         ]);
-        echo $html;
     }
 }
