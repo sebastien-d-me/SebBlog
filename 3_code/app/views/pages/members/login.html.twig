@@ -1,0 +1,23 @@
+{% extends "layouts/container.html.twig" %}
+
+{% set title = "Login" %}
+
+{% block container_content %}
+
+<p>{{ message }}</p>
+
+<form action="#" method="post">
+    <div class="form__row">
+        <label for="field__username_mail">Username or mail</label>
+        <input class="input input--form" id="field__username_mail" name="field__username_mail" placeholder="johndoe1 / john.doe@mail.com" required type="text">
+    </div>
+    <div class="form__row">
+        <label for="field__password">Password</label>
+        <input class="input input--form" id="field__password" name="field__password" placeholder="*********" required type="password">
+    </div>
+    <button class="btn" type="submit">
+        Login
+        <i class="ri-check-line"></i>
+    </button>
+</form>
+{% endblock %}

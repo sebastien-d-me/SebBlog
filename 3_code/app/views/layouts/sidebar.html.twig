@@ -22,9 +22,21 @@
                 <li class="item__list">
                     <a class="btn btn--link{% if route == '/articles' %} active{% endif %}" href="/articles">Articles</a>
                 </li>
-                <li class="item__list">
-                    <a class="btn btn--link{% if route == '/login' %} active{% endif %}" href="/login">Login</a>
-                </li>
+                {% if isLogged == false %}
+                    <li class="item__list">
+                        <a class="btn btn--link{% if route == '/login' %} active{% endif %}" href="/login">Login</a>
+                    </li>
+                {% else %}
+                    {% if role == "Administrator" %}
+                        <a class="btn btn--link{% if route == '/dashboard' %} active{% endif %}" href="/dashboard">Dashboard</a>
+                    {% endif %}
+                    <li class="item__list">
+                        <a class="btn btn--link{% if route == '/profil' %} active{% endif %}" href="/profil">Profil</a>
+                    </li>
+                    <li class="item__list">
+                        <a class="btn btn--link" href="/logout">Logout</a>
+                    </li>
+                {% endif %}
             </ul>
         </nav>
     </section>

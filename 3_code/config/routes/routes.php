@@ -22,6 +22,18 @@ $routes = [
         "class" => "RegistrationController",
         "method" => "activateAccount",
         "security_level" => $securityLevel[0]
+    ],
+
+    "/login" => [
+        "class" => "LoginController",
+        "method" => "index",
+        "security_level" => $securityLevel[0]
+    ],
+
+    "/logout" => [
+        "class" => "LogoutController",
+        "method" => "index",
+        "security_level" => $securityLevel[1]
     ]
 ];
 
