@@ -9,6 +9,7 @@
     justify-content: center;
     padding: 10px;
     text-align: center;
+    text-decoration: none;
     transition: 0.5s;
     width: fit-content;
 
@@ -20,34 +21,13 @@
     }
 }
 
-// Form
-.btn--form {
-    background-color: transparent;
-    border: none;
-    border-radius: unset;
-    color: $white;
-    font-size: 20px;
-    height: 30px;
-    padding: unset;
-
-    &:hover {
-        background-color: transparent;
-        color: $red;
-    }
-}
-
-// Link
-.btn--link {
-    border-radius: 5px;
-    color: $black;
+// Menu
+.btn--menu {
     text-transform: uppercase;
-    text-decoration: none;
     width: 100%;
 
     &:hover {
         background-color: transparent;
-        border-color: $white;
-        color: $white;
     }
 
     &.active {
