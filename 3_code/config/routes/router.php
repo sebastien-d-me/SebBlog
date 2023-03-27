@@ -32,5 +32,6 @@ if(array_key_exists("parameters", $route)) {
 } else {
     echo $class->{$route["method"]}();
 }
+
 /// TODO
 // Add a verification for the security
