@@ -13,7 +13,14 @@ class LoginController extends DefaultController {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->checkLoginFields($_POST);
         } else {
-            $this->twigRender("pages/members/login.html.twig");
+            if(isset($_GET["message"])) {
+                $message = $_GET["message"];
+                $this->twigRender("pages/members/login.html.twig", [
+                    "message" => $message
+                ]);
+            } else {
+                $this->twigRender("pages/members/login.html.twig");
+            }
         }        
     }
 
@@ -31,8 +38,8 @@ class LoginController extends DefaultController {
     
     // Do the connection
     function connectLogin($fields) {
-        $login = $fields["login__username_mail"];
-        $password = $fields["login__password"];
+        $login = htmlspecialchars($fields["login__username_mail"], ENT_QUOTES);
+        $password = htmlspecialchars($fields["login__password"], ENT_QUOTES);
 
         $checkLogin = LoginCredentials::where("username", $login)->orWhere("email", $login)->first();
         if(!$checkLogin) {
@@ -51,7 +58,7 @@ class LoginController extends DefaultController {
         $memberId = Member::find($checkLogin->getIdLoginCredentials());
         $memberActive = $memberId->getIsActive();
         if($memberActive === 0) {
-            $message = "Your account is not activated. Click <a class='link' href='/send-activation'>here</a> to send an activation email.";
+            $message = "Your account is not activated. Click <a class='link' href='/member/activation/send-activation'>here</a> to send an activation email.";
             $this->showConnectionError($message);
             exit();
         }

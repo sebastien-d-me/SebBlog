@@ -1,0 +1,22 @@
+{% extends "layouts/container.html.twig" %}
+
+{% set title = "Activation" %}
+
+
+{% block container_content %}
+{% if message is defined %}
+    <p>{{ message | raw }}</p>
+{% endif %}
+<form action="#" class="form" method="post">
+    <div class="form__row">
+        <label for="activation_mail">Mail</label>
+        <input class="input" id="activation_mail" name="activation_mail" placeholder="john.doe@mail.com" required type="email">
+    </div>
+    <div class="form__row">
+        <button class="btn" type="submit">
+            Send
+            <i class="ri-mail-send-line"></i>
+        </button>
+    </div>
+</form>
+{% endblock %}
