@@ -30,7 +30,7 @@ $routes = [
 
 
     /* Members */
-    "/register" => [
+    "/member/register" => [
         "class" => "RegistrationController",
         "method" => "index",
         "permissions" => [
@@ -40,7 +40,7 @@ $routes = [
         ]
     ],
 
-    "/send-activation" => [
+    "/member/activation/send-activation" => [
         "class" => "ActivationController",
         "method" => "index",
         "permissions" => [
@@ -50,8 +50,8 @@ $routes = [
         ]
     ], 
 
-    "/activate" => [
-        "class" => "RegistrationController",
+    "/member/activation/activate" => [
+        "class" => "ActivationController",
         "method" => "activateAccount",
         "permissions" => [
             "Anonymous" => true,
@@ -60,7 +60,7 @@ $routes = [
         ]
     ],    
 
-    "/login" => [
+    "/member/login" => [
         "class" => "LoginController",
         "method" => "index",
         "permissions" => [

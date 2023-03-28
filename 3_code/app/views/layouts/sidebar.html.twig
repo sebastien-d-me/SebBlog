@@ -16,7 +16,7 @@
                 </li>
                 {% if isLogged == false %}
                     <li class="item__list">
-                        <a class="btn btn--menu{% if route == '/login' %} active{% endif %}" href="/login">Login</a>
+                        <a class="btn btn--menu{% if route == '/member/login' %} active{% endif %}" href="/member/login">Login</a>
                     </li>
                 {% else %}
                     {% if role == "Administrator" %}

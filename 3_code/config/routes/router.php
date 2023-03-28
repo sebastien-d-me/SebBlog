@@ -7,10 +7,10 @@ require_once("routes.php");
 // Get the current URL and check if the route exist
 $currentURL = $_SERVER["REQUEST_URI"];
 $currentURL = strstr($currentURL, "?", true) ? : $currentURL;
-if(!array_key_exists($currentURL, $routes)) {
+/*if(!array_key_exists($currentURL, $routes)) {
     header("Location: /error?code=404");
     exit();
-}
+}*/
 
 
 // Get the route and the settings

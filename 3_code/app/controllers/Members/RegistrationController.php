@@ -65,28 +65,15 @@ class RegistrationController extends DefaultController {
             "idMember" => $member->getIdMember()
         ];
         $_SESSION["member_activation"] = $dataActivation;
-        header("Location: /send-activation");
+        header("Location: /member/activation/send-activation?message=Your account has been created. Please active it with the email you received !");
         exit();
     }
+
 
     // Display the errors
     function showRegistrationError($message) {
         $this->twigRender("pages/members/registration.html.twig", [
             "message" => $message
-        ]);
-    }
-
-    function activateAccount() {
-        $hashCode = $_GET["active"];
-        $activation = Activation::where("hash", $hashCode)->first();
-        $idUser = $activation->getIdMember();
-        $member = Member::where("idMember", $idUser)->first();
-        $member->setIsActive(true);
-        $member->save();
-
-        echo $this->twig->render("pages/members/registration.html.twig", [
-            "message" => "Your account is now active.",
-            "route" => $this->route
         ]);
     }
 }
