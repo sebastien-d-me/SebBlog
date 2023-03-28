@@ -43,7 +43,7 @@ class ActivationController extends DefaultController {
 
     // Manage the form of the page
     function formActivation($data) {
-        $credentials = LoginCredentials::where("email", $data["activation_mail"])->first();
+        $credentials = LoginCredentials::where("email", htmlspecialchars($data["activation_mail"], ENT_QUOTES))->first();
         if($credentials === NULL) {
             $message = "No account exists with this email address.";
             $this->showActivationError($message);
@@ -85,6 +85,13 @@ class ActivationController extends DefaultController {
     function activateAccount() {
         $hash = $_GET["code"];
         $activation = Activation::where("hash", $hash)->first();
+
+        if($activation === NULL) {
+            $message = "Your code not work, please contact me.";
+            $this->showActivationError($message);
+            exit();
+        }
+
         $member = Member::where("idMember", $activation->getIdMember())->first();
 
         if($member->getIsActive() === 0) {

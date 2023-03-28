@@ -38,8 +38,8 @@ class LoginController extends DefaultController {
     
     // Do the connection
     function connectLogin($fields) {
-        $login = $fields["login__username_mail"];
-        $password = $fields["login__password"];
+        $login = htmlspecialchars($fields["login__username_mail"], ENT_QUOTES);
+        $password = htmlspecialchars($fields["login__password"], ENT_QUOTES);
 
         $checkLogin = LoginCredentials::where("username", $login)->orWhere("email", $login)->first();
         if(!$checkLogin) {

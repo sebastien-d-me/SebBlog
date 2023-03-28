@@ -50,9 +50,9 @@ class RegistrationController extends DefaultController {
         $member->save();
 
         $loginCredentials = new LoginCredentials();
-        $loginCredentials->setUsername($fields["register__username"]);
-        $loginCredentials->setEmail($fields["register__mail"]);
-        $loginCredentials->setPassword($fields["register__password"]);
+        $loginCredentials->setUsername(htmlspecialchars($fields["register__username"], ENT_QUOTES));
+        $loginCredentials->setEmail(htmlspecialchars($fields["register__mail"], ENT_QUOTES));
+        $loginCredentials->setPassword(htmlspecialchars($fields["register__password"], ENT_QUOTES));
         $loginCredentials->setIdMember($member->getIdMember());
         $loginCredentials->save();
 

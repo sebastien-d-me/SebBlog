@@ -7,6 +7,21 @@ session_set_cookie_params(86400);
 session_start();
 
 
+// Manage the error
+function manageErrors() {
+    header("Location: /error?code=500");
+    exit();
+}
+
+set_error_handler("manageErrors");
+register_shutdown_function(function() {
+    $error = error_get_last();
+    if ($error) {
+        manageErrors();
+    }
+});
+
+
 // Add the values to the sessions
 $isLogged = isset($_SESSION["member_id"]);
 

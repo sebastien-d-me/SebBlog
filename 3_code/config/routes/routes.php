@@ -40,26 +40,6 @@ $routes = [
         ]
     ],
 
-    "/member/activation/send-activation" => [
-        "class" => "ActivationController",
-        "method" => "index",
-        "permissions" => [
-            "Anonymous" => true,
-            "Member" => false,
-            "Administrator" => false
-        ]
-    ], 
-
-    "/member/activation/activate" => [
-        "class" => "ActivationController",
-        "method" => "activateAccount",
-        "permissions" => [
-            "Anonymous" => true,
-            "Member" => false,
-            "Administrator" => false
-        ]
-    ],    
-
     "/member/login" => [
         "class" => "LoginController",
         "method" => "index",
@@ -77,6 +57,26 @@ $routes = [
             "Anonymous" => false,
             "Member" => true,
             "Administrator" => true
+        ]
+    ],
+
+    "/member/activation/send-activation" => [
+        "class" => "ActivationController",
+        "method" => "index",
+        "permissions" => [
+            "Anonymous" => true,
+            "Member" => false,
+            "Administrator" => false
+        ]
+    ], 
+
+    "/member/activation/activate" => [
+        "class" => "ActivationController",
+        "method" => "activateAccount",
+        "permissions" => [
+            "Anonymous" => true,
+            "Member" => false,
+            "Administrator" => false
         ]
     ]
 ];
