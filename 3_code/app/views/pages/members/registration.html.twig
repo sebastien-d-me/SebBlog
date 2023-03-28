@@ -2,34 +2,37 @@
 
 {% set title = "Registration" %}
 
+
 {% block container_content %}
-
-<p>{{ message }}</p>
-
-<form action="#" method="post">
+{% if message is defined %}
+    <p>{{ message | raw }}</p>
+{% endif %}
+<form action="#" class="form" method="post">
     <div class="form__row">
-        <label class="form__label" for="field__username">Username (min 3 characters)</label>
-        <input class="input input--form" id="field__username" minlength="3" name="field__username" placeholder="johndoe1" required type="text">
+        <label class="form__label" for="register__username">Username (min 3 characters)</label>
+        <input class="input" id="register__username" minlength="3" name="register__username" placeholder="johndoe1" required type="text">
     </div>
     <div class="form__row">
-        <label class="form__label" for="field__mail">Mail</label>
-        <input class="input input--form" id="field__mail" name="field__mail" placeholder="john.doe@me.com" required type="email">
+        <label class="form__label" for="register__mail">Mail</label>
+        <input class="input" id="register__mail" name="register__mail" placeholder="john.doe@me.com" required type="email">
     </div>
     <div class="form__row">
-        <label class="form__label" for="field__password">Password (min 8 characters)</label>
-        <input class="input input--form" id="field__password" minlength="8" name="field__password" placeholder="*********" required type="password">
+        <label class="form__label" for="register__password">Password (min 8 characters)</label>
+        <input class="input" id="register__password" minlength="8" name="register__password" placeholder="*********" required type="password">
     </div>
-    <div class="form__row form__row--stick">
-        <input class="checkbox input input--form" id="field__accept" name="field__accept" required type="checkbox">
-        <label class="form__label" for="field__accept">By registering, I have read the legal notice and the privacy policy.</label>
+    <div class="form__row form__row--inline">
+        <input class="input" id="register__accept" name="register__accept" required type="checkbox">
+        <label class="form__label" for="register__accept">By registering, I have read the legal notice and the privacy policy.</label>
     </div>
     <div class="form__row hide">
-        <input class="checkbox input input--form" id="field__important" name="field__important" type="checkbox">
-        <label class="form__label" for="field__important">Check this checkbox.</label>
+        <input class="input" id="register__important" name="register__important" type="checkbox">
+        <label class="form__label" for="register__important">Check this checkbox.</label>
     </div>
-    <button class="btn" type="submit">
-        Register
-        <i class="ri-check-line"></i>
-    </button>
+    <div class="form__row">
+        <button class="btn" type="submit">
+            Register
+            <i class="ri-check-line"></i>
+        </button>
+    </div>
 </form>
 {% endblock %}

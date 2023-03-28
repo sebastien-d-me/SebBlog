@@ -7,15 +7,10 @@
     padding: 10px;
     width: 300px;
 
-    &.checkbox {
+    &[type="checkbox"] {
         height: 25px;
         margin: auto 0;
         min-width: unset;
         width: 25px;
-    }
-
-    &.textarea {
-        min-height: 100px;
-        resize: none;
     }
 }

@@ -40,6 +40,16 @@ $routes = [
         ]
     ],
 
+    "/send-activation" => [
+        "class" => "ActivationController",
+        "method" => "index",
+        "permissions" => [
+            "Anonymous" => true,
+            "Member" => false,
+            "Administrator" => false
+        ]
+    ], 
+
     "/activate" => [
         "class" => "RegistrationController",
         "method" => "activateAccount",
@@ -49,16 +59,6 @@ $routes = [
             "Administrator" => false
         ]
     ],    
-
-    "/send-activation" => [
-        "class" => "RegistrationController",
-        "method" => "sendActivationAccount",
-        "permissions" => [
-            "Anonymous" => true,
-            "Member" => false,
-            "Administrator" => false
-        ]
-    ], 
 
     "/login" => [
         "class" => "LoginController",

@@ -2,10 +2,11 @@
 
 {% set title = "Login" %}
 
+
 {% block container_content %}
-
-<p>{{ message | raw }}</p>
-
+{% if message is defined %}
+    <p>{{ message | raw }}</p>
+{% endif %}
 <form action="#" class="form" method="post">
     <div class="form__row">
         <label for="login__username_mail">Username or mail</label>
@@ -20,7 +21,7 @@
             Login
             <i class="ri-login-box-line"></i>
         </button>
-        <a class="btn btn--link btn__reset--size btn--secondary" href="/register" type="button">
+        <a class="btn btn--link btn--secondary" href="/register" type="button">
             Register
             <i class="ri-add-line"></i>
         </a>

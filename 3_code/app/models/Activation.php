@@ -30,7 +30,7 @@ class Activation extends Model {
 
     // Setter
     public function setHash($hash) {
-        $this->hash = $hash;
+        $this->hash = password_hash($hash, PASSWORD_DEFAULT);
         return $this;
     }
 
