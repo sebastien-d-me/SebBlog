@@ -5,7 +5,7 @@
 
 {% block container_content %}
 {% if message is defined %}
-    <p>{{ message | raw }}</p>
+    <p class="form__message">{{ message | raw }}</p>
 {% endif %}
 <form action="#" class="form" method="post">
     <div class="form__row">

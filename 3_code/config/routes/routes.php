@@ -78,7 +78,27 @@ $routes = [
             "Member" => false,
             "Administrator" => false
         ]
-    ]
+    ],
+
+    "/member/password/password-reset" => [
+        "class" => "PasswordResetController",
+        "method" => "index",
+        "permissions" => [
+            "Anonymous" => true,
+            "Member" => false,
+            "Administrator" => false
+        ]
+    ],
+
+    "/member/password/reset" => [
+        "class" => "PasswordResetController",
+        "method" => "resetPassword",
+        "permissions" => [
+            "Anonymous" => true,
+            "Member" => false,
+            "Administrator" => false
+        ]
+    ],
 ];
 
 

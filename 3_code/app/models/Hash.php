@@ -7,21 +7,25 @@ namespace App\Models;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Eloquent\Model;
 
-class Activation extends Model {
+class Hash extends Model {
     // Parameters
-    protected $table = "activation";
+    protected $table = "hash";
     public $timestamps = false;
 
-    protected $primaryKey = "idActivation";
-    protected $fillable = ["idActivation", "hash", "idMember"];
+    protected $primaryKey = "idHash";
+    protected $fillable = ["idHash", "hash", "isActive", "idMember"];
 
     // Getter
-    public function getIdActivation() {
-        return $this->idActivation;
+    public function getIdHash() {
+        return $this->idHash;
     }
 
     public function getHash() {
         return $this->hash;
+    }
+
+    public function getIsActive() {
+        return $this->isActive;
     }
 
     public function getIdMember() {
@@ -31,6 +35,11 @@ class Activation extends Model {
     // Setter
     public function setHash($hash) {
         $this->hash = password_hash($hash, PASSWORD_DEFAULT);
+        return $this;
+    }
+
+    public function setIsActive($isActive) {
+        $this->isActive = $isActive;
         return $this;
     }
 

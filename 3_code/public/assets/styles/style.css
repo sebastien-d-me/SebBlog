@@ -263,6 +263,11 @@ body {
   gap: 15px;
 }
 
+.form__message {
+  color: #D44240;
+  margin: 0 0 20px 0;
+}
+
 .input {
   background-color: #F1F1F1;
   border: none;
