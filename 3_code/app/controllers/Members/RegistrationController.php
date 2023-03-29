@@ -7,7 +7,7 @@ namespace App\Controllers;
 use App\Controllers\ActivationController;
 use App\Models\LoginCredentials;
 use App\Models\Member;
-use App\Models\Activation;
+use App\Models\Hash;
 
 class RegistrationController extends DefaultController {
     // Checks the status
@@ -58,6 +58,12 @@ class RegistrationController extends DefaultController {
 
         $member->setIdLoginCredentials($loginCredentials->getIdLoginCredentials());
         $member->save();
+
+        $hash = new Hash();
+        $hash->setHash($loginCredentials->getUsername());
+        $hash->setIsActive(1);
+        $hash->setIdMember($loginCredentials->getIdMember());
+        $hash->save();
 
         $dataActivation = [
             "username" => $loginCredentials->getUsername(),

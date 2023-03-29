@@ -61,7 +61,7 @@ $routes = [
     ],
 
     "/member/activation/send-activation" => [
-        "class" => "ActivationController",
+        "class" => "AccountActivationController",
         "method" => "index",
         "permissions" => [
             "Anonymous" => true,
@@ -71,7 +71,7 @@ $routes = [
     ], 
 
     "/member/activation/activate" => [
-        "class" => "ActivationController",
+        "class" => "AccountActivationController",
         "method" => "activateAccount",
         "permissions" => [
             "Anonymous" => true,
