@@ -4,17 +4,15 @@
 namespace App\Controllers;
 
 // Load
+use App\Models\Hash;
 use App\Models\LoginCredentials;
 use App\Models\Member;
-use App\Models\Activation;
 
-class ActivationController extends DefaultController {
+class AccountActivationController extends DefaultController {
     // Checks the status
     function index() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
-            isset($_POST["username"]) ? $this->saveActivation($_POST) : $this->formActivation($_POST);
-        } else if(isset($_SESSION["member_activation"])) {
-            $this->saveActivation($_SESSION["member_activation"]);
+                $this->handleForm($_POST);
         } else {
             if(isset($_GET["message"])) {
                 $message = $_GET["message"];
@@ -28,43 +26,30 @@ class ActivationController extends DefaultController {
     }
 
 
-    // Save the activation
-    function saveActivation($data) {
-        $activation = new Activation();
-        $activation->setHash($data["username"]);
-        $activation->setIdMember($data["idMember"]);
-        $activation->save();
-
-        unset($_SESSION["member_activation"]);
-
-        $this->sendActivationMail($data["email"], $activation->getHash());
-    }
-
-
     // Manage the form of the page
-    function formActivation($data) {
-        $credentials = LoginCredentials::where("email", htmlspecialchars($data["activation_mail"], ENT_QUOTES))->first();
+    function handleForm($data) {
+        $credentials = LoginCredentials::where("email", htmlspecialchars($data["activation__mail"], ENT_QUOTES))->first();
         if($credentials === NULL) {
             $message = "No account exists with this email address.";
-            $this->showActivationError($message);
+            $this->showError($message);
             exit();
         }
 
         $member = Member::where("idMember", $credentials->getIdMember())->first();
         if($member->getIsActive() === 1) {
             $message = "Your account is already activated.";
-            $this->showActivationError($message);
+            $this->showError($message);
             exit();
         }
 
-        $activation = Activation::where("idMember", $credentials->getIdMember())->first();
+        $hash = Hash::where("idMember", $credentials->getIdMember())->first();
 
-        $this->sendActivationMail($credentials->getEmail(), $activation->getHash());
+        $this->sendMail($credentials->getEmail(), $hash->getHash());
     }
 
 
     // Send the activation mail
-    function sendActivationMail($recipient, $hash) {
+    function sendMail($recipient, $hash) {
         $mailURL = "https://$_SERVER[HTTP_HOST]/member/activation/activate?code=$hash";
         $mailContent = "Click here to activate your account : $mailURL";
 
@@ -82,19 +67,21 @@ class ActivationController extends DefaultController {
 
 
     // Activate the account
-    function activateAccount() {
+    function activate() {
         $hash = $_GET["code"];
-        $activation = Activation::where("hash", $hash)->first();
+        $hash = Hash::where("hash", $hash)->first();
 
-        if($activation === NULL) {
-            $message = "Your code not work, please contact me.";
-            $this->showActivationError($message);
+        if($hash === NULL || $hash === 0) {
+            $message = "Your code not work, please retry later.";
+            $this->showError($message);
             exit();
         }
 
-        $member = Member::where("idMember", $activation->getIdMember())->first();
+        $member = Member::where("idMember", $hash->getIdMember())->first();
 
         if($member->getIsActive() === 0) {
+            $hash->setIsActive(0);
+            $hash->save();
             $member->setIsActive(true);
             $member->save();
             $message = "Your account has been activated.";
@@ -108,7 +95,7 @@ class ActivationController extends DefaultController {
 
 
     // Display the errors
-    function showActivationError($message) {
+    function showError($message) {
         $this->twigRender("pages/members/activation.html.twig", [
             "message" => $message
         ]);

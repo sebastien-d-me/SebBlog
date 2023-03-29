@@ -8,7 +8,7 @@ session_start();
 
 
 // Manage the error
-function manageErrors() {
+/*function manageErrors() {
     header("Location: /error?code=500");
     exit();
 }
@@ -19,7 +19,7 @@ register_shutdown_function(function() {
     if ($error) {
         manageErrors();
     }
-});
+});*/
 
 
 // Add the values to the sessions

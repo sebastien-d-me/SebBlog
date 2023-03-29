@@ -50,7 +50,7 @@ $routes = [
         ]
     ],
 
-    "/logout" => [
+    "/member/logout" => [
         "class" => "LogoutController",
         "method" => "index",
         "permissions" => [
@@ -61,7 +61,7 @@ $routes = [
     ],
 
     "/member/activation/send-activation" => [
-        "class" => "ActivationController",
+        "class" => "AccountActivationController",
         "method" => "index",
         "permissions" => [
             "Anonymous" => true,
@@ -71,14 +71,34 @@ $routes = [
     ], 
 
     "/member/activation/activate" => [
-        "class" => "ActivationController",
-        "method" => "activateAccount",
+        "class" => "AccountActivationController",
+        "method" => "activate",
         "permissions" => [
             "Anonymous" => true,
             "Member" => false,
             "Administrator" => false
         ]
-    ]
+    ],
+
+    "/member/password/password-reset" => [
+        "class" => "PasswordResetController",
+        "method" => "index",
+        "permissions" => [
+            "Anonymous" => true,
+            "Member" => false,
+            "Administrator" => false
+        ]
+    ],
+
+    "/member/password/reset" => [
+        "class" => "PasswordResetController",
+        "method" => "edit",
+        "permissions" => [
+            "Anonymous" => true,
+            "Member" => false,
+            "Administrator" => false
+        ]
+    ],
 ];
 
 

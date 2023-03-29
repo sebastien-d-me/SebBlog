@@ -20,13 +20,13 @@
                     </li>
                 {% else %}
                     {% if role == "Administrator" %}
-                        <a class="btn btn--menu{% if route == '/dashboard' %} active{% endif %}" href="/dashboard">Dashboard</a>
+                        <a class="btn btn--menu{% if route == '/member/dashboard' %} active{% endif %}" href="/member/dashboard">Dashboard</a>
                     {% endif %}
                     <li class="item__list">
-                        <a class="btn btn--menu{% if route == '/profil' %} active{% endif %}" href="/profil">Profil</a>
+                        <a class="btn btn--menu{% if route == '/member/profil' %} active{% endif %}" href="/member/profil">Profil</a>
                     </li>
                     <li class="item__list">
-                        <a class="btn btn--menu" href="/logout">Logout</a>
+                        <a class="btn btn--menu" href="/member/logout">Logout</a>
                     </li>
                 {% endif %}
             </ul>
