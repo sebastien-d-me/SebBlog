@@ -50,7 +50,7 @@ $routes = [
         ]
     ],
 
-    "/logout" => [
+    "/member/logout" => [
         "class" => "LogoutController",
         "method" => "index",
         "permissions" => [
