@@ -1,0 +1,33 @@
+{% extends "layouts/container.html.twig" %}
+
+{% set title = "Edit profile" %}
+
+
+{% block container_content %}
+{% if message is defined %}
+    <p class="form__message">{{ message | raw }}</p>
+{% endif %}
+<form action="#" class="form" method="post">
+    <div class="form__row">
+        <span>Leave the fields blank if you do not want to change the value.</span>
+    </div>
+    <div class="form__row">
+        <label class="form__label" for="profil_edit__username">Username</label>
+        <input class="input" disabled id="profil_edit__username" minlength="3" name="profil_edit__username" placeholder="johndoe1" type="text" value="{{ credentials.username }}">
+    </div>
+    <div class="form__row">
+        <label class="form__label" for="profil_edit__mail">New mail</label>
+        <input class="input" id="profil_edit__mail" name="profil_edit__mail" placeholder="john.doe@me.com" type="email">
+    </div>
+    <div class="form__row">
+        <label class="form__label" for="profil_edit__password">New password (min 8 characters)</label>
+        <input class="input" id="profil_edit__password" minlength="8" name="profil_edit__password" placeholder="*********" type="password">
+    </div>
+    <div class="form__row">
+        <button class="btn" type="submit">
+            Save
+            <i class="ri-check-line"></i>
+        </button>
+    </div>
+</form>
+{% endblock %}

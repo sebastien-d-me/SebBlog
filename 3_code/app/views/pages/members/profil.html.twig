@@ -1,0 +1,26 @@
+{% extends "layouts/container.html.twig" %}
+
+{% set title = "Profil" %}
+
+
+{% block container_content %}
+{% if message is defined %}
+    <p class="form__message">{{ message | raw }}</p>
+{% endif %}
+<div class="profil__row">
+    <span>
+        <b>Username</b> : {{ informations.username }}
+    </span>
+</div>
+<div class="profil__row">
+    <span>
+        <b>Registration date</b> : {{ informations.registrationDate | date("F jS, Y") }}
+    </span>
+</div>
+{% if loggedProfil == true %}
+<div class="profil__row">
+    <a class="btn btn--secondary" href="/member/profil/edit">Edit my profil</a>
+</div>
+{% endif %}
+    <!-- Commentaires -->
+{% endblock %}

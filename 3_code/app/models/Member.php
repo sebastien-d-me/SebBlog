@@ -13,31 +13,15 @@ class Member extends Model {
     public $timestamps = false;
 
     protected $primaryKey = "idMember";
-    protected $fillable = ["idMember", "firstname", "lastname", "registrationDate", "updatedDate", "lastLoginDate", "isActive", "idRole", "idLoginCredentials"];
+    protected $fillable = ["idMember", "registrationDate", "isActive", "idRole", "idLoginCredentials"];
 
     // Getter
     public function getIdMember() {
         return $this->idMember;
     }
 
-    public function getFirstname() {
-        return $this->firstname;
-    }
-
-    public function getLastname() {
-        return $this->lastname;
-    }
-
     public function getRegistrationDate() {
         return $this->registrationDate;
-    }
-
-    public function getUpdatedDate() {
-        return $this->updatedDate;
-    }
-
-    public function getLastLoginDate() {
-        return $this->lastLoginDate;
     }
 
     public function getIsActive() {
@@ -58,28 +42,8 @@ class Member extends Model {
         return $this;
     }
 
-    public function setFirstname($firstname) {
-        $this->firstname = $firstname;
-        return $this;
-    }
-
-    public function setLastname($lastname) {
-        $this->lastname = $lastname;
-        return $this;
-    }
-
     public function setRegistrationDate($registrationDate) {
         $this->registrationDate = $registrationDate;
-        return $this;
-    }
-
-    public function setUpdatedDate($updatedDate) {
-        $this->updatedDate = $updatedDate;
-        return $this;
-    }
-
-    public function setLastLoginDate($lastLoginDate) {
-        $this->lastLoginDate = $lastLoginDate;
         return $this;
     }
 

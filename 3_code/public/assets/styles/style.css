@@ -283,6 +283,10 @@ body {
   min-width: unset;
   width: 25px;
 }
+.input:disabled {
+  background-color: #181818;
+  cursor: not-allowed;
+}
 
 .link {
   color: #4091D4;
@@ -540,4 +544,8 @@ body {
     text-align: center;
   }
 }
-/* Pages *//*# sourceMappingURL=style.css.map */
+/* Pages */
+.profil__row {
+  display: block;
+  margin-bottom: 25px;
+}/*# sourceMappingURL=style.css.map */

@@ -12,7 +12,7 @@ class RegistrationController extends DefaultController {
     // Checks the status
     function index() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
-            $this->checkFields($_POST);
+            $this->check($_POST);
         } else {
             $this->twigRender("pages/members/registration.html.twig");
         }        
@@ -20,7 +20,7 @@ class RegistrationController extends DefaultController {
 
 
     // Check the fields
-    function checkFields($fields) {
+    function check($fields) {
         $correctFields = true;
 
         foreach($fields as $field) {
@@ -37,14 +37,14 @@ class RegistrationController extends DefaultController {
             $message = "The username and/or email address is already in use.";
         }
 
-        $correctFields ? $this->saveMember($fields) : $this->showError($message);
+        $correctFields ? $this->save($fields) : $this->showError($message);
     }
 
 
     // Do the save of the member
-    function saveMember($fields) {
+    function save($fields) {
         $member = new Member();
-        $member->setRegistrationDate(date("d-m-y"));
+        $member->setRegistrationDate(date("Y-m-d"));
         $member->setIsActive(false);
         $member->setIdRole(2);
         $member->save();
