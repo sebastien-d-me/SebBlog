@@ -12,7 +12,7 @@ class PasswordResetController extends DefaultController {
     // Checks the status
     function index() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
-            $this->formPasswordReset($_POST);
+            $this->handleForm($_POST);
         } else {
             $this->twigRender("pages/members/password_reset.html.twig"); 
         }
@@ -20,13 +20,13 @@ class PasswordResetController extends DefaultController {
 
 
     // Manage the form of the page
-    function formPasswordReset($data) {
+    function handleForm($data) {
         $login = htmlspecialchars($data["password_reset__username_mail"], ENT_QUOTES);
 
         $credentials = LoginCredentials::where("username", $login)->orWhere("email", $login)->first();
         if($credentials === NULL) {
             $message = "No account exists with this email address.";
-            $this->showPasswordRecoverError($message);
+            $this->showError($message);
             exit();
         }
 
@@ -34,14 +34,13 @@ class PasswordResetController extends DefaultController {
             "username" => $credentials->getUsername(),
             "email" => $credentials->getEmail(),
             "idMember" => $credentials->getIdMember()
-        ]; 
-
-        $this->savePasswordReset($data);        
+        ];
+        $this->saveHash($data);        
     }
 
 
     // Save the hash
-    function savePasswordReset($data) {
+    function saveHash($data) {
         $passwordReset = new Hash();
         $passwordReset->setHash($data["username"]);
         $passwordReset->setIsActive(1);
@@ -50,12 +49,12 @@ class PasswordResetController extends DefaultController {
 
         $_SESSION["member_reset"] = $data;
 
-        $this->sendPasswordResetMail($passwordReset->getHash(), $data["email"]);
+        $this->sendMail($passwordReset->getHash(), $data["email"]);
     }
 
 
     // Send the password reset mail
-    function sendPasswordResetMail($hash, $recipient) {
+    function sendMail($hash, $recipient) {
         $mailURL = "https://$_SERVER[HTTP_HOST]/member/password/reset?code=$hash";
         $mailContent = "Click here to reset your password : $mailURL";
 
@@ -73,10 +72,10 @@ class PasswordResetController extends DefaultController {
 
 
     // Show the edit form
-    function resetPassword() {
+    function edit() {
         if(!isset($_SESSION["member_reset"])) {
             $message = "Try to reset your password again.";
-            $this->showPasswordRecoverError($message);
+            $this->showError($message);
             exit();
         }
 
@@ -92,7 +91,8 @@ class PasswordResetController extends DefaultController {
             
             unset($_SESSION["member_reset"]);
 
-            header("Location: /member/login?message=Your new password has been saved.");
+            $message = "Your new password has been saved.";
+            header("Location: /member/login?message=$message");
         }
 
         $this->twigRender("pages/members/password_reset-edit.html.twig");
@@ -100,7 +100,7 @@ class PasswordResetController extends DefaultController {
 
 
     // Display the errors
-    function showPasswordRecoverError($message) {
+    function showError($message) {
         $this->twigRender("pages/members/password_reset.html.twig", [
             "message" => $message
         ]);

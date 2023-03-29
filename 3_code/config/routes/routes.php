@@ -72,7 +72,7 @@ $routes = [
 
     "/member/activation/activate" => [
         "class" => "AccountActivationController",
-        "method" => "activateAccount",
+        "method" => "activate",
         "permissions" => [
             "Anonymous" => true,
             "Member" => false,
@@ -92,7 +92,7 @@ $routes = [
 
     "/member/password/reset" => [
         "class" => "PasswordResetController",
-        "method" => "resetPassword",
+        "method" => "edit",
         "permissions" => [
             "Anonymous" => true,
             "Member" => false,

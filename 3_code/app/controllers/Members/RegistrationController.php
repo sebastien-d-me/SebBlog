@@ -4,23 +4,23 @@
 namespace App\Controllers;
 
 // Load
-use App\Controllers\ActivationController;
+use App\Models\Hash;
 use App\Models\LoginCredentials;
 use App\Models\Member;
-use App\Models\Hash;
 
 class RegistrationController extends DefaultController {
     // Checks the status
     function index() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
-            $this->checkRegisterFields($_POST);
+            $this->checkFields($_POST);
         } else {
             $this->twigRender("pages/members/registration.html.twig");
         }        
     }
 
+
     // Check the fields
-    function checkRegisterFields($fields) {
+    function checkFields($fields) {
         $correctFields = true;
 
         foreach($fields as $field) {
@@ -37,12 +37,12 @@ class RegistrationController extends DefaultController {
             $message = "The username and/or email address is already in use.";
         }
 
-        $correctFields ? $this->memberRegister($fields) : $this->showRegistrationError($message);
+        $correctFields ? $this->saveMember($fields) : $this->showError($message);
     }
 
 
     // Do the save of the member
-    function memberRegister($fields) {
+    function saveMember($fields) {
         $member = new Member();
         $member->setRegistrationDate(date("d-m-y"));
         $member->setIsActive(false);
@@ -64,20 +64,32 @@ class RegistrationController extends DefaultController {
         $hash->setIsActive(1);
         $hash->setIdMember($loginCredentials->getIdMember());
         $hash->save();
+        
+        $this->sendMail($loginCredentials->getEmail(), $hash->getHash());
+        exit();
+    }
 
-        $dataActivation = [
-            "username" => $loginCredentials->getUsername(),
-            "email" => $loginCredentials->getEmail(),
-            "idMember" => $member->getIdMember()
+
+    // Send the activation mail
+    function sendMail($recipient, $hash) {
+        $mailURL = "https://$_SERVER[HTTP_HOST]/member/activation/activate?code=$hash";
+        $mailContent = "Click here to activate your account : $mailURL";
+
+        $mailValues = [
+            "to" => $recipient,
+            "subject" => "SebBlog - Account activation",
+            "content" => $mailContent
         ];
-        $_SESSION["member_activation"] = $dataActivation;
-        header("Location: /member/activation/send-activation?message=Your account has been created. Please active it with the email you received !");
+        sendMail($mailValues);
+
+        $message = "An email to activate your account has been sent to you.";
+        header("Location: /member/login?message=$message");
         exit();
     }
 
 
     // Display the errors
-    function showRegistrationError($message) {
+    function showError($message) {
         $this->twigRender("pages/members/registration.html.twig", [
             "message" => $message
         ]);
