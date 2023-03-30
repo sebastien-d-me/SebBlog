@@ -74,8 +74,7 @@ class PasswordResetController extends DefaultController {
     // Show the edit form
     function edit() {
         if(!isset($_SESSION["member_reset"])) {
-            $message = "Try to reset your password again.";
-            $this->showError($message);
+            header("Location: /member/password/password-reset");
             exit();
         }
 

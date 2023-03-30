@@ -9,20 +9,20 @@
 {% endif %}
 <form action="#" class="form" method="post">
     <div class="form__row">
-        <label class="form__label" for="register__username">Username (min 3 characters)</label>
+        <label class="form__label form__label--required" for="register__username">Username (min 3 characters)</label>
         <input class="input" id="register__username" minlength="3" name="register__username" placeholder="johndoe1" required type="text">
     </div>
     <div class="form__row">
-        <label class="form__label" for="register__mail">Mail</label>
+        <label class="form__label form__label--required" for="register__mail">Mail</label>
         <input class="input" id="register__mail" name="register__mail" placeholder="john.doe@me.com" required type="email">
     </div>
     <div class="form__row">
-        <label class="form__label" for="register__password">Password (min 8 characters)</label>
+        <label class="form__label form__label--required" for="register__password">Password (min 8 characters)</label>
         <input class="input" id="register__password" minlength="8" name="register__password" placeholder="*********" required type="password">
     </div>
     <div class="form__row form__row--inline">
         <input class="input" id="register__accept" name="register__accept" required type="checkbox">
-        <label class="form__label" for="register__accept">By registering, I have read the legal notice and the privacy policy.</label>
+        <label class="form__label form__label--required" for="register__accept">By registering, I have read the legal notice and the privacy policy.</label>
     </div>
     <div class="form__row hide">
         <input class="input" id="register__important" name="register__important" type="checkbox">

@@ -13,4 +13,16 @@
         min-width: unset;
         width: 25px;
     }
+
+    &:disabled {
+        background-color: $black;
+        cursor: not-allowed;
+    }
+}
+
+// Label
+.form__label--required::after {
+    color: $red;
+    content: "*";
+    margin-left: 5px;
 }

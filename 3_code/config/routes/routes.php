@@ -99,6 +99,36 @@ $routes = [
             "Administrator" => false
         ]
     ],
+
+    "/member/profil" => [
+        "class" => "ProfilController",
+        "method" => "index",
+        "permissions" => [
+            "Anonymous" => true,
+            "Member" => true,
+            "Administrator" => true
+        ]
+    ],
+
+    "/member/profil/edit" => [
+        "class" => "ProfilController",
+        "method" => "edit",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => true,
+            "Administrator" => true
+        ]
+    ],
+
+    "/member/profil/delete" => [
+        "class" => "ProfilController",
+        "method" => "delete",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => true,
+            "Administrator" => false
+        ]
+    ]
 ];
 
 
@@ -107,9 +137,6 @@ $routes = [
 "/" => [
     "class" => "BaseController",
     "method" => "index",
-    "parameters" => [
-        "id" => 1
-    ],
     "permissions" => [
         "Anonymous" => true,
         "Member" => true,
