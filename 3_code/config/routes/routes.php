@@ -118,6 +118,16 @@ $routes = [
             "Member" => true,
             "Administrator" => true
         ]
+    ],
+
+    "/member/profil/delete" => [
+        "class" => "ProfilController",
+        "method" => "delete",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => true,
+            "Administrator" => false
+        ]
     ]
 ];
 

@@ -4,6 +4,7 @@
 namespace App\Controllers;
 
 // Load
+use App\Models\Comment;
 use App\Models\Hash;
 use App\Models\LoginCredentials;
 use App\Models\Member;
@@ -11,11 +12,6 @@ use App\Models\Member;
 class ProfilController extends DefaultController {
     // Show the profil
     function index() {
-        /*if(!isset($_GET["user"]) && $_SESSION["member_id"] === NULL) {
-            header("Location: /error?code=500");
-            exit();
-        }*/
-
         if(!isset($_GET["user"]) && $_SESSION["member_id"] !== NULL) {
             $memberId = $_SESSION["member_id"];
             header("Location: /member/profil?user=$memberId");
@@ -39,7 +35,8 @@ class ProfilController extends DefaultController {
 
         $this->twigRender("pages/members/profil.html.twig", [
             "informations" => $informations,
-            "loggedProfil" => $loggedProfil
+            "logged" => $loggedProfil,
+            "role" => $_SESSION["member_role"]
         ]);
     }
 
@@ -69,6 +66,7 @@ class ProfilController extends DefaultController {
 
         $email = $data["profil_edit__mail"];
         $password = $data["profil_edit__password"];
+        $currentPassword = $data["profil_edit__current-password"];
 
         if ($email !== "" && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $correctFields = false;
@@ -82,6 +80,12 @@ class ProfilController extends DefaultController {
         if ($checkExisting) {
             $correctFields = false;
             $message = "The email address is already in use.";
+        }
+
+        $checkPassword = password_verify($currentPassword, $credentials->getPassword());
+        if(!$checkPassword || $currentPassword === "") {
+            $correctFields = false;
+            $message = "Your password is empty / incorrect.";
         }
 
 
@@ -104,7 +108,7 @@ class ProfilController extends DefaultController {
             $member->setIsActive(0);
             $member->save();
 
-            $this->sendMail($credentials->getEmail(), $hash->getHash());
+            $this->sendMailActivation($credentials->getEmail(), $hash->getHash());
         }
 
         if($data["profil_edit__password"] !== "") {
@@ -113,6 +117,7 @@ class ProfilController extends DefaultController {
         $credentials->save();
 
         unset($_SESSION["member_id"]);
+        unset($_SESSION["member_reset"]);
         unset($_SESSION["member_role"]);
         session_destroy();
 
@@ -123,22 +128,73 @@ class ProfilController extends DefaultController {
 
 
     // Send the activation mail
-    function sendMail($recipient, $hash) {
+    function sendMailActivation($recipient, $hash) {
         $mailURL = "https://$_SERVER[HTTP_HOST]/member/activation/activate?code=$hash";
         $mailContent = "Click here to confirm your email address : $mailURL";
 
         $mailValues = [
             "to" => $recipient,
-            "subject" => "SebBlog - Email modification",
+            "subject" => "SebBlog - Email validation",
             "content" => $mailContent
         ];
         sendMail($mailValues);
     }
 
+    // Delete the activation mail
+    function sendMailDelete($recipient, $hash) {
+        $mailURL = "https://$_SERVER[HTTP_HOST]/member/profil/delete?code=$hash";
+        $mailContent = "Click here to confirm your email address : $mailURL";
+
+        $mailValues = [
+            "to" => $recipient,
+            "subject" => "SebBlog - Delete validation",
+            "content" => $mailContent
+        ];
+        sendMail($mailValues);
+
+        $message = "To confirm the deletion of you account, please click on the link in the email you received.";
+        $this->twigRender("pages/members/profil-edit.html.twig", [
+            "message" => $message
+        ]);
+    }
+
+
+    // Delete the account
+    function delete() {
+        if(!isset($_GET["code"])) {
+            $credentials = LoginCredentials::where("idMember", $_SESSION["member_id"])->first();
+
+            $hash = new Hash();
+            $hash->setHash($credentials->getUsername());
+            $hash->setIsActive(1);
+            $hash->setIdMember($credentials->getIdMember());
+            $hash->save();
+
+            $this->sendMailDelete($credentials->getEmail(), $hash->getHash());
+        }
+
+
+        if(isset($_GET["code"])) {
+            Comment::where("idMember", $_SESSION["member_id"])->delete();
+            Hash::where("idMember", $_SESSION["member_id"])->delete();
+            LoginCredentials::where("idMember", $_SESSION["member_id"])->delete();
+            Member::where("idMember", $_SESSION["member_id"])->delete();
+
+            unset($_SESSION["member_id"]);
+            unset($_SESSION["member_reset"]);
+            unset($_SESSION["member_role"]);
+            session_destroy();
+    
+            $message = "Your account has been deleted.";
+            header("Location: /member/login?message=$message");
+            exit();
+        }
+    }
+
 
     // Display the errors
     function showError($message) {
-        $this->twigRender("pages/members/profil.html.twig", [
+        $this->twigRender("pages/members/profil-edit.html.twig", [
             "message" => $message
         ]);
     }

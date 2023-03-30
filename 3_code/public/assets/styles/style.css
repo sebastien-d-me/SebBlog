@@ -288,6 +288,12 @@ body {
   cursor: not-allowed;
 }
 
+.form__label--required::after {
+  color: #D44240;
+  content: "*";
+  margin-left: 5px;
+}
+
 .link {
   color: #4091D4;
   display: inline-block;

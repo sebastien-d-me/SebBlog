@@ -16,7 +16,7 @@ class Article extends Model {
     protected $fillable = ["idArticle", "title", "creationDate", "updateDate", "banner", "summary", "content", "idArticleStatus", "idMember"];
 
     // Getter
-    public function getidArticle() {
+    public function getIdArticle() {
         return $this->idArticle;
     }
 

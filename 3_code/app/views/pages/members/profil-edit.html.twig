@@ -24,10 +24,18 @@
         <input class="input" id="profil_edit__password" minlength="8" name="profil_edit__password" placeholder="*********" type="password">
     </div>
     <div class="form__row">
+        <label class="form__label form__label--required" for="profil_edit__current-password">Current password</label>
+        <input class="input" id="profil_edit__current-password" name="profil_edit__current-password" placeholder="*********" required type="password">
+    </div>
+    <div class="form__row form__row--inline">
         <button class="btn" type="submit">
             Save
             <i class="ri-check-line"></i>
         </button>
+        <a class="btn btn--link btn--secondary" href="/member/profil">
+            Back to the profil
+            <i class="ri-arrow-go-back-line"></i>
+        </a>
     </div>
 </form>
 {% endblock %}

@@ -9,11 +9,11 @@
 {% endif %}
 <form action="#" class="form" method="post">
     <div class="form__row">
-        <label for="login__username_mail">Username or mail</label>
+        <label class="form__label form__label--required" for="login__username_mail">Username or mail</label>
         <input class="input" id="login__username_mail" name="login__username_mail" placeholder="johndoe1 / john.doe@mail.com" required type="text">
     </div>
     <div class="form__row">
-        <label for="login__password">Password</label>
+        <label class="form__label form__label--required" for="login__password">Password</label>
         <input class="input" id="login__password" name="login__password" placeholder="*********" required type="password">
     </div>
     <div class="form__row">
@@ -26,7 +26,7 @@
             Login
             <i class="ri-login-box-line"></i>
         </button>
-        <a class="btn btn--link btn--secondary" href="/member/register" type="button">
+        <a class="btn btn--link btn--secondary" href="/member/register">
             Register
             <i class="ri-add-line"></i>
         </a>
