@@ -7,7 +7,7 @@
 {% if message is defined %}
     <p class="form__message">{{ message | raw }}</p>
 {% endif %}
-<form action="#" class="form" method="post">
+<form action="#" method="post">
     <div class="form__row">
         <span>Leave the fields blank if you do not want to change the value.</span>
     </div>
@@ -32,7 +32,7 @@
             Save
             <i class="ri-check-line"></i>
         </button>
-        <a class="btn btn--link btn--secondary" href="/member/profil">
+        <a class="btn btn--secondary" href="/member/profil">
             Back to the profil
             <i class="ri-arrow-go-back-line"></i>
         </a>

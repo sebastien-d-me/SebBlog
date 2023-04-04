@@ -1,6 +1,6 @@
 .sidebar__block {
     background-color: $black;
-    border-right: 1px solid $fullBlack;
+    border-right: 1px solid $black_full;
     min-height: 100vh;
     padding: 20px 25px;
     width: 300px;
@@ -39,7 +39,7 @@
 // Category
 .sidebar__category {
     align-items: center;
-    background: $sidebarCategory;
+    background: $sidebar_category;
     display: flex;
     font-size: 18px;
     font-weight: 600;
@@ -54,7 +54,7 @@
     bottom: 0;
     border-style: solid;
     border-width: 10px 10px 0 10px;
-    border-color: $sidebarCategory transparent transparent transparent;
+    border-color: $sidebar_category transparent transparent transparent;
     content: "";
     height: 0;
     left: 50%;

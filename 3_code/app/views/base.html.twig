@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>SebBlog - {{ title }}</title>
     <link href="{{publicFolder}}/styles/style.css" rel="stylesheet">
 </head>
@@ -13,7 +13,7 @@
     {% include "layouts/sidebar.html.twig" %}
     {% block main %}{% endblock %}
     <a class="link link--reset" href="#">
-        <i class="icon ri-arrow-up-circle-line scroll_up__icon"></i>
+        <i class="icon__scrollup ri-arrow-up-circle-line"></i>
     </a>
     <!-- Scripts -->
     <script src="{{publicFolder}}/scripts/script.js"></script>

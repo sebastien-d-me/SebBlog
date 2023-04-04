@@ -133,27 +133,6 @@
   font-display: swap;
   font-family: "Dancing Script";
   font-style: normal;
-  font-weight: 400;
-  src: url("../fonts/dancing_script/dancing-script-v24-latin-regular.woff2") format("woff2");
-}
-@font-face {
-  font-display: swap;
-  font-family: "Dancing Script";
-  font-style: normal;
-  font-weight: 500;
-  src: url("../fonts/dancing_script/dancing-script-v24-latin-500.woff2") format("woff2");
-}
-@font-face {
-  font-display: swap;
-  font-family: "Dancing Script";
-  font-style: normal;
-  font-weight: 600;
-  src: url("../fonts/dancing_script/dancing-script-v24-latin-600.woff2") format("woff2");
-}
-@font-face {
-  font-display: swap;
-  font-family: "Dancing Script";
-  font-style: normal;
   font-weight: 700;
   src: url("../fonts/dancing_script/dancing-script-v24-latin-700.woff2") format("woff2");
 }
@@ -185,13 +164,13 @@ body {
   display: none !important;
 }
 
-.img__responsive {
+.media__responsive {
   max-height: 100%;
   max-width: 100%;
   width: 100%;
 }
 
-.scroll_up__icon {
+.icon__scrollup {
   font-size: 35px;
   left: calc(100% - 50px);
   top: calc(100% - 50px);
@@ -223,18 +202,6 @@ body {
   cursor: pointer;
 }
 
-.btn--menu {
-  text-transform: uppercase;
-  width: 100%;
-}
-.btn--menu:hover {
-  background-color: transparent;
-}
-.btn--menu.active {
-  background-color: #D44240;
-  color: #F1F1F1;
-}
-
 .btn--secondary {
   background-color: #181818;
   border-color: #F1F1F1;
@@ -245,10 +212,16 @@ body {
   color: #F1F1F1;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.btn--menu {
+  text-transform: uppercase;
+  width: 100%;
+}
+.btn--menu:hover {
+  background-color: transparent;
+}
+.btn--menu.active {
+  background-color: #D44240;
+  color: #F1F1F1;
 }
 
 .form__row {
@@ -294,6 +267,11 @@ body {
   margin-left: 5px;
 }
 
+@media screen and (max-width: 992px) {
+  .input {
+    width: 100%;
+  }
+}
 .link {
   color: #4091D4;
   display: inline-block;

@@ -3,7 +3,7 @@
     font-family: "Poppins", sans-serif;
 }
 
-// Display
+// Display elements
 .show {
     display: block !important;
 }
@@ -12,15 +12,15 @@
     display: none !important;
 }
 
-// Image
-.img__responsive {
+// Media responsive
+.media__responsive {
     max-height: 100%;
     max-width: 100%;
     width: 100%;
 }
 
-// Scroll
-.scroll_up__icon {
+// Scroll up icon
+.icon__scrollup {
     font-size: 35px;
     left: calc(100% - 50px);
     top: calc(100% - 50px);

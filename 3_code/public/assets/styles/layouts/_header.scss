@@ -3,7 +3,7 @@
     background: $black;
     color: $white;
     display: flex;
-    filter: drop-shadow(0px 1px 2px $fullBlack);
+    filter: drop-shadow(0px 1px 2px $black_full);
     justify-content: space-evenly;
     min-height: 100px;
     width: 100%;
@@ -11,7 +11,7 @@
 
 // Banner
 .header__banner {
-    filter: drop-shadow(0 0 5px $fullBlack);
+    filter: drop-shadow(0 0 5px $black_full);
     object-fit: cover;
 }
 

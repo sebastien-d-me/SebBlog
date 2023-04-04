@@ -26,3 +26,10 @@
     content: "*";
     margin-left: 5px;
 }
+
+/// Responsive
+@media screen and (max-width: 992px) {
+    .input {
+        width: 100%;
+    }
+}

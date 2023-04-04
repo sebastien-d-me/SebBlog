@@ -7,7 +7,7 @@
 {% if message is defined %}
     <p class="form__message">{{ message | raw }}</p>
 {% endif %}
-<form action="#" class="form" method="post">
+<form action="#" method="post">
     <div class="form__row">
         <label class="form__label form__label--required" for="register__username">Username (min 3 characters)</label>
         <input class="input" id="register__username" minlength="3" name="register__username" placeholder="johndoe1" required type="text">
