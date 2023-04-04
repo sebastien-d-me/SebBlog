@@ -10,7 +10,7 @@ use App\Models\LoginCredentials;
 use App\Models\Member;
 
 class ProfilController extends DefaultController {
-    // Show the profil
+    // Manages the queries
     function index() {
         if(!isset($_GET["user"]) && $_SESSION["member_id"] !== NULL) {
             $memberId = $_SESSION["member_id"];
@@ -64,7 +64,7 @@ class ProfilController extends DefaultController {
 
         $correctFields = true;
 
-        $email = $data["profil_edit__mail"];
+        $email = $data["profil_edit__email"];
         $password = $data["profil_edit__password"];
         $currentPassword = $data["profil_edit__current-password"];
 
@@ -95,8 +95,8 @@ class ProfilController extends DefaultController {
 
     // Save the modification
     function save($credentials, $data) {
-        if($data["profil_edit__mail"] !== "") {
-            $credentials->setEmail(htmlspecialchars($data["profil_edit__mail"]));
+        if($data["profil_edit__email"] !== "") {
+            $credentials->setEmail(htmlspecialchars($data["profil_edit__email"]));
 
             $hash = new Hash();
             $hash->setHash($credentials->getUsername());
@@ -125,7 +125,6 @@ class ProfilController extends DefaultController {
         header("Location: /member/login?message=$message");
         exit();
     }
-
 
     // Send the activation mail
     function sendMailActivation($recipient, $hash) {
@@ -191,9 +190,8 @@ class ProfilController extends DefaultController {
         }
     }
 
-
-    // Display the errors
-    function showError($message) {
+    // Display the message
+    function showMessage($message) {
         $this->twigRender("pages/members/profil-edit.html.twig", [
             "message" => $message
         ]);

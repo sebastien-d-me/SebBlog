@@ -8,7 +8,7 @@ use App\Models\LoginCredentials;
 use App\Models\Member;
 
 class LoginController extends DefaultController {
-    // Manages the form and the queries
+    // Manages the queries
     function index() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->check($_POST);

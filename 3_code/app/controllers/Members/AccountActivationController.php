@@ -9,71 +9,54 @@ use App\Models\LoginCredentials;
 use App\Models\Member;
 
 class AccountActivationController extends DefaultController {
-    // Checks the status
+    // Manages the the queries
     function index() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
-                $this->handleForm($_POST);
+            $this->check($_POST);
+        } else if(isset($_GET["message"])) {
+            $this->showMessage($_GET["message"]);
+            exit();
         } else {
-            if(isset($_GET["message"])) {
-                $message = $_GET["message"];
-                $this->twigRender("pages/members/activation.html.twig", [
-                    "message" => $message
-                ]);
-            } else {
-                $this->twigRender("pages/members/activation.html.twig");
-            }
-        }        
-    }
+            $this->twigRender("pages/members/activation.html.twig");
+        }
+    }        
 
+    // Check the data values
+    function check($data) {
+        $email = $data["activation__email"];
 
-    // Manage the form of the page
-    function handleForm($data) {
-        $credentials = LoginCredentials::where("email", htmlspecialchars($data["activation__mail"], ENT_QUOTES))->first();
+        $credentials = LoginCredentials::where("email", htmlspecialchars($email, ENT_QUOTES))->first();
         if($credentials === NULL) {
-            $message = "No account exists with this email address.";
-            $this->showError($message);
+            $this->showError("No account exists with this email address.");
             exit();
         }
 
         $member = Member::where("idMember", $credentials->getIdMember())->first();
+        $hash = Hash::where("idMember", $credentials->getIdMember())->first();
         if($member->getIsActive() === 1) {
-            $message = "Your account is already activated.";
-            $this->showError($message);
+            $this->showError("Your account is already activated.");
             exit();
         }
 
-        $hash = Hash::where("idMember", $credentials->getIdMember())->first();
-
-        $this->sendMail($credentials->getEmail(), $hash->getHash());
-    }
-
-
-    // Send the activation mail
-    function sendMail($recipient, $hash) {
-        $mailURL = "https://$_SERVER[HTTP_HOST]/member/activation/activate?code=$hash";
-        $mailContent = "Click here to activate your account : $mailURL";
-
+        $getHash = $hash->getHash();
         $mailValues = [
-            "to" => $recipient,
-            "subject" => "SebBlog - Account activation",
-            "content" => $mailContent
+            "to" => $loginCredentials->getEmail(),
+            "subject" => "Account activation",
+            "content_message" => "Click here to activate your account",
+            "content_route" => "/member/activation/activate",
+            "content_hash" => "?code=$getHash",
+            "header_route" => "/member/login",
+            "header_message" => "An email to activate your account has been sent to you."
         ];
         sendMail($mailValues);
-
-        $message = "An email to activate your account has been sent to you.";
-        header("Location: /member/login?message=$message");
-        exit();
     }
-
 
     // Activate the account
     function activate() {
-        $hash = $_GET["code"];
-        $hash = Hash::where("hash", $hash)->first();
+        $hash = Hash::where("hash", $_GET["code"])->first();
 
-        if($hash === NULL || $hash === 0) {
-            $message = "Your code not work, please retry later.";
-            $this->showError($message);
+        if($hash === NULL) {
+            $this->showError("Your code not work, please retry later.");
             exit();
         }
 
@@ -93,9 +76,8 @@ class AccountActivationController extends DefaultController {
         exit();
     }
 
-
-    // Display the errors
-    function showError($message) {
+    // Display the message
+    function showMessage($message) {
         $this->twigRender("pages/members/activation.html.twig", [
             "message" => $message
         ]);
