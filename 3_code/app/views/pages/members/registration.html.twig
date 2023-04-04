@@ -7,26 +7,26 @@
 {% if message is defined %}
     <p class="form__message">{{ message | raw }}</p>
 {% endif %}
-<form action="#" class="form" method="post">
+<form action="#" method="post">
     <div class="form__row">
-        <label class="form__label form__label--required" for="register__username">Username (min 3 characters)</label>
-        <input class="input" id="register__username" minlength="3" name="register__username" placeholder="johndoe1" required type="text">
+        <input class="input__element" id="register__username" minlength="3" name="register__username" placeholder="johndoe1" required type="text">
+        <label for="register__username">Username (min 3 characters)</label>
     </div>
     <div class="form__row">
-        <label class="form__label form__label--required" for="register__mail">Mail</label>
-        <input class="input" id="register__mail" name="register__mail" placeholder="john.doe@me.com" required type="email">
+        <input class="input__element" id="register__email" name="register__email" placeholder="john.doe@me.com" required type="email">
+        <label for="register__email">Mail</label>
     </div>
     <div class="form__row">
-        <label class="form__label form__label--required" for="register__password">Password (min 8 characters)</label>
-        <input class="input" id="register__password" minlength="8" name="register__password" placeholder="*********" required type="password">
+        <input class="input__element" id="register__password" minlength="8" name="register__password" placeholder="*********" required type="password">
+        <label for="register__password">Password (min 8 characters)</label>
     </div>
     <div class="form__row form__row--inline">
-        <input class="input" id="register__accept" name="register__accept" required type="checkbox">
-        <label class="form__label form__label--required" for="register__accept">By registering, I have read the legal notice and the privacy policy.</label>
+        <input class="input__element" id="register__accept" name="register__accept" required type="checkbox">
+        <label for="register__accept">By registering, I have read the legal notice and the privacy policy.</label>
     </div>
     <div class="form__row hide">
-        <input class="input" id="register__important" name="register__important" type="checkbox">
-        <label class="form__label" for="register__important">Check this checkbox.</label>
+        <input class="input__element" id="register__important" name="register__important" type="checkbox">
+        <label for="register__important">Check this checkbox.</label>
     </div>
     <div class="form__row">
         <button class="btn" type="submit">

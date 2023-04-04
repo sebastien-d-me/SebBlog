@@ -8,72 +8,63 @@ use App\Models\LoginCredentials;
 use App\Models\Member;
 
 class LoginController extends DefaultController {
-    // Checks the status
+    // Manages the queries
     function index() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
-            $this->checkFields($_POST);
+            $this->check($_POST);
+        } else if(isset($_GET["message"])) {
+            $this->showMessage($_GET["message"]);
+            exit();
         } else {
-            if(isset($_GET["message"])) {
-                $message = $_GET["message"];
-                $this->twigRender("pages/members/login.html.twig", [
-                    "message" => $message
-                ]);
-            } else {
-                $this->twigRender("pages/members/login.html.twig");
-            }
-        }        
+            $this->twigRender("pages/members/login.html.twig");
+        }    
     }
 
-
-    // Check the fields
-    function checkFields($fields) {
-        $correctFields = true;
-        foreach($fields as $field) {
-            $field === "" ? $correctFields = false : $correctFields = true;
+    // Check the data values
+    function check($data) {
+        foreach($data as $value) {
+            if(empty($value)) {
+                $this->showMessage("Some fields are not filled in.");
+                exit();
+            }
         }
 
-        $correctFields ? $this->connect($fields) : $this->showError("You must fill in all the fields.");
+        $this->connect($data);
     }
-
     
-    // Do the connection
-    function connect($fields) {
-        $login = htmlspecialchars($fields["login__username_mail"], ENT_QUOTES);
-        $password = htmlspecialchars($fields["login__password"], ENT_QUOTES);
+    // Connect the member
+    function connect($data) {
+        $usernameEmail = $data["login__username_email"];
+        $password = $data["login__password"];
 
-        $checkLogin = LoginCredentials::where("username", $login)->orWhere("email", $login)->first();
+        $checkLogin = LoginCredentials::where("username", $usernameEmail)->orWhere("email", $usernameEmail)->first();
         if(!$checkLogin) {
-            $message = "Your username or your mail is incorrect.";
-            $this->showError($message);
+            $this->showMessage("Your username or your mail is incorrect.");
             exit();
         }
 
         $checkPassword = password_verify($password, $checkLogin->getPassword());
         if(!$checkPassword) {
-            $message = "Your password is incorrect.";
-            $this->showError($message);
+            $this->showMessage("Your password is incorrect.");
             exit();
         }
 
         $memberId = Member::find($checkLogin->getIdLoginCredentials());
         $memberActive = $memberId->getIsActive();
         if($memberActive === 0) {
-            $message = "Your account is not activated. Click <a class='link' href='/member/activation/send-activation'>here</a> to send an activation email.";
-            $this->showError($message);
+            $this->showMessage("Your account is not activated. Click <a class='link' href='/member/activation/send-activation'>here</a> to send an activation email.");
             exit();
         }
 
-        $roleMember = $memberId->getIdRole();
         $_SESSION["member_id"] = $checkLogin->getIdLoginCredentials();
-        $_SESSION["member_role"] = ($roleMember === 1) ? "Administrator" : "Member";
+        $_SESSION["member_role"] = $memberId->getIdRole() === 1 ? "Administrator" : "Member";
 
         header("Location: /");
         exit();
     }
-    
 
-    // Display the errors
-    function showError($message) {
+    // Display the message
+    function showMessage($message) {
         $this->twigRender("pages/members/login.html.twig", [
             "message" => $message
         ]);

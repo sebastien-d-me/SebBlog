@@ -3,6 +3,7 @@
 // Load Capsule
 use Illuminate\Database\Capsule\Manager as Capsule;
 
+// Init it
 $capsule = new Capsule;
 $capsule->addConnection([
     "driver" => "mysql",

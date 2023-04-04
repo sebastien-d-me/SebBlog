@@ -9,24 +9,22 @@ use App\Models\LoginCredentials;
 use App\Models\Member;
 
 class PasswordResetController extends DefaultController {
-    // Checks the status
+    // Manages the queries
     function index() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
-            $this->handleForm($_POST);
+            $this->check($_POST);
         } else {
-            $this->twigRender("pages/members/password_reset.html.twig"); 
+            $this->twigRender("pages/members/password/password_reset.html.twig"); 
         }
     }
 
+    // Check the data values
+    function check($data) {
+        $usernameEmail = htmlspecialchars($data["password_reset__username_email"], ENT_QUOTES);
 
-    // Manage the form of the page
-    function handleForm($data) {
-        $login = htmlspecialchars($data["password_reset__username_mail"], ENT_QUOTES);
-
-        $credentials = LoginCredentials::where("username", $login)->orWhere("email", $login)->first();
+        $credentials = LoginCredentials::where("username", $usernameEmail)->orWhere("email", $usernameEmail)->first();
         if($credentials === NULL) {
-            $message = "No account exists with this email address.";
-            $this->showError($message);
+            $this->showError("No account exists with this email address.");
             exit();
         }
 
@@ -35,41 +33,36 @@ class PasswordResetController extends DefaultController {
             "email" => $credentials->getEmail(),
             "idMember" => $credentials->getIdMember()
         ];
+
         $this->saveHash($data);        
     }
 
-
     // Save the hash
     function saveHash($data) {
-        $passwordReset = new Hash();
-        $passwordReset->setHash($data["username"]);
-        $passwordReset->setIsActive(1);
-        $passwordReset->setIdMember($data["idMember"]);
-        $passwordReset->save();
+        $username = $data["username"];
+        $email = $data["email"];
+        $idMember = $data["idMember"];
+
+        $hash = new Hash();
+        $hash->setHash($username);
+        $hash->setIsActive(1);
+        $hash->setIdMember($idMember);
+        $hash->save();
 
         $_SESSION["member_reset"] = $data;
 
-        $this->sendMail($passwordReset->getHash(), $data["email"]);
-    }
-
-
-    // Send the password reset mail
-    function sendMail($hash, $recipient) {
-        $mailURL = "https://$_SERVER[HTTP_HOST]/member/password/reset?code=$hash";
-        $mailContent = "Click here to reset your password : $mailURL";
-
+        $getHash = $hash->getHash();
         $mailValues = [
-            "to" => $recipient,
-            "subject" => "SebBlog - Password reset",
-            "content" => $mailContent
+            "to" => $loginCredentials->getEmail(),
+            "subject" => "Password reset",
+            "content_message" => "Click here to reset your password",
+            "content_route" => "/member/password/reset",
+            "content_hash" => "?code=$getHash",
+            "header_route" => "/member/login",
+            "header_message" => "An email to reset your password has been sent to you."
         ];
         sendMail($mailValues);
-
-        $message = "An email to reset your password has been sent to you.";
-        header("Location: /member/login?message=$message");
-        exit();
     }
-
 
     // Show the edit form
     function edit() {
@@ -79,12 +72,14 @@ class PasswordResetController extends DefaultController {
         }
 
         if(!empty($_POST)) {
-            $credentials = LoginCredentials::where("username", $_SESSION["member_reset"])->orWhere("email", $_SESSION["member_reset"])->first();
-            $credentials->setPassword(htmlspecialchars($_POST["password_reset__password"], ENT_QUOTES));
+            $memberReset = $_SESSION["member_reset"];
+            $passwordReset = $_POST["password_reset__password"];
+
+            $credentials = LoginCredentials::where("username", $memberReset)->orWhere("email", $memberReset)->first();
+            $credentials->setPassword(htmlspecialchars($passwordReset, ENT_QUOTES));
             $credentials->save();
 
-            $hash = $_GET["code"];
-            $hash = Hash::where("hash", $hash)->first();
+            $hash = Hash::where("hash", $_GET["code"])->first();
             $hash->setIsActive(0);
             $hash->save();
             
@@ -94,13 +89,12 @@ class PasswordResetController extends DefaultController {
             header("Location: /member/login?message=$message");
         }
 
-        $this->twigRender("pages/members/password_reset-edit.html.twig");
+        $this->twigRender("pages/members/password/password_reset-edit.html.twig");
     }
 
-
-    // Display the errors
-    function showError($message) {
-        $this->twigRender("pages/members/password_reset.html.twig", [
+    // Display the message
+    function showMessage($message) {
+        $this->twigRender("pages/members/password/password_reset.html.twig", [
             "message" => $message
         ]);
     }

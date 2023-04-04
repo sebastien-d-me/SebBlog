@@ -1,11 +1,8 @@
 <?php 
 
-// Load the security
-require_once("security.php");
-
-
-// Define the routes with the controller
+// Define the routes
 $routes = [
+    /* Homepage */
     "/" => [
         "class" => "BaseController",
         "method" => "index",
@@ -16,20 +13,7 @@ $routes = [
         ]
     ],
 
-
-    /* Errors */
-    "/error" => [
-        "class" => "ErrorController",
-        "method" => "index",
-        "permissions" => [
-            "Anonymous" => true,
-            "Member" => true,
-            "Administrator" => true
-        ]
-    ],
-
-
-    /* Members */
+    /* Member | Register */
     "/member/register" => [
         "class" => "RegistrationController",
         "method" => "index",
@@ -40,6 +24,7 @@ $routes = [
         ]
     ],
 
+    /* Member | Login */
     "/member/login" => [
         "class" => "LoginController",
         "method" => "index",
@@ -50,6 +35,7 @@ $routes = [
         ]
     ],
 
+    /* Member | Logout */
     "/member/logout" => [
         "class" => "LogoutController",
         "method" => "index",
@@ -60,6 +46,7 @@ $routes = [
         ]
     ],
 
+    /* Member | Form to send activation */
     "/member/activation/send-activation" => [
         "class" => "AccountActivationController",
         "method" => "index",
@@ -70,6 +57,7 @@ $routes = [
         ]
     ], 
 
+    /* Member | Activate the account */
     "/member/activation/activate" => [
         "class" => "AccountActivationController",
         "method" => "activate",
@@ -80,6 +68,7 @@ $routes = [
         ]
     ],
 
+    /* Member | Form to reset the password */
     "/member/password/password-reset" => [
         "class" => "PasswordResetController",
         "method" => "index",
@@ -90,6 +79,7 @@ $routes = [
         ]
     ],
 
+    /* Member | Reset the password */
     "/member/password/reset" => [
         "class" => "PasswordResetController",
         "method" => "edit",
@@ -100,6 +90,7 @@ $routes = [
         ]
     ],
 
+    /* Member | Profil */
     "/member/profil" => [
         "class" => "ProfilController",
         "method" => "index",
@@ -110,6 +101,7 @@ $routes = [
         ]
     ],
 
+    /* Member | Edit profil */
     "/member/profil/edit" => [
         "class" => "ProfilController",
         "method" => "edit",
@@ -120,27 +112,25 @@ $routes = [
         ]
     ],
 
+    /* Member | Delete account */
     "/member/profil/delete" => [
         "class" => "ProfilController",
         "method" => "delete",
         "permissions" => [
-            "Anonymous" => false,
+            "Anonymous" => true,
             "Member" => true,
             "Administrator" => false
         ]
+    ],
+
+    /* Error */
+    "/error" => [
+        "class" => "ErrorController",
+        "method" => "index",
+        "permissions" => [
+            "Anonymous" => true,
+            "Member" => true,
+            "Administrator" => true
+        ]
     ]
 ];
-
-
-// Example
-/*
-"/" => [
-    "class" => "BaseController",
-    "method" => "index",
-    "permissions" => [
-        "Anonymous" => true,
-        "Member" => true,
-        "Administrator" => true
-    ]
-]
-*/

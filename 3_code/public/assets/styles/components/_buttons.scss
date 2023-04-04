@@ -21,6 +21,18 @@
     }
 }
 
+// Secondary
+.btn--secondary {
+    background-color: $black;
+    border-color: $white;
+    color: $white;
+
+    &:hover {
+        border-color: $red;
+        color: $white;
+    }
+}
+
 // Menu
 .btn--menu {
     text-transform: uppercase;
@@ -32,18 +44,6 @@
 
     &.active {
         background-color: $red;
-        color: $white;
-    }
-}
-
-// Secondary
-.btn--secondary {
-    background-color: $black;
-    border-color: $white;
-    color: $white;
-
-    &:hover {
-        border-color: $red;
         color: $white;
     }
 }

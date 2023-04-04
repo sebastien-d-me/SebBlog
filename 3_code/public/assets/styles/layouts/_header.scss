@@ -1,18 +1,6 @@
 .header__block {
-    align-items: center;
-    background: $black;
-    color: $white;
     display: flex;
-    filter: drop-shadow(0px 1px 2px $fullBlack);
-    justify-content: space-evenly;
-    min-height: 100px;
-    width: 100%;
-}
-
-// Banner
-.header__banner {
-    filter: drop-shadow(0 0 5px $fullBlack);
-    object-fit: cover;
+    filter: drop-shadow(0px 1px 2px $black_full);
 }
 
 // Mobile
@@ -22,6 +10,11 @@
 
 /// Responsive
 @media screen and (max-width: 1200px) {
+    .header__block {
+        background: $black;
+        color: $white;
+        display: block;
+    }
 
     // Banner
     .header__banner {
@@ -46,8 +39,8 @@
         text-align: center;
     }
 
-    // Menu
-    .icon--open_sidebar {
+    // Icon sidebar
+    .icon__sidebar--open {
         font-size: 24px;
     }
 }

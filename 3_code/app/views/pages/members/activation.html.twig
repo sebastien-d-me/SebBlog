@@ -7,10 +7,10 @@
 {% if message is defined %}
     <p class="form__message">{{ message | raw }}</p>
 {% endif %}
-<form action="#" class="form" method="post">
+<form action="#" method="post">
     <div class="form__row">
-        <label class="form__label form__label--required" for="activation__mail">Mail</label>
-        <input class="input" id="activation__mail" name="activation__mail" placeholder="john.doe@mail.com" required type="email">
+        <input class="input__element" id="activation__email" name="activation__email" placeholder="john.doe@mail.com" required type="email">
+        <label for="activation__email">Mail</label>
     </div>
     <div class="form__row">
         <button class="btn" type="submit">

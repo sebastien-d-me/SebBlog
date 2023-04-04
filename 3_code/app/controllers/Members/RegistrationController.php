@@ -9,7 +9,7 @@ use App\Models\LoginCredentials;
 use App\Models\Member;
 
 class RegistrationController extends DefaultController {
-    // Checks the status
+    // Manages the queries
     function index() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->check($_POST);
@@ -18,31 +18,37 @@ class RegistrationController extends DefaultController {
         }        
     }
 
+    // Check the data values
+    function check($data) {
+        $username = $data["register__username"];
+        $email = $data["register__email"];
+        $password = $data["register__password"];
+        $accept = isset($_POST["register__accept"]);
+        $antiBot = isset($_POST["register__important"]);
 
-    // Check the fields
-    function check($fields) {
-        $correctFields = true;
-
-        foreach($fields as $field) {
-            empty($field) ? $correctFields = false : "";
+        foreach($data as $value) {
+            if(empty($value)) {
+                $this->showMessage("Some fields are not filled in.");
+                exit();
+            }
         }
 
-        if (strlen($fields["register__username"]) < 3 || !filter_var($fields["register__mail"], FILTER_VALIDATE_EMAIL) || strlen($fields["register__password"]) < 8 || !isset($_POST["register__accept"]) || isset($_POST["register__important"])) {
-            $correctFields = false;
+        if (strlen($username) < 3 || !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($password) < 8 || !$accept || $antiBot) {
+            $this->showMessage("Please check the value of the fields.");
+            exit();
         }
 
-        $checkExisting = LoginCredentials::where("username", $fields["register__username"])->orWhere("email", $fields["register__mail"])->first();
-        if ($checkExisting) {
-            $correctFields = false;
-            $message = "The username and/or email address is already in use.";
+        $checkSameCredentials = LoginCredentials::where("username", $username)->orWhere("email", $email)->first();
+        if ($checkSameCredentials) {
+            $this->showMessage("The username and/or email address is already in use.");
+            exit();
         }
 
-        $correctFields ? $this->save($fields) : $this->showError($message);
+        $this->save($data);
     }
 
-
-    // Do the save of the member
-    function save($fields) {
+    // Save the new member
+    function save($data) {
         $member = new Member();
         $member->setRegistrationDate(date("Y-m-d"));
         $member->setIsActive(false);
@@ -50,9 +56,9 @@ class RegistrationController extends DefaultController {
         $member->save();
 
         $loginCredentials = new LoginCredentials();
-        $loginCredentials->setUsername(htmlspecialchars($fields["register__username"], ENT_QUOTES));
-        $loginCredentials->setEmail(htmlspecialchars($fields["register__mail"], ENT_QUOTES));
-        $loginCredentials->setPassword(htmlspecialchars($fields["register__password"], ENT_QUOTES));
+        $loginCredentials->setUsername(htmlspecialchars($data["register__username"], ENT_QUOTES));
+        $loginCredentials->setEmail(htmlspecialchars($data["register__email"], ENT_QUOTES));
+        $loginCredentials->setPassword(htmlspecialchars($data["register__password"], ENT_QUOTES));
         $loginCredentials->setIdMember($member->getIdMember());
         $loginCredentials->save();
 
@@ -64,32 +70,22 @@ class RegistrationController extends DefaultController {
         $hash->setIsActive(1);
         $hash->setIdMember($loginCredentials->getIdMember());
         $hash->save();
-        
-        $this->sendMail($loginCredentials->getEmail(), $hash->getHash());
-        exit();
-    }
 
-
-    // Send the activation mail
-    function sendMail($recipient, $hash) {
-        $mailURL = "https://$_SERVER[HTTP_HOST]/member/activation/activate?code=$hash";
-        $mailContent = "Click here to activate your account : $mailURL";
-
+        $getHash = $hash->getHash();
         $mailValues = [
-            "to" => $recipient,
-            "subject" => "SebBlog - Account activation",
-            "content" => $mailContent
+            "to" => $loginCredentials->getEmail(),
+            "subject" => "Account activation",
+            "content_message" => "Click here to activate your account",
+            "content_route" => "/member/activation/activate",
+            "content_hash" => "?code=$getHash",
+            "header_route" => "/member/login",
+            "header_message" => "An email to activate your account has been sent to you."
         ];
         sendMail($mailValues);
-
-        $message = "An email to activate your account has been sent to you.";
-        header("Location: /member/login?message=$message");
-        exit();
     }
 
-
-    // Display the errors
-    function showError($message) {
+    // Display the message
+    function showMessage($message) {
         $this->twigRender("pages/members/registration.html.twig", [
             "message" => $message
         ]);

@@ -1,6 +1,5 @@
 /* Abstracts */
 @import "./abstracts/variables";
-@import "./abstracts/mixins";
 
 /* Vendors */
 @import "./vendors/node_modules/modern-normalize/modern-normalize.css";
@@ -12,22 +11,17 @@
 @import "./base/content";
 
 /* Components */
-@import "./components/animations";
 @import "./components/buttons";
 @import "./components/forms";
 @import "./components/inputs";
 @import "./components/links";
-@import "./components/lists";
 
 /* Layout */
 @import "./layouts/header";
 @import "./layouts/sidebar";
-@import "./layouts/navigation";
 @import "./layouts/main";
 @import "./layouts/container";
-@import "./layouts/article";
 @import "./layouts/footer";
 
 /* Pages */
-@import "./pages/index";
 @import "./pages/profil";
