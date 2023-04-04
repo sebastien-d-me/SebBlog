@@ -16,14 +16,13 @@
 .media__responsive {
     max-height: 100%;
     max-width: 100%;
-    width: 100%;
 }
 
 // Scroll up icon
 .icon__scrollup {
     font-size: 35px;
     left: calc(100% - 50px);
+    position: fixed;
     top: calc(100% - 50px);
     transition: 0.5s;
-    position: fixed;
 }

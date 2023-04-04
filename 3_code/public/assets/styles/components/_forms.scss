@@ -1,19 +1,24 @@
 // Row
 .form__row {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 5px;
     margin-bottom: 15px;
+}
 
-    &--inline {
-        align-items: center;
-        flex-direction: row;
-        gap: 15px;
-    }
+.form__row--inline {
+    flex-direction: row;
+    gap: 15px;
 }
 
 // Message
 .form__message {
-    color: $red;
+    border-bottom: 1px solid $white;
     margin: 0 0 20px 0;
+    padding: 0 0 20px 0;
+    width: fit-content;
+
+    &::before {
+        content: "Message : ";
+    }
 }

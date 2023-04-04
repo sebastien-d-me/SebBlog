@@ -1,8 +1,8 @@
 .sidebar__block {
     background-color: $black;
     border-right: 1px solid $black_full;
-    min-height: 100vh;
     padding: 20px 25px;
+    text-align: center;
     width: 300px;
 }
 
@@ -12,28 +12,11 @@
     font-family: "Dancing Script", sans-serif;
     font-size: 48px;
     margin: 0 auto 20px auto;
-    text-align: center;
 }
 
-// Catch phrase
-.sidebar__catch_phrase {
-    display: block;
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-// Menu
-.icon--close_sidebar {
+// Icon sidebar
+.icon__sidebar--close {
     display: none;
-}
-
-// Form
-.sidebar__form {
-    align-items: center;
-    display: flex;
-    gap: 0 20px;
-    justify-content: space-between;
-    width: 100%;
 }
 
 // Category
@@ -42,25 +25,24 @@
     background: $sidebar_category;
     display: flex;
     font-size: 18px;
-    font-weight: 600;
     height: 35px;
     justify-content: center;
     margin: 30px 0 20px 0;
     position: relative;
     text-transform: uppercase;
-}
 
-.sidebar__category::before {
-    bottom: 0;
-    border-style: solid;
-    border-width: 10px 10px 0 10px;
-    border-color: $sidebar_category transparent transparent transparent;
-    content: "";
-    height: 0;
-    left: 50%;
-    position: absolute;
-    transform: translateX(-50%) translateY(100%);
-    width: 0;
+    &::before {
+        bottom: 0;
+        border-style: solid;
+        border-width: 10px 10px 0 10px;
+        border-color: $sidebar_category transparent transparent transparent;
+        content: "";
+        height: 0;
+        left: 50%;
+        position: absolute;
+        transform: translateX(-50%) translateY(100%);
+        width: 0;
+    }
 }
 
 // Pages
@@ -68,6 +50,8 @@
     display: flex;
     flex-direction: column;
     gap: 20px 0;
+    list-style: none;
+    padding: 0;
 }
 
 // Articles
@@ -75,6 +59,8 @@
     display: flex;
     flex-direction: column;
     gap: 20px 0;
+    list-style: none;
+    padding: 0;
 
     > .item__list {
         display: flex;
@@ -87,17 +73,13 @@
     display: block;
 }
 
-.random_articles__none {
-    text-align: center;
-}
-
 // Socials
 .sidebar__socials {
     display: flex;
     justify-content: space-evenly;
 }
 
-.social__icon {
+.icon__social {
     align-items: center;
     border: 1px solid $white;
     border-radius: 50%;
@@ -105,7 +87,6 @@
     font-size: 20px;
     height: 40px;
     justify-content: center;
-    padding: 5px;
     transition: 0.5s;
     width: 40px;
 
@@ -121,33 +102,26 @@
 @media screen and (max-width: 1200px) {
     .sidebar__block {
         display: none;
-        position: absolute;
+        min-height: 100vh;
         width: 100%;
         z-index: 1;
     }
 
-    // Catch phrase
-    .sidebar__catch_phrase {
-        margin-bottom: 15px;
+    // Description
+    .sidebar__description {
+        display: none;
     }
 
     // Menu
-    .icon--close_sidebar {
+    .icon__sidebar--close {
         border-bottom: 1px solid $white;
         display: none;
         font-size: 30px;
-        text-align: center;
         padding-bottom: 10px;
-    }
-
-    // Form
-    .sidebar__form {
-        margin-top: 10px;
     }
 
     // Articles
     .sidebar__articles {
         display: none;
     }
-
 }

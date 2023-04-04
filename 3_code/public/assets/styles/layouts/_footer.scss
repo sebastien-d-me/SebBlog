@@ -7,7 +7,6 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     min-height: 60px;
-    width: 100%;
 }
 
 /// Responsive
@@ -15,11 +14,6 @@
     .footer__block {
         gap: 20px 0;
         padding: 10px;
-    }
-
-    // Copyright
-    .footer__copyright {
-        display: block;
         text-align: center;
     }
 }

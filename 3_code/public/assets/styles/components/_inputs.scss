@@ -3,14 +3,11 @@
     border: none;
     border-radius: 8px;
     height: 40px;
-    min-width: 200px;
     padding: 10px;
-    width: 300px;
+    width: 280px;
 
     &[type="checkbox"] {
         height: 25px;
-        margin: auto 0;
-        min-width: unset;
         width: 25px;
     }
 
@@ -21,15 +18,8 @@
 }
 
 // Label
-.form__label--required::after {
+.input:required + label::after {
     color: $red;
     content: "*";
     margin-left: 5px;
-}
-
-/// Responsive
-@media screen and (max-width: 992px) {
-    .input {
-        width: 100%;
-    }
 }
