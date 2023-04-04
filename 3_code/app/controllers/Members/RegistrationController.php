@@ -28,19 +28,19 @@ class RegistrationController extends DefaultController {
 
         foreach($data as $value) {
             if(empty($value)) {
-                $this->showError("Some fields are not filled in.");
+                $this->showMessage("Some fields are not filled in.");
                 exit();
             }
         }
 
         if (strlen($username) < 3 || !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($password) < 8 || !$accept || $antiBot) {
-            $this->showError("Please check the value of the fields.");
+            $this->showMessage("Please check the value of the fields.");
             exit();
         }
 
         $checkSameCredentials = LoginCredentials::where("username", $username)->orWhere("email", $email)->first();
         if ($checkSameCredentials) {
-            $this->showError("The username and/or email address is already in use.");
+            $this->showMessage("The username and/or email address is already in use.");
             exit();
         }
 
@@ -53,12 +53,14 @@ class RegistrationController extends DefaultController {
         $member->setRegistrationDate(date("Y-m-d"));
         $member->setIsActive(false);
         $member->setIdRole(2);
+        $member->save();
 
         $loginCredentials = new LoginCredentials();
         $loginCredentials->setUsername(htmlspecialchars($data["register__username"], ENT_QUOTES));
         $loginCredentials->setEmail(htmlspecialchars($data["register__mail"], ENT_QUOTES));
         $loginCredentials->setPassword(htmlspecialchars($data["register__password"], ENT_QUOTES));
         $loginCredentials->setIdMember($member->getIdMember());
+        $loginCredentials->save();
 
         $member->setIdLoginCredentials($loginCredentials->getIdLoginCredentials());
         $member->save();
@@ -89,9 +91,8 @@ class RegistrationController extends DefaultController {
         exit();
     }
 
-
-    // Display the possible errors
-    function showError($message) {
+    // Display the message
+    function showMessage($message) {
         $this->twigRender("pages/members/registration.html.twig", [
             "message" => $message
         ]);
