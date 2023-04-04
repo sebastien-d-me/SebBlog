@@ -17,7 +17,7 @@
         <b>Registration date</b> : {{ informations.registrationDate | date("F jS, Y") }}
     </span>
 </div>
-{% if logged == true %}
+{% if currentProfil == true %}
     <div class="form__row form__row--inline">
         <a class="btn" href="/member/profil/edit" type="button">
             Edit my profil

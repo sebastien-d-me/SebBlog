@@ -25,14 +25,14 @@ class AccountActivationController extends DefaultController {
     function check($data) {
         $email = $data["activation__email"];
 
-        $credentials = LoginCredentials::where("email", htmlspecialchars($email, ENT_QUOTES))->first();
-        if($credentials === NULL) {
+        $loginCredentials = LoginCredentials::where("email", htmlspecialchars($email, ENT_QUOTES))->first();
+        if($loginCredentials === NULL) {
             $this->showError("No account exists with this email address.");
             exit();
         }
 
-        $member = Member::where("idMember", $credentials->getIdMember())->first();
-        $hash = Hash::where("idMember", $credentials->getIdMember())->first();
+        $member = Member::where("idMember", $loginCredentials->getIdMember())->first();
+        $hash = Hash::where("idMember", $loginCredentials->getIdMember())->first();
         if($member->getIsActive() === 1) {
             $this->showError("Your account is already activated.");
             exit();

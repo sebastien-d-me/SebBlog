@@ -14,7 +14,7 @@ class PasswordResetController extends DefaultController {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->check($_POST);
         } else {
-            $this->twigRender("pages/members/password_reset.html.twig"); 
+            $this->twigRender("pages/members/password/password_reset.html.twig"); 
         }
     }
 
@@ -89,12 +89,12 @@ class PasswordResetController extends DefaultController {
             header("Location: /member/login?message=$message");
         }
 
-        $this->twigRender("pages/members/password_reset-edit.html.twig");
+        $this->twigRender("pages/members/password/password_reset-edit.html.twig");
     }
 
     // Display the message
     function showMessage($message) {
-        $this->twigRender("pages/members/password_reset.html.twig", [
+        $this->twigRender("pages/members/password/password_reset.html.twig", [
             "message" => $message
         ]);
     }

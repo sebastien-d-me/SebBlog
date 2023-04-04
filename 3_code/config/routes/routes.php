@@ -117,7 +117,7 @@ $routes = [
         "class" => "ProfilController",
         "method" => "delete",
         "permissions" => [
-            "Anonymous" => false,
+            "Anonymous" => true,
             "Member" => true,
             "Administrator" => false
         ]
