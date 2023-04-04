@@ -1,4 +1,4 @@
-.input {
+.input__element {
     background-color: $white;
     border: none;
     border-radius: 8px;
@@ -18,7 +18,7 @@
 }
 
 // Label
-.input:required + label::after {
+.input__element:required + label::after {
     color: $red;
     content: "*";
     margin-left: 5px;

@@ -16,7 +16,6 @@ class DefaultController {
         $this->route = $route;
         $this->twig = $twig;
     }
-
     
     // Twig render
     protected function twigRender($template, $data = []) {

@@ -6,8 +6,3 @@ ini_set("smtp_port", 25);
 
 // Mail headers
 define("MAIL_HEADERS", "From: noreply@sebblog.sebastien-d.me" . "\r\n" . "X-Mailer: PHP/" . phpversion());
-
-// Send the mail
-function sendMail($values) {
-    mail($values["to"], $values["subject"], $values["content"], MAIL_HEADERS);
-}
