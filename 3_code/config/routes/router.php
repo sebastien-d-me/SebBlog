@@ -28,9 +28,7 @@ $classPath = "App\Controllers\\".$route["class"];
 $class = new $classPath($isLogged, $role, $currentURL, $twig);
 
 // Get the user permissions
-isset($_SESSION["member_role"]) ? $currentRole = $_SESSION["member_role"] : $currentRole = "Anonymous";
-
-if($route["permissions"][$currentRole] !== true) {
+if($route["permissions"][$role] !== true) {
     header("Location: /error?code=401");
     exit();
 }
