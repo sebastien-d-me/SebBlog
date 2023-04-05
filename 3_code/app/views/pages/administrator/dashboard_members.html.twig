@@ -1,0 +1,59 @@
+{% extends "layouts/container.html.twig" %}
+
+{% set title = "Members dashboard" %}
+
+
+{% block container_content %}
+{% if message != "" %}
+    <p class="form__message">{{ message | raw }}</p>
+{% endif %}
+<table class="datatable">
+    <thead class="datatable__head">
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Activated</th>
+            <th>Activate it</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody class="datatable__body">
+        {% for item in datatable %}
+            <tr>
+                <td>{{ item.idLoginCredentials }}</td>
+                <td>{{ item.username }}</td>
+                <td>{{ item.email }}</td>
+                {% if item.idRole == 1 %}
+                    <td>Administrator</td>
+                {% else %}
+                    <td>Member</td>
+                {% endif %}
+
+                {% if item.isActive == 1 %}
+                    <td>Activated</td>
+                    {% if item.idLoginCredentials != idAdmin %}
+                        <td><a class="btn btn--margin" href="/admin/dashboard/members/desactivate?user={{ item.idMember }}">Desactivate this member</a></td>
+                    {% else %}
+                        <td>You can't desactivate your own account here.</td>
+                    {% endif %}
+                {% else %}
+                    <td>Not activated</td>
+                    {% if item.idLoginCredentials != idAdmin %}
+                        <td><a class="btn btn--margin" href="/admin/dashboard/members/activate?user={{ item.idMember }}">Activate this member</a></td>
+                        {% else %}
+                        <td>You can't activate your own account here.</td>
+                    {% endif %}
+                {% endif %}
+
+                {% if item.idLoginCredentials != idAdmin %}
+                    <td><a class="btn btn--margin btn--secondary" href="/admin/dashboard/members/delete?user={{ item.idMember }}">Delete this member</a></td>
+                {% else %}
+                    <td>Use the contact form to delete your own account.</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

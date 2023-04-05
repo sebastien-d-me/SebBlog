@@ -123,6 +123,61 @@ $routes = [
         ]
     ],
 
+    /* Dashboard */
+    "/admin/dashboard" => [
+        "class" => "DashboardController",
+        "method" => "index",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Dashboard | Members dashboard */
+    "/admin/dashboard/members" => [
+        "class" => "MembersDashboard",
+        "method" => "index",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Dashboard | Members dashboard - Desactivate */
+    "/admin/dashboard/members/desactivate" => [
+        "class" => "MembersDashboard",
+        "method" => "desactivate",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Dashboard | Members dashboard - Activate */
+    "/admin/dashboard/members/activate" => [
+        "class" => "MembersDashboard",
+        "method" => "activate",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Dashboard | Members dashboard - Delete */
+    "/admin/dashboard/members/delete" => [
+        "class" => "MembersDashboard",
+        "method" => "delete",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
     /* Error */
     "/error" => [
         "class" => "ErrorController",

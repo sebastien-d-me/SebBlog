@@ -33,8 +33,7 @@ class ProfilController extends DefaultController {
 
         $this->twigRender("pages/members/profil/profil.html.twig", [
             "informations" => $informations,
-            "currentProfil" => $currentProfil,
-            "role" => $_SESSION["member_role"]
+            "currentProfil" => $currentProfil
         ]);
     }
 

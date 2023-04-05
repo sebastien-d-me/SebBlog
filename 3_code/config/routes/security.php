@@ -15,20 +15,8 @@ session_start();
     }
 });*/
 
-// Check if login and init the role
+// Check if logged
 $isLogged = isset($_SESSION["member_id"]);
 
-$role = "Anonymous";
-if(isset($_SESSION["member_role"])) {
-    switch($_SESSION["member_role"]) {
-        case 1:
-            $role = "Administrator";
-            break;
-        case 2:
-            $role = "Member";
-            break;
-        default:
-            $role = "Anonymous";
-            break;
-    }
-}
+// Init the role
+isset($_SESSION["member_role"]) ? $role = $_SESSION["member_role"] : $role = "Anonymous";

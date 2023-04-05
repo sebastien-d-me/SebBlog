@@ -223,6 +223,35 @@ body {
   color: #F1F1F1;
 }
 
+.btn--margin {
+  margin: auto;
+}
+
+.datatable {
+  border-collapse: collapse;
+  overflow: scroll;
+  text-align: center;
+  width: 100%;
+}
+
+.datatable__head {
+  background-color: #F1F1F1;
+  border: 1px solid #F1F1F1;
+  color: #181818;
+}
+.datatable__head > tr > th {
+  font-weight: bold;
+  padding: 10px;
+}
+
+.datatable__body {
+  border: 1px solid #F1F1F1;
+}
+.datatable__body > tr > td {
+  border: 1px solid #F1F1F1;
+  padding: 10px;
+}
+
 .form__row {
   display: flex;
   flex-direction: column-reverse;
