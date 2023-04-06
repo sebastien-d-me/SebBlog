@@ -4,7 +4,7 @@
 $routes = [
     /* Homepage */
     "/" => [
-        "class" => "BaseController",
+        "class" => "HomeController",
         "method" => "index",
         "permissions" => [
             "Anonymous" => true,

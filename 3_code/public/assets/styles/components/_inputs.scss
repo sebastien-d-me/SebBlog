@@ -17,6 +17,12 @@
     }
 }
 
+// Textarea
+.textarea__element {
+    min-height: 150px;
+    resize: none;
+}
+
 // Label
 .input__element:required + label::after {
     color: $red;
