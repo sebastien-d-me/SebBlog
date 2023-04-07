@@ -136,7 +136,7 @@ $routes = [
 
     /* Dashboard | Members dashboard */
     "/admin/dashboard/members" => [
-        "class" => "MembersDashboard",
+        "class" => "MembersDashboardController",
         "method" => "index",
         "permissions" => [
             "Anonymous" => false,
@@ -147,7 +147,7 @@ $routes = [
 
     /* Dashboard | Members dashboard - Desactivate */
     "/admin/dashboard/members/desactivate" => [
-        "class" => "MembersDashboard",
+        "class" => "MembersDashboardController",
         "method" => "desactivate",
         "permissions" => [
             "Anonymous" => false,
@@ -158,7 +158,7 @@ $routes = [
 
     /* Dashboard | Members dashboard - Activate */
     "/admin/dashboard/members/activate" => [
-        "class" => "MembersDashboard",
+        "class" => "MembersDashboardController",
         "method" => "activate",
         "permissions" => [
             "Anonymous" => false,
@@ -169,7 +169,7 @@ $routes = [
 
     /* Dashboard | Members dashboard - Delete */
     "/admin/dashboard/members/delete" => [
-        "class" => "MembersDashboard",
+        "class" => "MembersDashboardController",
         "method" => "delete",
         "permissions" => [
             "Anonymous" => false,

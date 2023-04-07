@@ -10,7 +10,7 @@ use App\Models\Hash;
 use App\Models\LoginCredentials;
 use App\Models\Member;
 
-class MembersDashboard extends DefaultController {
+class MembersDashboardController extends DefaultController {
     // Show the dashboard
     function index() {
         $data = LoginCredentials::join("member", "logincredentials.idMember", "=", "member.idMember");
