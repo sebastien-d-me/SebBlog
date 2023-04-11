@@ -28,4 +28,17 @@ class ArticlesController extends DefaultController {
             "articlesList" => $articlesList
         ]);
     }
+
+    // Show an article
+    function showArticle() {
+        $idArticle = $_GET["article"];
+        $article = Article::where("idArticle", $idArticle)->first();
+        $username = LoginCredentials::find($article->idMember);
+        $username = $username->getUsername();
+
+        $this->twigRender("pages/article.html.twig", [
+            "article" => $article,
+            "username" => $username
+        ]);
+    }
 }

@@ -531,6 +531,9 @@ body {
   margin-bottom: 40px;
   padding-bottom: 40px;
 }
+.article__element:last-of-type {
+  border-bottom: unset;
+}
 
 .article__title {
   margin: 10px 0;
@@ -538,6 +541,19 @@ body {
 
 .article__meta {
   margin-bottom: 30px;
+}
+
+.article__summary::after {
+  font-size: 15px;
+}
+.article__summary::after::after {
+  content: "...";
+}
+
+.article__text {
+  border-bottom: 1px solid #F1F1F1;
+  margin-top: 50px;
+  padding-bottom: 50px;
 }
 
 .footer__block {

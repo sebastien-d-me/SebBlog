@@ -24,6 +24,17 @@ $routes = [
         ]
     ],
 
+    /* Articles | Article */
+    "/articles/article" => [
+        "class" => "ArticlesController",
+        "method" => "showArticle",
+        "permissions" => [
+            "Anonymous" => true,
+            "Member" => true,
+            "Administrator" => true
+        ]
+    ],
+
     /* Member | Register */
     "/member/register" => [
         "class" => "RegistrationController",

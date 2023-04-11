@@ -3,26 +3,21 @@
 
 
 {% block container_content %}
-    {% for articles in articlesList %}
+    {% for articles in articlesList | reverse %}
         <article class="article__element">
             <header>
-                <h2 class="article__title">{{ articles.article.title }}</h2>
-                <div class="article__meta">
-                    <a class="link" href="/member/profil?user={{ articles.article.idMember }}">{{ articles.username }}</a>
-                    <span>|</span>
-                    {% if articles.article.creationDate != articles.article.updateDate %}
-                        <time datetime="{{ article.creationDate }}">Created the {{ articles.article.creationDate | date("F jS, Y") }}</time>
-                    {% else %} 
-                        <time datetime="{{ article.updateDate }}">Updated the {{ articles.article.updateDate | date("F jS, Y") }}</time>
-                    {% endif %}
-                </div>
+                <h2 class="article__title">
+                    <a class="link" href="/articles/article?article={{ articles.article.idArticle }}">{{ articles.article.title }}</a>
+                </h2>
+                {% if articles.article.creationDate == articles.article.updateDate %}
+                    <time datetime="{{ articles.article.creationDate }}">Created the {{ articles.article.creationDate | date("F jS, Y") }}</time>
+                {% else %} 
+                    <time datetime="{{ articles.article.updateDate }}">Updated the {{ articles.article.updateDate | date("F jS, Y") }}</time>
+                {% endif %}
             </header>
             <div>
-                <p>{{ articles.article.summary }}</p>
+                <p class="article__summary">{{ articles.article.summary }}</p>
             </div>
-            <footer>
-                <a class="link" href="/article?article={{ article.idArticle }}">0 comment(s)</a>
-            </footer>
         </article>
     {% endfor %}
 {% endblock %}

@@ -2,6 +2,10 @@
     border-bottom: 2px solid $white;
     margin-bottom: 40px;
     padding-bottom: 40px;
+
+    &:last-of-type {
+        border-bottom: unset;
+    }
 }
 
 // Title
@@ -12,4 +16,20 @@
 // Meta
 .article__meta {
     margin-bottom: 30px;
+}
+
+// Summary
+.article__summary::after {
+    font-size: 15px;
+
+    &::after {
+        content: "...";
+    }
+}
+
+// Text
+.article__text {
+    border-bottom: 1px solid $white;
+    margin-top: 50px;
+    padding-bottom: 50px;
 }
