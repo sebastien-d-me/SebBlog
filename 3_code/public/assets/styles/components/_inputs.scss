@@ -11,6 +11,11 @@
         width: 25px;
     }
 
+    &[type="radio"] {
+        height: 25px;
+        width: 25px;
+    }
+
     &:disabled {
         background-color: $black;
         cursor: not-allowed;

@@ -12,6 +12,13 @@
     gap: 15px;
 }
 
+// Radio
+.form__row--radio {
+    align-items: center;
+    display: flex;
+    gap: 15px;
+}
+
 // Message
 .form__message {
     border-bottom: 1px solid $white;

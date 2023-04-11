@@ -189,6 +189,17 @@ $routes = [
         ]
     ],
 
+    /* Dashboard | Articles dashboard - Create */
+    "/admin/dashboard/articles/create" => [
+        "class" => "ArticlesDashboardController",
+        "method" => "create",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
     /* Dashboard | Articles dashboard - Unpublish */
     "/admin/dashboard/articles/unpublish" => [
         "class" => "ArticlesDashboardController",
@@ -204,6 +215,17 @@ $routes = [
     "/admin/dashboard/articles/publish" => [
         "class" => "ArticlesDashboardController",
         "method" => "publish",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Dashboard | Articles dashboard - Edit */
+    "/admin/dashboard/articles/edit" => [
+        "class" => "ArticlesDashboardController",
+        "method" => "edit",
         "permissions" => [
             "Anonymous" => false,
             "Member" => false,

@@ -224,11 +224,12 @@ body {
 }
 
 .btn--margin {
-  margin: auto auto 10px auto;
+  margin: auto;
 }
 
 .datatable {
   border-collapse: collapse;
+  margin-top: 10px;
   overflow: scroll;
   text-align: center;
   width: 100%;
@@ -265,6 +266,12 @@ body {
   gap: 15px;
 }
 
+.form__row--radio {
+  align-items: center;
+  display: flex;
+  gap: 15px;
+}
+
 .form__message {
   border-bottom: 1px solid #F1F1F1;
   margin: 0 0 20px 0;
@@ -285,6 +292,10 @@ body {
   width: 280px;
 }
 .input__element[type=checkbox] {
+  height: 25px;
+  width: 25px;
+}
+.input__element[type=radio] {
   height: 25px;
   width: 25px;
 }
