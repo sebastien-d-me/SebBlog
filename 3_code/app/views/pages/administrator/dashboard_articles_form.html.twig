@@ -1,0 +1,63 @@
+{% extends "layouts/container.html.twig" %}
+
+{% set title = "Article form" %}
+
+
+{% block container_content %}
+{% if message != "" %}
+    <p class="form__message">{{ message | raw }}</p>
+{% endif %}
+<form action="#" method="post">
+    <div class="form__row">
+        <input class="input__element" id="article__title" name="article__title" placeholder="Lorem ipsum" required type="text" value="{{ data.title }}">
+        <label for="article__title">Title</label>
+    </div>
+    <div class="form__row">
+        <textarea class="input__element textarea__element" id="article__summary" name="article__summary" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit." required>{{ data.summary }}</textarea>
+        <label for="article__summary">Summary</label>
+    </div>
+    <div class="form__row">
+        <textarea class="input__element textarea__element" id="article__content" name="article__content" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur efficitur massa tortor, ac commodo nisi fringilla nec." required>{{ data.content }}</textarea>
+        <label for="article__content">Content</label>
+    </div>
+    <div class="form__row">
+        <select class="input__element select__element" id="article__author" name="article__author" required>
+            {% for administrator in administrators %}
+                {% if administrator.idMember == data.idMember %}
+                    <option selected value="{{ administrator.idMember }}">{{ administrator.username }}</option>
+                {% else %}
+                    <option value="{{ administrator.idMember }}">{{ administrator.username }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <label for="article__author">Author</label>
+    </div>
+    <div class="form__row">
+        <div class="form__row form__row--inline">
+            <div class="form__row--radio">
+                {% if data.idArticleStatus == 1 %}
+                    <input checked class="input__element" id="article__status--published" name="article__status" required type="radio" value="published">
+                {% else %}
+                    <input class="input__element" id="article__status--published" name="article__status" required type="radio" value="published">
+                {% endif %}
+                <label for="article__status--published">Publié</label>
+            </div>
+            <div class="form__row--radio">
+                {% if data.idArticleStatus == 2 %}
+                    <input checked class="input__element" id="article__status--unpublished" name="article__status" required type="radio" value="unpublished">                
+                {% else %}
+                    <input class="input__element" id="article__status--unpublished" name="article__status" required type="radio" value="unpublished">                
+                {% endif %}
+                <label for="article__status--unpublished">Non publié</label>
+            </div>
+        </div>
+        <label for="article__status">Status</label>
+    </div>
+    <div class="form__row">
+        <button class="btn" type="submit">
+            Save
+            <i class="ri-check-line"></i>
+        </button>
+    </div>
+</form>
+{% endblock %}

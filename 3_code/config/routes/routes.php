@@ -177,6 +177,72 @@ $routes = [
             "Administrator" => true
         ]
     ],
+    
+    /* Dashboard | Articles dashboard */
+    "/admin/dashboard/articles" => [
+        "class" => "ArticlesDashboardController",
+        "method" => "index",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Dashboard | Articles dashboard - Create */
+    "/admin/dashboard/articles/create" => [
+        "class" => "ArticlesDashboardController",
+        "method" => "create",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Dashboard | Articles dashboard - Unpublish */
+    "/admin/dashboard/articles/unpublish" => [
+        "class" => "ArticlesDashboardController",
+        "method" => "unpublish",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Dashboard | Articles dashboard - Publish */
+    "/admin/dashboard/articles/publish" => [
+        "class" => "ArticlesDashboardController",
+        "method" => "publish",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Dashboard | Articles dashboard - Edit */
+    "/admin/dashboard/articles/edit" => [
+        "class" => "ArticlesDashboardController",
+        "method" => "edit",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Dashboard | Articles dashboard - Delete */
+    "/admin/dashboard/articles/delete" => [
+        "class" => "ArticlesDashboardController",
+        "method" => "delete",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
 
     /* Error */
     "/error" => [
