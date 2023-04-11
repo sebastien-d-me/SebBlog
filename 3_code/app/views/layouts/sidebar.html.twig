@@ -35,7 +35,7 @@
         <ul class="random_articles__list">
             {% for article in randArticles %}
                 <li class="item__list">
-                    <a class="link" href="/article?number={{article.idArticle}}">{{article.title}}</a>
+                    <a class="link" href="/article?article={{article.idArticle}}">{{article.title}}</a>
                     <time class="random_article__date" datetime="{{article.updateDate}}">{{article.updateDate | date("F jS, Y") }}</time>
                 </li>
             {% else %}
