@@ -526,6 +526,20 @@ body {
   justify-content: center;
 }
 
+.article__element {
+  border-bottom: 2px solid #F1F1F1;
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+}
+
+.article__title {
+  margin: 10px 0;
+}
+
+.article__meta {
+  margin-bottom: 30px;
+}
+
 .footer__block {
   align-items: center;
   background: #181818;

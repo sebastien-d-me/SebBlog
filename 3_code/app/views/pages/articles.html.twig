@@ -1,0 +1,28 @@
+{% extends "layouts/container.html.twig" %}
+{% set title = "Articles" %}
+
+
+{% block container_content %}
+    {% for articles in articlesList %}
+        <article class="article__element">
+            <header>
+                <h2 class="article__title">{{ articles.article.title }}</h2>
+                <div class="article__meta">
+                    <a class="link" href="/member/profil?user={{ articles.article.idMember }}">{{ articles.username }}</a>
+                    <span>|</span>
+                    {% if articles.article.creationDate != articles.article.updateDate %}
+                        <time datetime="{{ article.creationDate }}">Created the {{ articles.article.creationDate | date("F jS, Y") }}</time>
+                    {% else %} 
+                        <time datetime="{{ article.updateDate }}">Updated the {{ articles.article.updateDate | date("F jS, Y") }}</time>
+                    {% endif %}
+                </div>
+            </header>
+            <div>
+                <p>{{ articles.article.summary }}</p>
+            </div>
+            <footer>
+                <a class="link" href="/article?article={{ article.idArticle }}">0 comment(s)</a>
+            </footer>
+        </article>
+    {% endfor %}
+{% endblock %}

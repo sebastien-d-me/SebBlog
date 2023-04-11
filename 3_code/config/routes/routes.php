@@ -13,6 +13,17 @@ $routes = [
         ]
     ],
 
+    /* Articles */
+    "/articles" => [
+        "class" => "ArticlesController",
+        "method" => "index",
+        "permissions" => [
+            "Anonymous" => true,
+            "Member" => true,
+            "Administrator" => true
+        ]
+    ],
+
     /* Member | Register */
     "/member/register" => [
         "class" => "RegistrationController",
