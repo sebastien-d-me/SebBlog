@@ -16,6 +16,11 @@
     width: fit-content;
 }
 
+// Datatable
+.container__datatable {
+    overflow: auto;
+}
+
 /// Responsive
 @media screen and (max-width: 1200px) {
     .container__block {

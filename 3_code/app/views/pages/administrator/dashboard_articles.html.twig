@@ -1,0 +1,43 @@
+{% extends "layouts/container.html.twig" %}
+
+{% set title = "Articles dashboard" %}
+
+
+{% block container_content %}
+{% if message != "" %}
+    <p class="form__message">{{ message | raw }}</p>
+{% endif %}
+<a class="btn btn--margin" href="/admin/dashboard/articles/create">Create an article</a>
+<div class="container__datatable">
+    <table class="datatable">
+        <thead class="datatable__head">
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Created at</th>
+                <th>Updated at</th>
+                <th>Status</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody class="datatable__body">
+            {% for item in datatable %}
+                <tr>
+                    <td>{{ item.idArticle }}</td>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.creationDate | date("F jS, Y") }}</td>
+                    <td>{{ item.updateDate | date("F jS, Y") }}</td>
+                    {% if item.idArticleStatus == 1 %}
+                        <td><a class="btn btn--margin btn--secondary" href="/admin/dashboard/articles/unpublish?article={{ item.idArticle }}">Unpublish this article</a></td>
+                    {% else %}
+                        <td><a class="btn btn--margin btn--secondary" href="/admin/dashboard/articles/publish?article={{ item.idArticle }}">Publish this article</a></td>
+                    {% endif %}
+                    <td><a class="btn btn--margin btn--secondary" href="/admin/dashboard/articles/edit?article={{ item.idArticle }}">Edit this article</a></td>
+                    <td><a class="btn btn--margin btn--secondary" href="/admin/dashboard/articles/delete?article={{ item.idArticle }}">Delete this article</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

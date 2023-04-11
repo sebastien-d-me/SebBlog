@@ -224,7 +224,7 @@ body {
 }
 
 .btn--margin {
-  margin: auto;
+  margin: auto auto 10px auto;
 }
 
 .datatable {
@@ -423,6 +423,7 @@ body {
 
 .random_article__date {
   display: block;
+  text-align: left;
 }
 
 .sidebar__socials {
@@ -497,12 +498,23 @@ body {
   width: fit-content;
 }
 
+.container__datatable {
+  overflow: auto;
+}
+
 @media screen and (max-width: 1200px) {
   .container__block {
     min-height: calc(100vh - 140px);
     padding: 20px;
   }
 }
+.row--inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
 .footer__block {
   align-items: center;
   background: #181818;
