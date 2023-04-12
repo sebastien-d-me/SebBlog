@@ -3,20 +3,20 @@
 
 
 {% block container_content %}
-    {% for articles in articlesList | reverse %}
+    {% for article in articles | reverse %}
         <article class="article__element">
             <header>
                 <h2 class="article__title">
-                    <a class="link" href="/articles/article?article={{ articles.article.idArticle }}">{{ articles.article.title }}</a>
+                    <a class="link" href="/articles/article?article={{ article.article.idArticle }}">{{ article.title }}</a>
                 </h2>
-                {% if articles.article.creationDate == articles.article.updateDate %}
-                    <time datetime="{{ articles.article.creationDate }}">Created the {{ articles.article.creationDate | date("F jS, Y") }}</time>
+                {% if article.creationDate == article.updateDate %}
+                    <time datetime="{{ article.creationDate }}">Created the {{ article.creationDate | date("F jS, Y") }}</time>
                 {% else %} 
-                    <time datetime="{{ articles.article.updateDate }}">Updated the {{ articles.article.updateDate | date("F jS, Y") }}</time>
+                    <time datetime="{{ article.updateDate }}">Updated the {{ article.updateDate | date("F jS, Y") }}</time>
                 {% endif %}
             </header>
             <div>
-                <p class="article__summary">{{ articles.article.summary }}</p>
+                <p class="article__summary">{{ article.summary }}</p>
             </div>
         </article>
     {% endfor %}

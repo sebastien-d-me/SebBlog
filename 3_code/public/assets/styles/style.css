@@ -556,6 +556,21 @@ body {
   padding-bottom: 50px;
 }
 
+.comments__list {
+  margin-top: 15px;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0 15px 0;
+}
+
+.comment__header {
+  display: flex;
+  gap: 0 5px;
+}
+
 .footer__block {
   align-items: center;
   background: #181818;
