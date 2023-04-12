@@ -59,7 +59,7 @@ class MembersDashboardController extends DefaultController {
 
         Comment::where("idMember", $userId)->delete();
         Hash::where("idMember", $userId)->delete();
-        LoginCredentials::where("idMember", $serId)->delete();
+        LoginCredentials::where("idMember", $userId)->delete();
         Member::where("idMember", $userId)->delete();
 
         $message = "The account (ID : $userId) has been deleted.";
