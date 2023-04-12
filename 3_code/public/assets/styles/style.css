@@ -556,6 +556,10 @@ body {
   padding-bottom: 50px;
 }
 
+.comments__list {
+  margin-top: 15px;
+}
+
 .comment {
   display: flex;
   flex-direction: column;
