@@ -156,49 +156,6 @@ $routes = [
         ]
     ],
 
-    /* Dashboard | Members dashboard */
-    "/admin/dashboard/members" => [
-        "class" => "MembersDashboardController",
-        "method" => "index",
-        "permissions" => [
-            "Anonymous" => false,
-            "Member" => false,
-            "Administrator" => true
-        ]
-    ],
-
-    /* Dashboard | Members dashboard - Desactivate */
-    "/admin/dashboard/members/desactivate" => [
-        "class" => "MembersDashboardController",
-        "method" => "desactivate",
-        "permissions" => [
-            "Anonymous" => false,
-            "Member" => false,
-            "Administrator" => true
-        ]
-    ],
-
-    /* Dashboard | Members dashboard - Activate */
-    "/admin/dashboard/members/activate" => [
-        "class" => "MembersDashboardController",
-        "method" => "activate",
-        "permissions" => [
-            "Anonymous" => false,
-            "Member" => false,
-            "Administrator" => true
-        ]
-    ],
-
-    /* Dashboard | Members dashboard - Delete */
-    "/admin/dashboard/members/delete" => [
-        "class" => "MembersDashboardController",
-        "method" => "delete",
-        "permissions" => [
-            "Anonymous" => false,
-            "Member" => false,
-            "Administrator" => true
-        ]
-    ],
     
     /* Dashboard | Articles dashboard */
     "/admin/dashboard/articles" => [
@@ -258,6 +215,94 @@ $routes = [
     /* Dashboard | Articles dashboard - Delete */
     "/admin/dashboard/articles/delete" => [
         "class" => "ArticlesDashboardController",
+        "method" => "delete",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+    
+    /* Dashboard | Comments dashboard */
+    "/admin/dashboard/comments" => [
+        "class" => "CommentsDashboardController",
+        "method" => "index",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Dashboard | Comments dashboard - Unvalidate */
+    "/admin/dashboard/comments/unvalidate" => [
+        "class" => "CommentsDashboardController",
+        "method" => "unvalidate",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Dashboard | Comments dashboard - Validate */
+    "/admin/dashboard/comments/validate" => [
+        "class" => "CommentsDashboardController",
+        "method" => "validate",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Dashboard | Comments dashboard - Delete */
+    "/admin/dashboard/comments/delete" => [
+        "class" => "CommentsDashboardController",
+        "method" => "delete",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Dashboard | Members dashboard */
+    "/admin/dashboard/members" => [
+        "class" => "MembersDashboardController",
+        "method" => "index",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Dashboard | Members dashboard - Desactivate */
+    "/admin/dashboard/members/desactivate" => [
+        "class" => "MembersDashboardController",
+        "method" => "desactivate",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Dashboard | Members dashboard - Activate */
+    "/admin/dashboard/members/activate" => [
+        "class" => "MembersDashboardController",
+        "method" => "activate",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Dashboard | Members dashboard - Delete */
+    "/admin/dashboard/members/delete" => [
+        "class" => "MembersDashboardController",
         "method" => "delete",
         "permissions" => [
             "Anonymous" => false,
