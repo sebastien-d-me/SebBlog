@@ -8,7 +8,6 @@ skinparam backgroundcolor White
 title Sequence | Delete an article
 
 'Déroulement'
-Administrator -> Administrator : Select an article
 Administrator -> System : Click on "Delete article"
 System -> System : Delete the item from the database
 System --> Administrator: Displays an action confirmation message

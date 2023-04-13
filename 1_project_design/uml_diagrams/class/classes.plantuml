@@ -27,7 +27,6 @@ class Article {
     +title: string
     +creationDate: date
     +updateDate: date
-    +banner: string
     +summary: text
     +content: text
 }
@@ -47,11 +46,7 @@ class Role {
 'Member'
 class Member {
     {static} +idMember: int
-    +firstname: string
-    +lastname: string
     +registrationDate: date
-    +updatedDate: date
-    +lastLoginDate: date
     +isActive: bool
 }
 
@@ -63,15 +58,16 @@ class LoginCredentials {
     +password: string
 }
 
-'Avatar'
-class Avatar {
-     {static} +idAvatar: int
-    +path: string
+'Hash'
+class Hash {
+    {static} +idHash: int
+    +hash: string
+    +isActive: bool 
 }
 
 'Déroulement'
 Member "1" <-- "1" LoginCredentials: $warning("CONNECT")
-Member "1" <-- "1" Avatar: $warning("INCLUDE")
+Member "1" <-- "1" Hash: $warning("INCLUDE")
 Member "*" <-up- "1" Role : $warning("OWN")
 Article "*" <-- "\n1" Member: $warning("WRITE")
 Comment "*" <-- "1" Member: $warning("LEAVE")

@@ -16,8 +16,8 @@ rectangle {
     "«Authentication»" as (Authentification)
 
     'Utilisateur'
-    "Click on his profile" as (CliquerProfil)
-    "Click on edit my profile" as (ModifierProfil)
+    "Click on his profil" as (CliquerProfil)
+    "Click on edit my profil" as (ModifierProfil)
     "Modify your information" as (ModifierInformations)
     "Save changes" as (EnregistrerModifications)
 

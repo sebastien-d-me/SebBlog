@@ -16,14 +16,12 @@ rectangle {
     "«Authentication»" as (Authentification)
 
     'Administrateur'
-    "Consult the article dashboard" as (ConsulterTDBArticles)
-    "Select the article" as (SelectionnerArticle)
+    "Consult the articles dashboard" as (ConsulterTDBArticles)
     "Delete the article" as (SupprimerArticle)
 
     'Déroulement'
     :Administrateur: -.> (ConsulterTDBArticles)
-    (ConsulterTDBArticles) -.> (SelectionnerArticle) : include
-    (SelectionnerArticle) -.> (SupprimerArticle) : include
+    (ConsulterTDBArticles) -.> (SupprimerArticle) : include
     (SupprimerArticle) -.> (Authentification) : include
 }
 @enduml

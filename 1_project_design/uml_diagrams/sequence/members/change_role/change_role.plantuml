@@ -9,9 +9,7 @@ title Sequence | Change role
 
 'Déroulement'
 Administrator -> Administrator: View the member dashboard
-Administrator -> Administrator: Selects a member and changes his role
-Administrator -> System: Sends the modification
+Administrator -> Administrator: Click on "Change to (role name)"
 System -> System : Saves the modification in the database
 System --> Administrator: Displays an action confirmation message
-System -> User : Notify by mail that his role has changed
 @enduml

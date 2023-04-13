@@ -17,14 +17,12 @@ rectangle {
 
     'Administrateur'
     "Consult the article dashboard" as (ConsulterTDBArticles)
-    "Select the article" as (SelectionnerArticle)
     "Edit the article" as (ModifierArticle)
     "Save the changes" as (EnregistrerModifications)
 
     'Déroulement'
     :Administrateur: -.> (ConsulterTDBArticles)
-    (ConsulterTDBArticles) -.> (SelectionnerArticle) : include
-    (SelectionnerArticle) -.> (ModifierArticle) : include
+    (ConsulterTDBArticles) -.> (ModifierArticle) : include
     (ModifierArticle) -.> (EnregistrerModifications) : include
     (EnregistrerModifications) -.> (Authentification) : include
 }
