@@ -17,13 +17,11 @@ rectangle {
 
     'Administrateur'
     "Consult the comments dashboard" as (ConsulterTDBCommentaires)
-    "Select the comment" as (SelectionnerCommentaire)
     "Delete comment" as (SupprimerCommentaire)
 
     'Déroulement'
     :Administrateur: -.> (ConsulterTDBCommentaires)
-    (ConsulterTDBCommentaires) -.> (SelectionnerCommentaire) : include
-    (SelectionnerCommentaire) -.> (SupprimerCommentaire) : include
+    (ConsulterTDBCommentaires) -.> (SupprimerCommentaire) : include
     (SupprimerCommentaire) -.> (Authentification) : include
 }
 @enduml

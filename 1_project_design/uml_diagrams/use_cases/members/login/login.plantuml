@@ -13,9 +13,7 @@ actor "Visitor" as Visiteur
 'Rectangle'
 rectangle {
     'Authentification'
-    "«Authentication»\n--\nExtension point: authentication_error | Account blocked after 3 failures" as (Authentification)
-    note "Condition : 3 connection failures : authentication_error" as ConditionConnexion
-    "Block the account for 30 minutes" as (BloquerCompte)
+    "«Authentication»" as (Authentification)
 
     'Visiteur'
     "Fill in the form" as (RemplirFormulaire)
@@ -26,8 +24,6 @@ rectangle {
     :Visiteur: -.> (RemplirFormulaire)
     (RemplirFormulaire) -.> (EnvoyerFormulaire) : include
     (EnvoyerFormulaire) -.> (Authentification) : include
-    (Authentification) <.up- (ConditionConnexion) : extend
-    (ConditionConnexion) -.> (BloquerCompte) : include
     :Visiteur: -.> (OublierMDP)
 }
 @enduml

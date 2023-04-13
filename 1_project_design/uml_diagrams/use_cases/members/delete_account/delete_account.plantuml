@@ -1,29 +1,38 @@
-@startuml use_cases__change_role
+@startuml use_cases__delete_account
 left to right direction
 skinparam actorStyle Awesome
 !theme bluegray
 skinparam backgroundcolor White
 
 'Titre'
-title Use cases | Change role
+title Use cases | Delete account
 
 'Acteur'
 actor "Administrator" as Administrateur
+actor "User" as User
 
 'Rectangle'
 rectangle {
     'Authentification'
     "«Authentication»" as (Authentification)
 
+    'General'
+    "Click on delete" as (ClickSuppr)
+    "Save changes" as (EnregistrerModifications)
+
     'Administrateur'
     "Consult the members dashboard" as (ConsulterTDBMembres)
-    "Change the role of the member" as (ModifierRole)
-    "Save changes" as (EnregistrerModifications)
+    
+    'User'
+    "Click on his profil" as (GoProfil)
 
     'Déroulement'
     :Administrateur: -.> (ConsulterTDBMembres)
-    (ConsulterTDBMembres) -.> (ModifierRole) : include
-    (ModifierRole) -.> (EnregistrerModifications) : include
+    :User: -.> (GoProfil)
+    (ConsulterTDBMembres) -.> (ClickSuppr) : include
+    (GoProfil) -.> (ClickSuppr) : include
+    (ClickSuppr) -.> (EnregistrerModifications) : include
     (EnregistrerModifications) -.> (Authentification) : include
+
 }
 @enduml

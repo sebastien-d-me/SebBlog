@@ -1,0 +1,20 @@
+@startuml sequence__delete_account
+hide footbox
+skinparam actorStyle awesome
+!theme aws-orange
+skinparam backgroundcolor White
+
+'Titre'
+title Sequence | Delete account
+
+'Déroulement'
+Administrator -> Administrator: View the member dashboard
+Administrator -> Administrator: Click on "Delete this member"
+System -> System : Saves the modification in the database
+System --> Administrator: Displays an action confirmation message
+
+User -> User: View his profil
+User -> User: Click on "Delete"
+System -> System : Saves the modification in the database
+System --> User: Displays an action confirmation message
+@enduml
