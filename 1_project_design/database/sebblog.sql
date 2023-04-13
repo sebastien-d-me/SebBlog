@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 13 avr. 2023 à 12:10
+-- Généré le : jeu. 13 avr. 2023 à 13:06
 -- Version du serveur : 10.4.25-MariaDB
 -- Version de PHP : 8.1.10
 
@@ -116,7 +116,7 @@ CREATE TABLE `logincredentials` (
   `username` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `idMember` int(11) NOT NULL
+  `idMember` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -127,7 +127,7 @@ CREATE TABLE `logincredentials` (
 
 CREATE TABLE `member` (
   `idMember` int(11) NOT NULL,
-  `registrationDate` varchar(50) NOT NULL,
+  `registrationDate` date NOT NULL,
   `isActive` tinyint(1) NOT NULL,
   `idRole` int(11) NOT NULL,
   `idLoginCredentials` int(11) DEFAULT NULL
@@ -294,13 +294,13 @@ ALTER TABLE `hash`
 -- Contraintes pour la table `logincredentials`
 --
 ALTER TABLE `logincredentials`
-  ADD CONSTRAINT `LoginCredentials_Member0_FK` FOREIGN KEY (`idMember`) REFERENCES `member` (`idMember`);
+  ADD CONSTRAINT `LoginCredentials_Member0_FK` FOREIGN KEY (`idMember`) REFERENCES `member` (`idMember`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `member`
 --
 ALTER TABLE `member`
-  ADD CONSTRAINT `Member_LoginCredentials1_FK` FOREIGN KEY (`idLoginCredentials`) REFERENCES `logincredentials` (`idLoginCredentials`),
+  ADD CONSTRAINT `Member_LoginCredentials1_FK` FOREIGN KEY (`idLoginCredentials`) REFERENCES `logincredentials` (`idLoginCredentials`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Member_Role0_FK` FOREIGN KEY (`idRole`) REFERENCES `role` (`idRole`);
 COMMIT;
 

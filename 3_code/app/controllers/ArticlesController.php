@@ -12,7 +12,7 @@ use App\Models\LoginCredentials;
 class ArticlesController extends DefaultController {
     // Show the articles
     function index() {
-        $articles = Article::all();
+        $articles = Article::where("idArticleStatus", 1)->get();
 
         $this->twigRender("pages/articles.html.twig", [
             "articles" => $articles

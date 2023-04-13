@@ -51,7 +51,7 @@ class HomeController extends DefaultController {
 
         $mailValues = [
             "to" => "sebastien.delahaye.contact@gmail.com",
-            "subject" => "SebBlog | Contact request",
+            "subject" => "Contact request",
             "content_message" => $formValues."Contact from",
             "content_route" => "",
             "content_hash" => "",

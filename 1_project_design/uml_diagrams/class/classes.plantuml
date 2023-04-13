@@ -67,7 +67,7 @@ class Hash {
 
 'Déroulement'
 Member "1" <-- "1" LoginCredentials: $warning("CONNECT")
-Member "1" <-- "1" Hash: $warning("INCLUDE")
+Member "1" <-- "1..*" Hash: $warning("INCLUDE")
 Member "*" <-up- "1" Role : $warning("OWN")
 Article "*" <-- "\n1" Member: $warning("WRITE")
 Comment "*" <-- "1" Member: $warning("LEAVE")

@@ -39,5 +39,8 @@
             {% endfor %}
         </tbody>
     </table>
+    {% if datatable | length == 0 %} 
+        <span>No records found</span>
+    {% endif %}
 </div>
 {% endblock %}
