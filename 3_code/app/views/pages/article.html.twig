@@ -24,6 +24,7 @@
         <p class="article__text">{{ article.content }}</p>
     </div>
     <footer>
+        {% if isLogged == true %}
         <form action="#" method="post">
             <div class="form__row">
                 <textarea class="input__element textarea__element" id="comment__content" name="comment__content" placeholder="Lorem ipsum dolor..." required></textarea>
@@ -36,6 +37,9 @@
                 </button>
             </div>
         </form>
+        {% else %}
+            <span>You must be logged to comment.</span>
+        {% endif %}
         <div class="comments__list">
             {% set commentsNumber = 0 %}
             {% for comments in commentsList %}
