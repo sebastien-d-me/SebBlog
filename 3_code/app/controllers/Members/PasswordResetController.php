@@ -24,7 +24,7 @@ class PasswordResetController extends DefaultController {
 
         $credentials = LoginCredentials::where("username", $usernameEmail)->orWhere("email", $usernameEmail)->first();
         if($credentials === NULL) {
-            $this->showError("No account exists with this email address.");
+            $this->showMessage("No account exists with this email address.");
             exit();
         }
 
@@ -34,11 +34,11 @@ class PasswordResetController extends DefaultController {
             "idMember" => $credentials->getIdMember()
         ];
 
-        $this->saveHash($data);        
+        $this->saveHash($credentials, $data);        
     }
 
     // Save the hash
-    function saveHash($data) {
+    function saveHash($credentials, $data) {
         $username = $data["username"];
         $email = $data["email"];
         $idMember = $data["idMember"];
@@ -53,7 +53,7 @@ class PasswordResetController extends DefaultController {
 
         $getHash = $hash->getHash();
         $mailValues = [
-            "to" => $loginCredentials->getEmail(),
+            "to" => $credentials->getEmail(),
             "subject" => "Password reset",
             "content_message" => "Click here to reset your password",
             "content_route" => "/member/password/reset",

@@ -278,6 +278,28 @@ $routes = [
         ]
     ],
 
+    /* Dashboard | Members dashboard - Change member */
+    "/admin/dashboard/members/change-member" => [
+        "class" => "MembersDashboardController",
+        "method" => "changeMember",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
+    /* Dashboard | Members dashboard - Change admin */
+    "/admin/dashboard/members/change-admin" => [
+        "class" => "MembersDashboardController",
+        "method" => "changeAdmin",
+        "permissions" => [
+            "Anonymous" => false,
+            "Member" => false,
+            "Administrator" => true
+        ]
+    ],
+
     /* Dashboard | Members dashboard - Desactivate */
     "/admin/dashboard/members/desactivate" => [
         "class" => "MembersDashboardController",
