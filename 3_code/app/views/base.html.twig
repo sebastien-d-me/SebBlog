@@ -1,5 +1,4 @@
-{% set publicFolder = "/public" %}
-{% set assetsFolder = "/public/assets" %}
+{% set publicFolder = "/public/assets" %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +6,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>SebBlog - {{ title }}</title>
-    <link href="{{assetsFolder}}/styles/style.css" rel="stylesheet">
+    <link href="{{publicFolder}}/styles/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -18,6 +17,6 @@
     </a>
     
     <!-- Scripts -->
-    <script src="{{assetsFolder}}/scripts/script.js"></script>
+    <script src="{{publicFolder}}/scripts/script.js"></script>
 </body>
 </html>

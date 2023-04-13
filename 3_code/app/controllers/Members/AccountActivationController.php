@@ -27,14 +27,14 @@ class AccountActivationController extends DefaultController {
 
         $loginCredentials = LoginCredentials::where("email", htmlspecialchars($email, ENT_QUOTES))->first();
         if($loginCredentials === NULL) {
-            $this->showMessage("No account exists with this email address.");
+            $this->showError("No account exists with this email address.");
             exit();
         }
 
         $member = Member::where("idMember", $loginCredentials->getIdMember())->first();
         $hash = Hash::where("idMember", $loginCredentials->getIdMember())->first();
         if($member->getIsActive() === 1) {
-            $this->showMessage("Your account is already activated.");
+            $this->showError("Your account is already activated.");
             exit();
         }
 
@@ -56,7 +56,7 @@ class AccountActivationController extends DefaultController {
         $hash = Hash::where("hash", $_GET["code"])->first();
 
         if($hash === NULL) {
-            $this->showMessage("Your code not work, please retry later.");
+            $this->showError("Your code not work, please retry later.");
             exit();
         }
 

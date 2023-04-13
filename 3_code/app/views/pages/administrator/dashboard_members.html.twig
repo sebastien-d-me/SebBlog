@@ -15,7 +15,8 @@
                 <th>Username</th>
                 <th>Email</th>
                 <th>Role</th>
-                <th>Status</th>
+                <th>Activated</th>
+                <th>Activate it</th>
                 <th>Delete</th>
             </tr>
         </thead>
@@ -25,28 +26,21 @@
                     <td>{{ item.idLoginCredentials }}</td>
                     <td>{{ item.username }}</td>
                     <td>{{ item.email }}</td>
-
                     {% if item.idRole == 1 %}
-                        {% if item.idLoginCredentials != idAdmin %}
-                            <td><a class="btn btn--margin" href="/admin/dashboard/members/change-member?user={{ item.idMember }}">Change to member</a></td>
-                        {% else %}
-                            <td>You can't change your own role.</td>
-                        {% endif %}
+                        <td>Administrator</td>
                     {% else %}
-                        {% if item.idLoginCredentials != idAdmin %}
-                            <td><a class="btn btn--margin" href="/admin/dashboard/members/change-admin?user={{ item.idMember }}">Change to administrator</a></td>
-                            {% else %}
-                            <td>You can't change your own role.</td>
-                        {% endif %}
+                        <td>Member</td>
                     {% endif %}
 
                     {% if item.isActive == 1 %}
+                        <td>Activated</td>
                         {% if item.idLoginCredentials != idAdmin %}
                             <td><a class="btn btn--margin" href="/admin/dashboard/members/desactivate?user={{ item.idMember }}">Desactivate this member</a></td>
                         {% else %}
                             <td>You can't desactivate your own account here.</td>
                         {% endif %}
                     {% else %}
+                        <td>Not activated</td>
                         {% if item.idLoginCredentials != idAdmin %}
                             <td><a class="btn btn--margin" href="/admin/dashboard/members/activate?user={{ item.idMember }}">Activate this member</a></td>
                             {% else %}

@@ -31,28 +31,6 @@ class MembersDashboardController extends DefaultController {
         ]);
     }
 
-    // Change to member
-    function changeMember() {
-        $userId = $_GET["user"];
-        $user = Member::where("idMember", $userId)->first();
-        $user->setIdRole(2);
-        $user->save();
-
-        $message = "The role of the account (ID : $userId) has been changed.";
-        header("Location: /admin/dashboard/members?message=$message");
-    }
-
-    // Change to admin
-    function changeAdmin() {
-        $userId = $_GET["user"];
-        $user = Member::where("idMember", $userId)->first();
-        $user->setIdRole(1);
-        $user->save();
-
-        $message = "The role of the account (ID : $userId) has been changed.";
-        header("Location: /admin/dashboard/members?message=$message");
-    }
-
     // Desactivate the account
     function desactivate() {
         $userId = $_GET["user"];

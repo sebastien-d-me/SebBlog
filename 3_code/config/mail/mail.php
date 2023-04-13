@@ -18,7 +18,7 @@ function sendMail($values) {
     $mailInformations = [
         "to" => $values["to"],
         "subject" => "SebBlog - ".$values["subject"],
-        "content" => $values["content_message"]." : <a href='http://$_SERVER[HTTP_HOST]".$values["content_route"].$values["content_hash"]."'>here</a>"
+        "content" => $values["content_message"]." : http://$_SERVER[HTTP_HOST]".$values["content_route"].$values["content_hash"]
     ];
     
     mail($mailInformations["to"], $mailInformations["subject"], $mailInformations["content"], MAIL_HEADERS);
