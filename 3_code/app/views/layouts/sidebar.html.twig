@@ -33,14 +33,23 @@
     <div class="sidebar__articles">
         <h2 class="sidebar__category">Random articles</h2>
         <ul class="random_articles__list">
+            {% set articlesNumber = 0 %}
             {% for article in randArticles %}
-                <li class="item__list">
-                    <a class="link" href="/articles/article?article={{article.idArticle}}">{{article.title}}</a>
-                    <time class="random_article__date" datetime="{{article.updateDate}}">{{article.updateDate | date("F jS, Y") }}</time>
-                </li>
-            {% else %}
-                <span>There are no articles found.</span>
+                {% if article.idArticleStatus == 1 %}
+                    {% set articlesNumber = articlesNumber + 1 %}
+                {% endif %}
             {% endfor %}
+            {% for article in randArticles %}
+                {% if article.idArticleStatus == 1 %}
+                    <li class="item__list">
+                        <a class="link" href="/articles/article?article={{article.idArticle}}">{{article.title}}</a>
+                        <time class="random_article__date" datetime="{{article.updateDate}}">{{article.updateDate | date("F jS, Y") }}</time>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            {% if articlesNumber == 0 %}
+                <span>There are no articles found.</span>
+            {% endif %}
         </ul>
     </div>
 

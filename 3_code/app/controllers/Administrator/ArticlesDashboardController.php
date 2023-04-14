@@ -98,13 +98,13 @@ class ArticlesDashboardController extends DefaultController {
 
         if($type === "new") {
             $article = new Article();
+            $article->setCreationDate(date("Y-m-d"));
         } else {
             $articleId = $_GET["article"];
             $article = Article::where("idArticle", $articleId)->first();
         }
 
         $article->setTitle($data["article__title"]);
-        $article->setCreationDate(date("Y-m-d"));
         $article->setUpdateDate(date("Y-m-d"));
         $article->setSummary($data["article__summary"]);
         $article->setContent($data["article__content"]);
