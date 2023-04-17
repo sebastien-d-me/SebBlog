@@ -1,13 +1,13 @@
 <?php
 
-// Namespace
+/** Namespace */
 namespace App\Controllers;
 
-// Load
+/** Load */
 use App\Controllers\DefaultController;
 
 class ErrorController extends DefaultController {
-    // Display the error
+    /** Display the error */
     function index() {
         $errorCode = isset($_GET["code"]) ? $_GET["code"] : "Unknown";
 

@@ -1,15 +1,15 @@
 <?php
 
-// Namespace
+/** Namespace */
 namespace App\Controllers;
 
-// Load
+/** Load */
 use App\Models\Hash;
 use App\Models\LoginCredentials;
 use App\Models\Member;
 
 class RegistrationController extends DefaultController {
-    // Manages the queries
+    /** Manages the queries */
     function index() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->check($_POST);
@@ -21,7 +21,7 @@ class RegistrationController extends DefaultController {
         }        
     }
 
-    // Check the data values
+    /** Check the data values */
     function check($data) {
         $username = $data["register__username"];
         $email = $data["register__email"];
@@ -55,7 +55,7 @@ class RegistrationController extends DefaultController {
         $this->save($data);
     }
 
-    // Save the new member
+    /** Save the new member */
     function save($data) {
         $member = new Member();
         $member->setRegistrationDate(date("Y-m-d"));
@@ -92,7 +92,7 @@ class RegistrationController extends DefaultController {
         sendMail($mailValues);
     }
 
-    // Display the message
+    /** Display the message */
     function showMessage($message) {
         $_SESSION["csrf"] = bin2hex(random_bytes(32));
         $this->twigRender("pages/members/registration.html.twig", [

@@ -1,13 +1,13 @@
 <?php
 
-// Namespace
+/** Namespace */
 namespace App\Controllers;
 
-// Load
+/** Load */
 use App\Controllers\DefaultController;
 
 class HomeController extends DefaultController {
-    // Show the homepage
+    /** Show the homepage */
     function index() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->check($_POST);
@@ -21,7 +21,7 @@ class HomeController extends DefaultController {
         }
     }
     
-    // Check the data values
+    /** Check the data values */
     function check($data) {
         $email = $data["contact__email"];
         $antiBot = isset($data["contact__important"]);
@@ -43,7 +43,7 @@ class HomeController extends DefaultController {
         $this->contactSubmit($data);
     }
 
-    // Send me the informations
+    /** Send me the informations */
     function contactSubmit($data) {
         $formValues = "<b>Full name : </b>".htmlspecialchars($data["contact__name"], ENT_QUOTES)."<br>";
         $formValues.= "<b>Email name : </b>".htmlspecialchars($data["contact__email"], ENT_QUOTES)."<br>";
@@ -62,7 +62,7 @@ class HomeController extends DefaultController {
         sendMail($mailValues);
     }
 
-    // Display the message
+    /** Display the message */
     function showMessage($message) {
         $_SESSION["csrf"] = bin2hex(random_bytes(32));
         $this->twigRender("pages/index.html.twig", [

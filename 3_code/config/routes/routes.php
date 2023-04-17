@@ -1,6 +1,6 @@
 <?php 
 
-// Define the routes
+/** Define the routes
 $routes = [
     /* Homepage */
     "/" => [

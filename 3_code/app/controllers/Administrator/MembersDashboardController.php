@@ -1,9 +1,9 @@
 <?php
 
-// Namespace
+/** Namespace */
 namespace App\Controllers;
 
-// Load
+/** Load */
 use App\Controllers\DefaultController;
 use App\Models\Comment;
 use App\Models\Hash;
@@ -11,7 +11,7 @@ use App\Models\LoginCredentials;
 use App\Models\Member;
 
 class MembersDashboardController extends DefaultController {
-    // Show the dashboard
+    /** Show the dashboard */
     function index() {
         $data = LoginCredentials::join("member", "logincredentials.idMember", "=", "member.idMember");
         $data = $data->select("logincredentials.idLoginCredentials", "logincredentials.username", "logincredentials.email", "member.idRole", "member.isActive", "member.idMember");
@@ -31,7 +31,7 @@ class MembersDashboardController extends DefaultController {
         ]);
     }
 
-    // Change to member
+    /** Change to member */
     function changeMember() {
         $userId = $_GET["user"];
         $user = Member::where("idMember", $userId)->first();
@@ -42,7 +42,7 @@ class MembersDashboardController extends DefaultController {
         header("Location: /admin/dashboard/members?message=$message");
     }
 
-    // Change to admin
+    /** Change to admin */
     function changeAdmin() {
         $userId = $_GET["user"];
         $user = Member::where("idMember", $userId)->first();
@@ -53,7 +53,7 @@ class MembersDashboardController extends DefaultController {
         header("Location: /admin/dashboard/members?message=$message");
     }
 
-    // Desactivate the account
+    /** Desactivate the account */
     function desactivate() {
         $userId = $_GET["user"];
         $user = Member::where("idMember", $userId)->first();
@@ -64,7 +64,7 @@ class MembersDashboardController extends DefaultController {
         header("Location: /admin/dashboard/members?message=$message");
     }
 
-    // Activate the account
+    /** Activate the account */
     function activate() {
         $userId = $_GET["user"];
         $user = Member::where("idMember", $userId)->first();
@@ -75,7 +75,7 @@ class MembersDashboardController extends DefaultController {
         header("Location: /admin/dashboard/members?message=$message");
     }
 
-    // Delete the account
+    /** Delete the account */
     function delete() {
         $userId = $_GET["user"];
 

@@ -1,14 +1,14 @@
 <?php
 
-// Namespace
+/** Namespace */
 namespace App\Controllers;
 
-// Load
+/** Load */
 use App\Models\LoginCredentials;
 use App\Models\Member;
 
 class LoginController extends DefaultController {
-    // Manages the queries
+    /** Manages the queries */
     function index() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->check($_POST);
@@ -22,7 +22,7 @@ class LoginController extends DefaultController {
         }    
     }
 
-    // Check the data values
+    /** Check the data values */
     function check($data) {
         foreach($data as $value) {
             if(empty($value)) {
@@ -33,7 +33,7 @@ class LoginController extends DefaultController {
         $this->connect($data);
     }
     
-    // Connect the member
+    /** Connect the member */
     function connect($data) {
         $usernameEmail = $data["login__username_email"];
         $password = $data["login__password"];
@@ -64,7 +64,7 @@ class LoginController extends DefaultController {
         header("Location: /");
     }
 
-    // Display the message
+    /** Display the message */
     function showMessage($message) {
         $_SESSION["csrf"] = bin2hex(random_bytes(32));
         $this->twigRender("pages/members/login.html.twig", [

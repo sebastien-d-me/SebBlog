@@ -1,15 +1,15 @@
 <?php
 
-// Namespace
+/** Namespace */
 namespace App\Controllers;
 
-// Load
+/** Load */
 use App\Models\Hash;
 use App\Models\LoginCredentials;
 use App\Models\Member;
 
 class AccountActivationController extends DefaultController {
-    // Manages the the queries
+    /** Manages the the queries */
     function index() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->check($_POST);
@@ -23,7 +23,7 @@ class AccountActivationController extends DefaultController {
         }
     }        
 
-    // Check the data values
+    /** Check the data values */
     function check($data) {
         $email = $data["activation__email"];
 
@@ -55,7 +55,7 @@ class AccountActivationController extends DefaultController {
         sendMail($mailValues);
     }
 
-    // Activate the account
+    /** Activate the account */
     function activate() {
         $hash = Hash::where("hash", $_GET["code"])->first();
 
@@ -76,7 +76,7 @@ class AccountActivationController extends DefaultController {
         header("Location: /member/login?message=$message");
     }
 
-    // Display the message
+    /** Display the message */
     function showMessage($message) {
         $_SESSION["csrf"] = bin2hex(random_bytes(32));
         $this->twigRender("pages/members/activation.html.twig", [

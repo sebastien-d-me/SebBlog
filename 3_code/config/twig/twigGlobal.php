@@ -1,8 +1,8 @@
 <?php
 
-// Load model
+/** Load model
 use App\Models\Article;
 
-// Load random articles
+/** Load random articles
 $randArticles = Article::inRandomOrder()->take(3)->get();
 $twig->addGlobal("randArticles", $randArticles);

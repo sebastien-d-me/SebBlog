@@ -1,21 +1,21 @@
 <?php
 
-// Namespace
+/** Namespace */
 namespace App\Models;
 
-// Load Capsule
+/** Load Capsule */
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Eloquent\Model;
 
 class Hash extends Model {
-    // Parameters
+    /** Parameters */
     protected $table = "hash";
     public $timestamps = false;
 
     protected $primaryKey = "idHash";
     protected $fillable = ["idHash", "hash", "isActive", "idMember"];
 
-    // Getter
+    /** Getter */
     public function getIdHash() {
         return $this->idHash;
     }
@@ -32,7 +32,7 @@ class Hash extends Model {
         return $this->idMember;
     }
 
-    // Setter
+    /** Setter */
     public function setHash($hash) {
         $this->hash = password_hash($hash, PASSWORD_DEFAULT);
         return $this;

@@ -1,9 +1,9 @@
 <?php
 
-// Namespace
+/** Namespace */
 namespace App\Controllers;
 
-// Load
+/** Load */
 use App\Controllers\DefaultController;
 use App\Models\Article;
 use App\Models\Comment;
@@ -11,7 +11,7 @@ use App\Models\LoginCredentials;
 use App\Models\Member;
 
 class ArticlesDashboardController extends DefaultController {
-    // Show the dashboard
+    /** Show the dashboard */
     function index() {
         $data = Article::all();
 
@@ -26,7 +26,7 @@ class ArticlesDashboardController extends DefaultController {
         ]);
     }
 
-    // Unpublish the article
+    /** Unpublish the article */
     function unpublish() {
         $articleId = $_GET["article"];
         $article = Article::where("idArticle", $articleId)->first();
@@ -37,7 +37,7 @@ class ArticlesDashboardController extends DefaultController {
         header("Location: /admin/dashboard/articles?message=$message");
     }
 
-    // Publish the article
+    /** Publish the article */
     function publish() {
         $articleId = $_GET["article"];
         $article = Article::where("idArticle", $articleId)->first();
@@ -48,7 +48,7 @@ class ArticlesDashboardController extends DefaultController {
         header("Location: /admin/dashboard/articles?message=$message");
     }
 
-    // Create an article
+    /** Create an article */
     function create() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->save("new", $_POST);
@@ -67,7 +67,7 @@ class ArticlesDashboardController extends DefaultController {
         ]);
     }
 
-    // Edit the article
+    /** Edit the article */
     function edit() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->save("edit", $_POST);
@@ -90,7 +90,7 @@ class ArticlesDashboardController extends DefaultController {
         ]);
     }
 
-    // Save the article
+    /** Save the article */
     function save($type, $data) {
         $data["article__status"] === "published" ? $idArticleStatus = 1 : $idArticleStatus = 2;
 
@@ -116,7 +116,7 @@ class ArticlesDashboardController extends DefaultController {
         header("Location: /admin/dashboard/articles?message=$message");
     }
 
-    // Delete the article
+    /** Delete the article */
     function delete() {
         $articleId = $_GET["article"];
 

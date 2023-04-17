@@ -1,16 +1,16 @@
 <?php
 
-// Namespace
+/** Namespace */
 namespace App\Controllers;
 
-// Load
+/** Load */
 use App\Models\Comment;
 use App\Models\Hash;
 use App\Models\LoginCredentials;
 use App\Models\Member;
 
 class ProfilController extends DefaultController {
-    // Manages the queries
+    /** Manages the queries */
     function index() {
         if(!isset($_GET["user"]) && $_SESSION["member_id"] !== NULL) {
             $memberId = $_SESSION["member_id"];
@@ -39,7 +39,7 @@ class ProfilController extends DefaultController {
         ]);
     }
 
-    // Manage the edit form
+    /** Manage the edit form */
     function edit() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->check($_POST);
@@ -55,7 +55,7 @@ class ProfilController extends DefaultController {
         ]);
     }
 
-    // Check the fields
+    /** Check the fields */
     function check($data) {
         $loginCredentials = LoginCredentials::where("idMember", $_SESSION["member_id"])->first();
 
@@ -78,7 +78,7 @@ class ProfilController extends DefaultController {
         $this->save($loginCredentials, $data);
     }
 
-    // Save the modification
+    /** Save the modification */
     function save($loginCredentials, $data) {
         $newPassword = $data["profil_edit__password"];
 
@@ -97,7 +97,7 @@ class ProfilController extends DefaultController {
         }
     }
 
-    // Delete the account
+    /** Delete the account */
     function delete() {
         if(isset($_GET["code"])) {
             Comment::where("idMember", $_SESSION["member_id"])->delete();
@@ -138,7 +138,7 @@ class ProfilController extends DefaultController {
         }
     }
 
-    // Display the message
+    /** Display the message */
     function showMessage($message) {
         $_SESSION["csrf"] = bin2hex(random_bytes(32));
         $this->twigRender("pages/members/profil/profil-edit.html.twig", [

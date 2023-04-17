@@ -1,15 +1,15 @@
 <?php
 
-// Namespace
+/** Namespace */
 namespace App\Controllers;
 
-// Load
+/** Load */
 use App\Controllers\DefaultController;
 use App\Models\Comment;
 use App\Models\LoginCredentials;
 
 class CommentsDashboardController extends DefaultController {
-    // Show the dashboard
+    /** Show the dashboard */
     function index() {
         $data = Comment::all();
 
@@ -24,7 +24,7 @@ class CommentsDashboardController extends DefaultController {
         ]);
     }
 
-    // Validate the comment
+    /** Validate the comment */
     function validate() {
         $commentId = $_GET["comment"];
         $comment = Comment::where("idComment", $commentId)->first();
@@ -35,7 +35,7 @@ class CommentsDashboardController extends DefaultController {
         header("Location: /admin/dashboard/comments?message=$message");
     }
 
-    // Unvalidate the comment
+    /** Unvalidate the comment */
     function unvalidate() {
         $commentId = $_GET["comment"];
         $comment = Comment::where("idComment", $commentId)->first();
@@ -46,7 +46,7 @@ class CommentsDashboardController extends DefaultController {
         header("Location: /admin/dashboard/comments?message=$message");
     }
 
-    // Delete the comment
+    /** Delete the comment */
     function delete() {
         $commentId = $_GET["comment"];
         Comment::where("idComment", $commentId)->delete();

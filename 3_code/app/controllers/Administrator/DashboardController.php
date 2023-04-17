@@ -1,13 +1,13 @@
 <?php
 
-// Namespace
+/** Namespace */
 namespace App\Controllers;
 
-// Load
+/** Load */
 use App\Controllers\DefaultController;
 
 class DashboardController extends DefaultController {
-    // Show the dashboard
+    /** Show the dashboard */
     function index() {
         $this->twigRender("pages/administrator/dashboard.html.twig");
     }

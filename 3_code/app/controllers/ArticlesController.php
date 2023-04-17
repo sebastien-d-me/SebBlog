@@ -1,16 +1,16 @@
 <?php
 
-// Namespace
+/** Namespace */
 namespace App\Controllers;
 
-// Load
+/** Load */
 use App\Controllers\DefaultController;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\LoginCredentials;
 
 class ArticlesController extends DefaultController {
-    // Show the articles
+    /** Show the articles */
     function index() {
         $articles = Article::where("idArticleStatus", 1)->get();
 
@@ -19,7 +19,7 @@ class ArticlesController extends DefaultController {
         ]);
     }
 
-    // Show an article
+    /** Show an article */
     function showArticle() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->saveComment($_POST);
@@ -64,7 +64,7 @@ class ArticlesController extends DefaultController {
         }
     }
 
-    // Save the comment
+    /** Save the comment */
     function saveComment($data) {
         $articleId = $_GET["article"];
         if(!empty($data["comment__content"])) {

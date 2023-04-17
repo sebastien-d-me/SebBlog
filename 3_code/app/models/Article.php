@@ -1,21 +1,21 @@
 <?php
 
-// Namespace
+/** Namespace */
 namespace App\Models;
 
-// Load Capsule
+/** Load Capsule */
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model {
-    // Parameters
+    /** Parameters */
     protected $table = "article";
     public $timestamps = false;
 
     protected $primaryKey = "idArticle";
     protected $fillable = ["idArticle", "title", "creationDate", "updateDate", "banner", "summary", "content", "idArticleStatus", "idMember"];
 
-    // Getter
+    /** Getter */
     public function getIdArticle() {
         return $this->idArticle;
     }
@@ -52,7 +52,7 @@ class Article extends Model {
         return $this->idMember;
     }
 
-    // Setter
+    /** Setter */
     public function setTitle($title) {
         $this->title = $title;
         return $this;

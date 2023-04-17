@@ -1,10 +1,10 @@
 <?php
 
-// Namespace
+/** Namespace */
 namespace App\Controllers;
 
 class LogoutController extends DefaultController {
-    // Disconnect the user
+    /** Disconnect the user */
     function index() {
         unset($_SESSION["member_id"]);
         unset($_SESSION["member_reset"]);

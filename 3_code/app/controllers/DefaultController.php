@@ -1,10 +1,10 @@
 <?php
 
-// Namespace
+/** Namespace */
 namespace App\Controllers;
 
 class DefaultController {
-    // Load parameters
+    /** Load parameters */
     protected $isLogged;
     protected $role;
     protected $route;
@@ -17,7 +17,7 @@ class DefaultController {
         $this->twig = $twig;
     }
     
-    // Twig render
+    /** Twig render */
     protected function twigRender($template, $data = []) {
         $infosData = [
             "isLogged" => $this->isLogged,

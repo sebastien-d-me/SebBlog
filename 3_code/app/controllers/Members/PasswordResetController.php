@@ -1,15 +1,15 @@
 <?php
 
-// Namespace
+/** Namespace */
 namespace App\Controllers;
 
-// Load
+/** Load */
 use App\Models\Hash;
 use App\Models\LoginCredentials;
 use App\Models\Member;
 
 class PasswordResetController extends DefaultController {
-    // Manages the queries
+    /** Manages the queries */
     function index() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->check($_POST);
@@ -21,7 +21,7 @@ class PasswordResetController extends DefaultController {
         }
     }
 
-    // Check the data values
+    /** Check the data values */
     function check($data) {
         $usernameEmail = htmlspecialchars($data["password_reset__username_email"], ENT_QUOTES);
 
@@ -43,7 +43,7 @@ class PasswordResetController extends DefaultController {
         $this->saveHash($credentials, $data);        
     }
 
-    // Save the hash
+    /** Save the hash */
     function saveHash($credentials, $data) {
         $username = htmlspecialchars($data["username"], ENT_QUOTES);
         $idMember = htmlspecialchars($data["idMember"], ENT_QUOTES);
@@ -69,7 +69,7 @@ class PasswordResetController extends DefaultController {
         sendMail($mailValues);
     }
 
-    // Show the edit form
+    /** Show the edit form */
     function edit() {
         if(!isset($_SESSION["member_reset"])) {
             header("Location: /member/password/password-reset");
@@ -100,7 +100,7 @@ class PasswordResetController extends DefaultController {
         ]);
     }
 
-    // Display the message
+    /** Display the message */
     function showMessage($message) {
         $_SESSION["csrf"] = bin2hex(random_bytes(32));
         $this->twigRender("pages/members/password/password_reset.html.twig", [
