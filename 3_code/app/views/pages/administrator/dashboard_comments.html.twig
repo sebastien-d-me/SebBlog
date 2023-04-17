@@ -28,13 +28,13 @@
                     <td><a class="link" href="/articles/article?article={{ item.idArticle }}">{{ item.idArticle }}</a></td>
                     <td><a class="link" href="/member/profil?user={{ item.idMember }}">{{ item.idMember }}</a></td>
 
-                    {% if item.idCommentStatus == 1 %}
+                    {% if item.idCommentStatus == 3 %}
                         <td>Pending</td>
                         <td class="row--inline">
                             <a class="btn btn--margin" href="/admin/dashboard/comments/validate?comment={{ item.idComment }}">Validate this comment</a>
                             <a class="btn btn--margin" href="/admin/dashboard/comments/unvalidate?comment={{ item.idComment }}">Unvalidate this comment</a>
                         </td>
-                    {% elseif item.idCommentStatus == 2 %}
+                    {% elseif item.idCommentStatus == 1 %}
                         <td>Validated</td>
                         <td><a class="btn btn--margin" href="/admin/dashboard/comments/unvalidate?comment={{ item.idComment }}">Unvalidate this comment</a></td>
                     {% else %}

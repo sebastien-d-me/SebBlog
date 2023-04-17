@@ -75,11 +75,9 @@ class AccountActivationController extends DefaultController {
             $hash->save();
             $member->setIsActive(true);
             $member->save();
-            $message = "Your account has been activated.";
-        } else {
-            $message = "Your account is already activated.";
         }
 
+        $message = "Your account is activated.";
         header("Location: /member/login?message=$message");
         exit();
     }

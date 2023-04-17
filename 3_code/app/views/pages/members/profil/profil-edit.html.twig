@@ -27,6 +27,7 @@
         <input class="input__element" id="profil_edit__current-password" name="profil_edit__current-password" placeholder="*********" required type="password">
         <label for="profil_edit__current-password">Current password</label>
     </div>
+    <input name="csrf" type="hidden" value="{{ csrf }}">
     <div class="form__row form__row--inline">
         <button class="btn" type="submit">
             Save
