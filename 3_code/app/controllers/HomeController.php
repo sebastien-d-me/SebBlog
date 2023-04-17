@@ -8,12 +8,12 @@ use App\Controllers\DefaultController;
 
 class HomeController extends DefaultController {
     // Show the homepage
-    function index() {
+    function index(): void {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->check($_POST);
         } else if(isset($_GET["message"])) {
             $this->showMessage($_GET["message"]);
-            exit();
+            return;
         } else {
             $_SESSION["csrf"] = bin2hex(random_bytes(32));
             $this->twigRender("pages/index.html.twig", [
@@ -23,7 +23,7 @@ class HomeController extends DefaultController {
     }
     
     // Check the data values
-    function check($data) {
+    function check(array $data): void {
         $fullName = $data["contact__name"];
         $email = $data["contact__email"];
         $subject = $data["contact__subject"];
@@ -32,26 +32,26 @@ class HomeController extends DefaultController {
 
         if($data["csrf"] !== $_SESSION["csrf"]) {
             $this->showMessage("Error please retry.");
-            exit();
+            return;
         }
 
         foreach($data as $value) {
             if(empty($value)) {
                 $this->showMessage("Some fields are not filled in.");
-                exit();
+                return;
             }
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || $antiBot) {
             $this->showMessage("Please check the value of the fields.");
-            exit();
+            return;
         }
 
         $this->contactSubmit($data);
     }
 
     // Send me the informations
-    function contactSubmit($data) {
+    function contactSubmit(array $data): void {
         $formValues = "<b>Full name : </b>".htmlspecialchars($data["contact__name"], ENT_QUOTES)."<br>";
         $formValues.= "<b>Email name : </b>".htmlspecialchars($data["contact__email"], ENT_QUOTES)."<br>";
         $formValues.= "<b>Subject : </b>".htmlspecialchars($data["contact__subject"], ENT_QUOTES)."<br>";
@@ -70,7 +70,7 @@ class HomeController extends DefaultController {
     }
 
     // Display the message
-    function showMessage($message) {
+    function showMessage(string $message): void {
         $_SESSION["csrf"] = bin2hex(random_bytes(32));
         $this->twigRender("pages/index.html.twig", [
             "csrf" => $_SESSION["csrf"],

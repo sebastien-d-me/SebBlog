@@ -10,7 +10,7 @@ class DefaultController {
     protected $route;
     protected $twig;
     
-    public function __construct($isLogged, $role, $route, $twig) {
+    public function __construct(bool $isLogged, string $role, string $route, object $twig) {
         $this->isLogged = $isLogged;
         $this->role = $role;
         $this->route = $route;
@@ -18,7 +18,7 @@ class DefaultController {
     }
     
     // Twig render
-    protected function twigRender($template, $data = []) {
+    protected function twigRender(string $template, array $data = []): void {
         $infosData = [
             "isLogged" => $this->isLogged,
             "role" => $this->role,

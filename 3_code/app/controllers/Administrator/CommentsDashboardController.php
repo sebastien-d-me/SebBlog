@@ -10,7 +10,7 @@ use App\Models\LoginCredentials;
 
 class CommentsDashboardController extends DefaultController {
     // Show the dashboard
-    function index() {
+    function index(): void {
         $data = Comment::all();
 
         $message = "";
@@ -25,7 +25,7 @@ class CommentsDashboardController extends DefaultController {
     }
 
     // Validate the comment
-    function validate() {
+    function validate(): void {
         $commentId = $_GET["comment"];
         $comment = Comment::where("idComment", $commentId)->first();
         $comment->setIdCommentStatus(1);
@@ -36,7 +36,7 @@ class CommentsDashboardController extends DefaultController {
     }
 
     // Unvalidate the comment
-    function unvalidate() {
+    function unvalidate(): void {
         $commentId = $_GET["comment"];
         $comment = Comment::where("idComment", $commentId)->first();
         $comment->setIdCommentStatus(2);
@@ -47,7 +47,7 @@ class CommentsDashboardController extends DefaultController {
     }
 
     // Delete the comment
-    function delete() {
+    function delete(): void {
         $commentId = $_GET["comment"];
         Comment::where("idComment", $commentId)->delete();
 

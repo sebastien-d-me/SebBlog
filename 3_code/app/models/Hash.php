@@ -16,34 +16,34 @@ class Hash extends Model {
     protected $fillable = ["idHash", "hash", "isActive", "idMember"];
 
     // Getter
-    public function getIdHash() {
+    public function getIdHash(): int {
         return $this->idHash;
     }
 
-    public function getHash() {
+    public function getHash(): string {
         return $this->hash;
     }
 
-    public function getIsActive() {
+    public function getIsActive(): string {
         return $this->isActive;
     }
 
-    public function getIdMember() {
+    public function getIdMember(): string {
         return $this->idMember;
     }
 
     // Setter
-    public function setHash($hash) {
+    public function setHash(string $hash): string {
         $this->hash = password_hash($hash, PASSWORD_DEFAULT);
         return $this;
     }
 
-    public function setIsActive($isActive) {
+    public function setIsActive(string $isActive): string {
         $this->isActive = $isActive;
         return $this;
     }
 
-    public function setIdMember($idMember) {
+    public function setIdMember(string $idMember): string {
         $this->idMember = $idMember;
         return $this;
     }

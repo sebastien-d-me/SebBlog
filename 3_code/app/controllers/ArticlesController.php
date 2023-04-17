@@ -11,7 +11,7 @@ use App\Models\LoginCredentials;
 
 class ArticlesController extends DefaultController {
     // Show the articles
-    function index() {
+    function index(): void {
         $articles = Article::where("idArticleStatus", 1)->get();
 
         $this->twigRender("pages/articles.html.twig", [
@@ -20,10 +20,10 @@ class ArticlesController extends DefaultController {
     }
 
     // Show an article
-    function showArticle() {
+    function showArticle(): void {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->saveComment($_POST);
-            exit();
+            return;
         }
 
         $message = "";
@@ -66,7 +66,7 @@ class ArticlesController extends DefaultController {
     }
 
     // Save the comment
-    function saveComment($data) {
+    function saveComment(array $data): void {
         $articleId = $_GET["article"];
         if(!empty($data["comment__content"])) {
             $memberId = $_SESSION["member_id"];
@@ -74,7 +74,7 @@ class ArticlesController extends DefaultController {
             if($data["csrf"] !== $_SESSION["csrf"]) {
                 $message = "Error please retry.";
                 header("Location: /articles/article?article=$articleId&message=$message");
-                exit();
+                return;
             }
     
             $comment = new Comment();

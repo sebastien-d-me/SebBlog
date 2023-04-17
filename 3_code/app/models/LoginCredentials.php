@@ -16,43 +16,43 @@ class LoginCredentials extends Model {
     protected $fillable = ["idLoginCredentials", "username", "email", "password", "idMember"];
 
     // Getter
-    public function getIdLoginCredentials() {
+    public function getIdLoginCredentials(): int {
         return $this->idLoginCredentials;
     }
 
-    public function getUsername() {
+    public function getUsername(): string {
         return $this->username;
     }
 
-    public function getEmail() {
+    public function getEmail(): string {
         return $this->email;
     }
 
-    public function getPassword() {
+    public function getPassword(): string {
         return $this->password;
     }
 
-    public function getIdMember() {
+    public function getIdMember(): string {
         return $this->idMember;
     }
 
     // Setter
-    public function setUsername($username) {
+    public function setUsername(string $username): string {
         $this->username = $username;
         return $this;
     }
 
-    public function setEmail($email) {
+    public function setEmail(string $email): string {
         $this->email = $email;
         return $this;
     }
 
-    public function setPassword($password) {
+    public function setPassword(string $password): string {
         $this->password = password_hash($password, PASSWORD_DEFAULT);
         return $this;
     }
 
-    public function setIdMember($idMember) {
+    public function setIdMember(string $idMember): string {
         $this->idMember = $idMember;
         return $this;
     }

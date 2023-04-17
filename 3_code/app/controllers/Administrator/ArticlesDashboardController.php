@@ -12,7 +12,7 @@ use App\Models\Member;
 
 class ArticlesDashboardController extends DefaultController {
     // Show the dashboard
-    function index() {
+    function index(): void {
         $data = Article::all();
 
         $message = "";
@@ -27,7 +27,7 @@ class ArticlesDashboardController extends DefaultController {
     }
 
     // Unpublish the article
-    function unpublish() {
+    function unpublish(): void {
         $articleId = $_GET["article"];
         $article = Article::where("idArticle", $articleId)->first();
         $article->setIdArticleStatus(2);
@@ -38,7 +38,7 @@ class ArticlesDashboardController extends DefaultController {
     }
 
     // Publish the article
-    function publish() {
+    function publish(): void {
         $articleId = $_GET["article"];
         $article = Article::where("idArticle", $articleId)->first();
         $article->setIdArticleStatus(1);
@@ -49,10 +49,10 @@ class ArticlesDashboardController extends DefaultController {
     }
 
     // Create an article
-    function create() {
+    function create(): void {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->save("new", $_POST);
-            exit();
+            return;
         }
 
         $administrators = Member::join("logincredentials", "member.idLoginCredentials", "=", "logincredentials.idLoginCredentials");
@@ -69,10 +69,10 @@ class ArticlesDashboardController extends DefaultController {
     }
 
     // Edit the article
-    function edit() {
+    function edit(): void {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->save("edit", $_POST);
-            exit();
+            return;
         }
 
         $articleId = $_GET["article"];
@@ -93,7 +93,7 @@ class ArticlesDashboardController extends DefaultController {
     }
 
     // Save the article
-    function save($type, $data) {
+    function save(string $type, array $data): void {
         $data["article__status"] === "published" ? $idArticleStatus = 1 : $idArticleStatus = 2;
 
         if($type === "new") {
@@ -119,7 +119,7 @@ class ArticlesDashboardController extends DefaultController {
     }
 
     // Delete the article
-    function delete() {
+    function delete(): void {
         $articleId = $_GET["article"];
 
         Comment::where("idArticle", $articleId)->delete();

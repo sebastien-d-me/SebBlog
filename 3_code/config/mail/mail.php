@@ -1,8 +1,8 @@
 <?php
 
 // SMTP Settings
-ini_set("SMTP",  "127.0.0.1");
-ini_set("smtp_port", 25);
+/*ini_set("SMTP",  "127.0.0.1");
+ini_set("smtp_port", 25);*/
 
 // Mail headers
 $headers = [
@@ -24,5 +24,5 @@ function sendMail($values) {
     mail($mailInformations["to"], $mailInformations["subject"], $mailInformations["content"], MAIL_HEADERS);
 
     header("Location: ".$values["header_route"]."?message=".$values["header_message"]);
-    exit();
+    return;
 }

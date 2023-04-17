@@ -1,8 +1,8 @@
 <?php
 
 // Config the session
-ini_set("session.cookie_lifetime", 3600);
-ini_set("session.gc_maxlifetime", 86400);
+/*ini_set("session.cookie_lifetime", 3600);
+ini_set("session.gc_maxlifetime", 3600);*/
 session_set_cookie_params([
     "lifetime" => 86400,
     "secure" => true,
@@ -12,11 +12,11 @@ session_start();
 session_regenerate_id(true);
 
 // Manage the error
-/*register_shutdown_function(function() {
+/*register_shutdown_function(function(): void {
     $error = error_get_last();
     if ($error) {
         header("Location: /error?code=500");
-        exit();
+        return;
     }
 });*/
 

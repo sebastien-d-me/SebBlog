@@ -10,7 +10,7 @@ use App\Models\Member;
 
 class PasswordResetController extends DefaultController {
     // Manages the queries
-    function index() {
+    function index(): void {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->check($_POST);
         } else {
@@ -22,18 +22,18 @@ class PasswordResetController extends DefaultController {
     }
 
     // Check the data values
-    function check($data) {
+    function check(array $data): void {
         $usernameEmail = htmlspecialchars($data["password_reset__username_email"], ENT_QUOTES);
 
         if($data["csrf"] !== $_SESSION["csrf"]) {
             $this->showMessage("Error please retry.");
-            exit();
+            return;
         }
 
         $credentials = LoginCredentials::where("username", $usernameEmail)->orWhere("email", $usernameEmail)->first();
         if($credentials === NULL) {
             $this->showMessage("No account exists with this email address.");
-            exit();
+            return;
         }
 
         $data = [
@@ -46,7 +46,7 @@ class PasswordResetController extends DefaultController {
     }
 
     // Save the hash
-    function saveHash($credentials, $data) {
+    function saveHash(object $credentials, array $data): void {
         $username = htmlspecialchars($data["username"], ENT_QUOTES);
         $email = htmlspecialchars($data["email"], ENT_QUOTES);
         $idMember = htmlspecialchars($data["idMember"], ENT_QUOTES);
@@ -73,10 +73,10 @@ class PasswordResetController extends DefaultController {
     }
 
     // Show the edit form
-    function edit() {
+    function edit(): void {
         if(!isset($_SESSION["member_reset"])) {
             header("Location: /member/password/password-reset");
-            exit();
+            return;
         }
 
         if(!empty($_POST)) {
@@ -105,7 +105,7 @@ class PasswordResetController extends DefaultController {
     }
 
     // Display the message
-    function showMessage($message) {
+    function showMessage(string $message): void {
         $_SESSION["csrf"] = bin2hex(random_bytes(32));
         $this->twigRender("pages/members/password/password_reset.html.twig", [
             "csrf" => $_SESSION["csrf"],

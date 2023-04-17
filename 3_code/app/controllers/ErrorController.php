@@ -8,7 +8,7 @@ use App\Controllers\DefaultController;
 
 class ErrorController extends DefaultController {
     // Display the error
-    function index() {
+    function index(): void {
         $errorCode = isset($_GET["code"]) ? $_GET["code"] : "Unknown";
 
         $this->twigRender("pages/error.html.twig", [

@@ -12,7 +12,7 @@ use App\Models\Member;
 
 class MembersDashboardController extends DefaultController {
     // Show the dashboard
-    function index() {
+    function index(): void {
         $data = LoginCredentials::join("member", "logincredentials.idMember", "=", "member.idMember");
         $data = $data->select("logincredentials.idLoginCredentials", "logincredentials.username", "logincredentials.email", "member.idRole", "member.isActive", "member.idMember");
         $data = $data->get();
@@ -32,7 +32,7 @@ class MembersDashboardController extends DefaultController {
     }
 
     // Change to member
-    function changeMember() {
+    function changeMember(): void {
         $userId = $_GET["user"];
         $user = Member::where("idMember", $userId)->first();
         $user->setIdRole(2);
@@ -43,7 +43,7 @@ class MembersDashboardController extends DefaultController {
     }
 
     // Change to admin
-    function changeAdmin() {
+    function changeAdmin(): void {
         $userId = $_GET["user"];
         $user = Member::where("idMember", $userId)->first();
         $user->setIdRole(1);
@@ -54,7 +54,7 @@ class MembersDashboardController extends DefaultController {
     }
 
     // Desactivate the account
-    function desactivate() {
+    function desactivate(): void {
         $userId = $_GET["user"];
         $user = Member::where("idMember", $userId)->first();
         $user->setIsActive(0);
@@ -65,7 +65,7 @@ class MembersDashboardController extends DefaultController {
     }
 
     // Activate the account
-    function activate() {
+    function activate(): void {
         $userId = $_GET["user"];
         $user = Member::where("idMember", $userId)->first();
         $user->setIsActive(1);
@@ -76,7 +76,7 @@ class MembersDashboardController extends DefaultController {
     }
 
     // Delete the account
-    function delete() {
+    function delete(): void {
         $userId = $_GET["user"];
 
         Comment::where("idMember", $userId)->delete();

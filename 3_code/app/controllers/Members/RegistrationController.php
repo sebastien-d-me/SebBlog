@@ -10,7 +10,7 @@ use App\Models\Member;
 
 class RegistrationController extends DefaultController {
     // Manages the queries
-    function index() {
+    function index(): void {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->check($_POST);
         } else {
@@ -22,7 +22,7 @@ class RegistrationController extends DefaultController {
     }
 
     // Check the data values
-    function check($data) {
+    function check(array $data): void {
         $username = $data["register__username"];
         $email = $data["register__email"];
         $password = $data["register__password"];
@@ -31,37 +31,37 @@ class RegistrationController extends DefaultController {
 
         if($data["csrf"] !== $_SESSION["csrf"]) {
             $this->showMessage("Error please retry.");
-            exit();
+            return;
         }
 
         foreach($data as $value) {
             if(empty($value)) {
                 $this->showMessage("Some fields are not filled in.");
-                exit();
+                return;
             }
         }
 
         if (strlen($username) < 3 || !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($password) < 8 || !$accept || $antiBot) {
             $this->showMessage("Please check the value of the fields.");
-            exit();
+            return;
         }
 
         if(strlen($username) > 50) {
             $this->showMessage("Your username must be lower than 50 characters.");
-            exit();
+            return;
         }
 
         $checkSameCredentials = LoginCredentials::where("username", $username)->orWhere("email", $email)->first();
         if ($checkSameCredentials) {
             $this->showMessage("The username and/or email address is already in use.");
-            exit();
+            return;
         }
 
         $this->save($data);
     }
 
     // Save the new member
-    function save($data) {
+    function save(array $data): void {
         $member = new Member();
         $member->setRegistrationDate(date("Y-m-d"));
         $member->setIsActive(false);
@@ -98,7 +98,7 @@ class RegistrationController extends DefaultController {
     }
 
     // Display the message
-    function showMessage($message) {
+    function showMessage(string $message): void {
         $_SESSION["csrf"] = bin2hex(random_bytes(32));
         $this->twigRender("pages/members/registration.html.twig", [
             "csrf" => $_SESSION["csrf"],

@@ -11,11 +11,11 @@ use App\Models\Member;
 
 class ProfilController extends DefaultController {
     // Manages the queries
-    function index() {
+    function index(): void {
         if(!isset($_GET["user"]) && $_SESSION["member_id"] !== NULL) {
             $memberId = $_SESSION["member_id"];
             header("Location: /member/profil?user=$memberId");
-            exit();
+            return;
         }
 
         $loginCredentials = LoginCredentials::where("idMember", $_GET["user"])->first();
@@ -41,10 +41,10 @@ class ProfilController extends DefaultController {
     }
 
     // Manage the edit form
-    function edit() {
+    function edit(): void {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->check($_POST);
-            exit();
+            return;
         }
 
         $loginCredentials = LoginCredentials::where("idMember", $_SESSION["member_id"])->first();
@@ -58,7 +58,7 @@ class ProfilController extends DefaultController {
     }
 
     // Check the fields
-    function check($data) {
+    function check(array $data): void {
         $loginCredentials = LoginCredentials::where("idMember", $_SESSION["member_id"])->first();
 
         $password = $data["profil_edit__password"];
@@ -66,25 +66,25 @@ class ProfilController extends DefaultController {
 
         if($data["csrf"] !== $_SESSION["csrf"]) {
             $this->showMessage("Error please retry.");
-            exit();
+            return;
         }
 
         if($password !== "" && strlen($password) < 8) {
             $this->showMessage("Your new password is not strong enough.");
-            exit();
+            return;
         }
 
         $checkPassword = password_verify($currentPassword, $loginCredentials->getPassword());
         if(!$checkPassword || $currentPassword === "") {
             $this->showMessage("Your current password is incorrect.");
-            exit();
+            return;
         }
 
         $this->save($loginCredentials, $data);
     }
 
     // Save the modification
-    function save($loginCredentials, $data) {
+    function save(object $loginCredentials, array $data): void {
         $newPassword = $data["profil_edit__password"];
 
         if($newPassword !== "") {
@@ -97,15 +97,15 @@ class ProfilController extends DefaultController {
 
             $message = "Your modification has been saved. Please reconnect.";
             header("Location: /member/login?message=$message");
-            exit();
+            return;
         } else {
             header("Location: /member/profil");
-            exit();
+            return;
         }
     }
 
     // Delete the account
-    function delete() {
+    function delete(): void {
         if(isset($_GET["code"])) {
             Comment::where("idMember", $_SESSION["member_id"])->delete();
             Hash::where("idMember", $_SESSION["member_id"])->delete();
@@ -118,7 +118,7 @@ class ProfilController extends DefaultController {
     
             $message = "Your account has been deleted.";
             header("Location: /member/login?message=$message");
-            exit();
+            return;
         } else {
             $loginCredentials = LoginCredentials::where("idMember", $_SESSION["member_id"])->first();
 
@@ -147,7 +147,7 @@ class ProfilController extends DefaultController {
     }
 
     // Display the message
-    function showMessage($message) {
+    function showMessage(string $message): void {
         $_SESSION["csrf"] = bin2hex(random_bytes(32));
         $this->twigRender("pages/members/profil/profil-edit.html.twig", [
             "csrf" => $_SESSION["csrf"],

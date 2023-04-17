@@ -16,48 +16,48 @@ class Member extends Model {
     protected $fillable = ["idMember", "registrationDate", "isActive", "idRole", "idLoginCredentials"];
 
     // Getter
-    public function getIdMember() {
+    public function getIdMember(): string {
         return $this->idMember;
     }
 
-    public function getRegistrationDate() {
+    public function getRegistrationDate(): string {
         return $this->registrationDate;
     }
 
-    public function getIsActive() {
+    public function getIsActive(): int {
         return $this->isActive;
     }
 
-    public function getIdRole() {
+    public function getIdRole(): int {
         return $this->idRole;
     }
 
-    public function getIdLoginCredentials() {
+    public function getIdLoginCredentials(): string {
         return $this->idLoginCredentials;
     }
 
     // Setter
-    public function setIdMember($idMember) {
+    public function setIdMember(string $idMember): string {
         $this->idMember = $idMember;
         return $this;
     }
 
-    public function setRegistrationDate($registrationDate) {
+    public function setRegistrationDate(string $registrationDate): string {
         $this->registrationDate = $registrationDate;
         return $this;
     }
 
-    public function setIsActive($isActive) {
+    public function setIsActive(string $isActive): string {
         $this->isActive = $isActive;
         return $this;
     }
 
-    public function setIdRole($idRole) {
+    public function setIdRole(string $idRole): string {
         $this->idRole = $idRole;
         return $this;
     }
 
-    public function setIdLoginCredentials($idLoginCredentials) {
+    public function setIdLoginCredentials(string $idLoginCredentials): string {
         $this->idLoginCredentials = $idLoginCredentials;
         return $this;
     }

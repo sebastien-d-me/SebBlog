@@ -8,7 +8,7 @@ use App\Controllers\DefaultController;
 
 class LegalNoticeController extends DefaultController {
     // Show the page
-    function index() {
+    function index(): void {
         $this->twigRender("pages/legal-notice.html.twig");
     }
 }   
