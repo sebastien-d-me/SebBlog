@@ -28,7 +28,7 @@ class CommentsDashboardController extends DefaultController {
     function validate() {
         $commentId = $_GET["comment"];
         $comment = Comment::where("idComment", $commentId)->first();
-        $comment->setIdCommentStatus(2);
+        $comment->setIdCommentStatus(1);
         $comment->save();
 
         $message = "The comment (ID : $commentId) has been validated.";
@@ -39,7 +39,7 @@ class CommentsDashboardController extends DefaultController {
     function unvalidate() {
         $commentId = $_GET["comment"];
         $comment = Comment::where("idComment", $commentId)->first();
-        $comment->setIdCommentStatus(3);
+        $comment->setIdCommentStatus(2);
         $comment->save();
 
         $message = "The comment (ID : $commentId) has been unvalidated.";

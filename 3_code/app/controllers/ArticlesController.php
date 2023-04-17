@@ -33,31 +33,36 @@ class ArticlesController extends DefaultController {
 
         $idArticle = $_GET["article"];
         $article = Article::where("idArticle", $idArticle)->first();
-        $writer = LoginCredentials::find($article->idMember);
-        $writer = $writer->getUsername();
 
-        $comments = Comment::where("idArticle", $idArticle)->get();
+        if($article->getIdArticleStatus() === 1) {
+            $writer = LoginCredentials::find($article->idMember);
+            $writer = $writer->getUsername();
 
-        $commentsList = [];
-        foreach($comments as $comment) {
-            $user = LoginCredentials::find($comment->idMember);
-            $user = $user->getUsername();
+            $comments = Comment::where("idArticle", $idArticle)->get();
 
-            $commentsList[] = [
-                "comment" => $comment,
-                "user" => $user
-            ];
+            $commentsList = [];
+            foreach($comments as $comment) {
+                $user = LoginCredentials::find($comment->idMember);
+                $user = $user->getUsername();
+
+                $commentsList[] = [
+                    "comment" => $comment,
+                    "user" => $user
+                ];
+            }
+
+            $_SESSION["csrf"] = bin2hex(random_bytes(32));
+
+            $this->twigRender("pages/article.html.twig", [
+                "article" => $article,
+                "csrf" => $_SESSION["csrf"],
+                "commentsList" => $commentsList,
+                "message" => $message,
+                "writer" => $writer
+            ]);
+        } else {
+            header("Location: /");
         }
-
-        $_SESSION["csrf"] = bin2hex(random_bytes(32));
-
-        $this->twigRender("pages/article.html.twig", [
-            "article" => $article,
-            "csrf" => $_SESSION["csrf"],
-            "commentsList" => $commentsList,
-            "message" => $message,
-            "writer" => $writer
-        ]);
     }
 
     // Save the comment
@@ -73,11 +78,11 @@ class ArticlesController extends DefaultController {
             }
     
             $comment = new Comment();
-            $comment->setContent(htmlspecialchars($data["comment__content"], ENT_QUOTES));
+            $comment->setContent(htmlspecialchars($data["comment__content"], ENT_NOQUOTES));
             $comment->setCreationDate(date("Y-m-d"));
-            $comment->setIdMember(htmlspecialchars($memberId, ENT_QUOTES));
-            $comment->setIdCommentStatus(1);
-            $comment->setIdArticle(htmlspecialchars($articleId, ENT_QUOTES));
+            $comment->setIdMember(htmlspecialchars($memberId, ENT_NOQUOTES));
+            $comment->setIdCommentStatus(3);
+            $comment->setIdArticle(htmlspecialchars($articleId, ENT_NOQUOTES));
             $comment->save();
     
             $message = "Your comment has been submitted for validation.";
