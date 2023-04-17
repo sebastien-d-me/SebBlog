@@ -31,7 +31,10 @@ class ProfilController extends DefaultController {
             intval($_GET["user"]) === $_SESSION["member_id"] ? $currentProfil = true : $currentProfil = false;
         }
 
+        $_SESSION["csrf"] = bin2hex(random_bytes(32));
+
         $this->twigRender("pages/members/profil/profil.html.twig", [
+            "csrf" => $_SESSION["csrf"],
             "informations" => $informations,
             "currentProfil" => $currentProfil
         ]);
@@ -46,7 +49,10 @@ class ProfilController extends DefaultController {
 
         $loginCredentials = LoginCredentials::where("idMember", $_SESSION["member_id"])->first();
 
+        $_SESSION["csrf"] = bin2hex(random_bytes(32));
+
         $this->twigRender("pages/members/profil/profil-edit.html.twig", [
+            "csrf" => $_SESSION["csrf"],
             "credentials" => $loginCredentials
         ]);
     }
@@ -57,6 +63,11 @@ class ProfilController extends DefaultController {
 
         $password = $data["profil_edit__password"];
         $currentPassword = $data["profil_edit__current-password"];
+
+        if($data["csrf"] !== $_SESSION["csrf"]) {
+            $this->showMessage("Error please retry.");
+            exit();
+        }
 
         if($password !== "" && strlen($password) < 8) {
             $this->showMessage("Your new password is not strong enough.");
@@ -77,7 +88,7 @@ class ProfilController extends DefaultController {
         $newPassword = $data["profil_edit__password"];
 
         if($newPassword !== "") {
-            $loginCredentials->setPassword(htmlspecialchars($newPassword));
+            $loginCredentials->setPassword(htmlspecialchars($newPassword), ENT_QUOTES);
             $loginCredentials->save();
 
             unset($_SESSION["member_id"]);
@@ -137,7 +148,9 @@ class ProfilController extends DefaultController {
 
     // Display the message
     function showMessage($message) {
+        $_SESSION["csrf"] = bin2hex(random_bytes(32));
         $this->twigRender("pages/members/profil/profil-edit.html.twig", [
+            "csrf" => $_SESSION["csrf"],
             "message" => $message
         ]);
     }

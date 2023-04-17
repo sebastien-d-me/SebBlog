@@ -9,7 +9,7 @@
 {% endif %}
 <form action="#" method="post">
     <div class="form__row">
-        <input class="input__element" id="register__username" minlength="3" name="register__username" placeholder="johndoe1" required type="text">
+        <input class="input__element" id="register__username" maxlength="50" minlength="3" name="register__username" placeholder="johndoe1" required type="text">
         <label for="register__username">Username (min 3 characters)</label>
     </div>
     <div class="form__row">
@@ -28,6 +28,7 @@
         <input class="input__element" id="register__important" name="register__important" type="checkbox">
         <label for="register__important">Check this checkbox.</label>
     </div>
+    <input name="csrf" type="hidden" value="{{ csrf }}">
     <div class="form__row">
         <button class="btn" type="submit">
             Register

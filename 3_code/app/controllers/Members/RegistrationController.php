@@ -14,7 +14,10 @@ class RegistrationController extends DefaultController {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->check($_POST);
         } else {
-            $this->twigRender("pages/members/registration.html.twig");
+            $_SESSION["csrf"] = bin2hex(random_bytes(32));
+            $this->twigRender("pages/members/registration.html.twig", [
+                "csrf" => $_SESSION["csrf"],
+            ]);
         }        
     }
 
@@ -26,6 +29,11 @@ class RegistrationController extends DefaultController {
         $accept = isset($_POST["register__accept"]);
         $antiBot = isset($_POST["register__important"]);
 
+        if($data["csrf"] !== $_SESSION["csrf"]) {
+            $this->showMessage("Error please retry.");
+            exit();
+        }
+
         foreach($data as $value) {
             if(empty($value)) {
                 $this->showMessage("Some fields are not filled in.");
@@ -35,6 +43,11 @@ class RegistrationController extends DefaultController {
 
         if (strlen($username) < 3 || !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($password) < 8 || !$accept || $antiBot) {
             $this->showMessage("Please check the value of the fields.");
+            exit();
+        }
+
+        if(strlen($username) > 50) {
+            $this->showMessage("Your username must be lower than 50 characters.");
             exit();
         }
 
@@ -86,7 +99,9 @@ class RegistrationController extends DefaultController {
 
     // Display the message
     function showMessage($message) {
+        $_SESSION["csrf"] = bin2hex(random_bytes(32));
         $this->twigRender("pages/members/registration.html.twig", [
+            "csrf" => $_SESSION["csrf"],
             "message" => $message
         ]);
     }

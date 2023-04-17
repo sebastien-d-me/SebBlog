@@ -15,7 +15,10 @@ class HomeController extends DefaultController {
             $this->showMessage($_GET["message"]);
             exit();
         } else {
-            $this->twigRender("pages/index.html.twig");
+            $_SESSION["csrf"] = bin2hex(random_bytes(32));
+            $this->twigRender("pages/index.html.twig", [
+                "csrf" => $_SESSION["csrf"],
+            ]);
         }
     }
     
@@ -26,6 +29,11 @@ class HomeController extends DefaultController {
         $subject = $data["contact__subject"];
         $message = $data["contact__message"];
         $antiBot = isset($data["contact__important"]);
+
+        if($data["csrf"] !== $_SESSION["csrf"]) {
+            $this->showMessage("Error please retry.");
+            exit();
+        }
 
         foreach($data as $value) {
             if(empty($value)) {
@@ -44,10 +52,10 @@ class HomeController extends DefaultController {
 
     // Send me the informations
     function contactSubmit($data) {
-        $formValues = "<b>Full name : </b>".$data["contact__name"]."<br>";
-        $formValues.= "<b>Email name : </b>".$data["contact__email"]."<br>";
-        $formValues.= "<b>Subject : </b>".$data["contact__subject"]."<br>";
-        $formValues.= "<b>Message : </b>".$data["contact__message"]."<br><br>";
+        $formValues = "<b>Full name : </b>".htmlspecialchars($data["contact__name"], ENT_QUOTES)."<br>";
+        $formValues.= "<b>Email name : </b>".htmlspecialchars($data["contact__email"], ENT_QUOTES)."<br>";
+        $formValues.= "<b>Subject : </b>".htmlspecialchars($data["contact__subject"], ENT_QUOTES)."<br>";
+        $formValues.= "<b>Message : </b>".htmlspecialchars($data["contact__message"], ENT_QUOTES)."<br><br>";
 
         $mailValues = [
             "to" => "sebastien.delahaye.contact@gmail.com",
@@ -63,7 +71,9 @@ class HomeController extends DefaultController {
 
     // Display the message
     function showMessage($message) {
+        $_SESSION["csrf"] = bin2hex(random_bytes(32));
         $this->twigRender("pages/index.html.twig", [
+            "csrf" => $_SESSION["csrf"],
             "message" => $message
         ]);
     }

@@ -104,12 +104,12 @@ class ArticlesDashboardController extends DefaultController {
             $article = Article::where("idArticle", $articleId)->first();
         }
 
-        $article->setTitle($data["article__title"]);
+        $article->setTitle(htmlspecialchars($data["article__title"], ENT_QUOTES));
         $article->setUpdateDate(date("Y-m-d"));
-        $article->setSummary($data["article__summary"]);
-        $article->setContent($data["article__content"]);
+        $article->setSummary(htmlspecialchars($data["article__summary"], ENT_QUOTES));
+        $article->setContent(htmlspecialchars($data["article__content"], ENT_QUOTES));
         $article->setIdArticleStatus($idArticleStatus);
-        $article->setIdMember($data["article__author"]);
+        $article->setIdMember(htmlspecialchars($data["article__author"], ENT_QUOTES));
         $article->save();
 
         $articleId = $article->getIdArticle();
