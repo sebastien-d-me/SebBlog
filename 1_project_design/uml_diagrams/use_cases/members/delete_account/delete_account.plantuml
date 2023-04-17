@@ -16,23 +16,22 @@ rectangle {
     'Authentification'
     "«Authentication»" as (Authentification)
 
-    'General'
-    "Click on delete" as (ClickSuppr)
-    "Save changes" as (EnregistrerModifications)
-
     'Administrateur'
     "Consult the members dashboard" as (ConsulterTDBMembres)
+    "Click on delete" as (ClickSuppr)
     
     'User'
     "Click on his profil" as (GoProfil)
+    "Click on delete" as (ClickSupprUser)
+    "Validate the link" as (ValidateLink)
 
     'Déroulement'
     :Administrateur: -.> (ConsulterTDBMembres)
     :User: -.> (GoProfil)
     (ConsulterTDBMembres) -.> (ClickSuppr) : include
-    (GoProfil) -.> (ClickSuppr) : include
-    (ClickSuppr) -.> (EnregistrerModifications) : include
-    (EnregistrerModifications) -.> (Authentification) : include
-
+    (GoProfil) -.> (ClickSupprUser) : include
+    (ClickSuppr) -.> (Authentification) : include
+    (ClickSupprUser) -.> (ValidateLink) : include
+    (ValidateLink) -.> (Authentification) : include
 }
 @enduml

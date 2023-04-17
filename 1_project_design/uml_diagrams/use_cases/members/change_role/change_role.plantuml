@@ -18,12 +18,10 @@ rectangle {
     'Administrateur'
     "Consult the members dashboard" as (ConsulterTDBMembres)
     "Change the role of the member" as (ModifierRole)
-    "Save changes" as (EnregistrerModifications)
 
     'Déroulement'
     :Administrateur: -.> (ConsulterTDBMembres)
     (ConsulterTDBMembres) -.> (ModifierRole) : include
-    (ModifierRole) -.> (EnregistrerModifications) : include
-    (EnregistrerModifications) -.> (Authentification) : include
+    (ModifierRole) -.> (Authentification) : include
 }
 @enduml

@@ -15,6 +15,7 @@ System --> Administrator: Displays an action confirmation message
 
 User -> User: View his profil
 User -> User: Click on "Delete"
+User -> System : Validate the hash link
 System -> System : Saves the modification in the database
 System --> User: Displays an action confirmation message
 @enduml

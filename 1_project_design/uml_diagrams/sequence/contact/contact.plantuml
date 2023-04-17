@@ -11,7 +11,7 @@ title Sequence | Contact
 Sender -> Sender : Fills in the contact form correctly
 Sender -> System : Sends the contact form
 System -> System : Checks the different values of the form
-System --> Sender : Sends an email to inform that the form has been sent
+System --> Sender : Show a message to inform that the form has been sent
 System -> Administrator : Sends an email containing the sender's information
 Administrator -> Sender: Replies to the sender by mail
 @enduml
