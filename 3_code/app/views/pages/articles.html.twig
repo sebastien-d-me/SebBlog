@@ -3,24 +3,24 @@
 
 
 {% block container_content %}
-    {% for article in articles | reverse %}
-        <article class="article__element">
-            <header>
-                <h2 class="article__title">
-                    <a class="link" href="/articles/article?article={{ article.idArticle }}">{{ article.title }}</a>
-                </h2>
-                {% if article.creationDate == article.updateDate %}
-                    <time datetime="{{ article.creationDate }}">Created the {{ article.creationDate | date("F jS, Y") }}</time>
-                {% else %} 
-                    <time datetime="{{ article.updateDate }}">Updated the {{ article.updateDate | date("F jS, Y") }}</time>
-                {% endif %}
-            </header>
-            <div>
-                <p class="article__summary">{{ article.summary }}</p>
-            </div>
-        </article>
-    {% endfor %}
-    {% if articles | length == 0 %} 
-        <span>There are no article(s) for the moment.</span>
-    {% endif %}
+  {% for article in articles | reverse %}
+    <article class="article__element">
+      <header>
+        <h2 class="article__title">
+          <a class="link" href="/articles/article?article={{ article.idArticle }}">{{ article.title }}</a>
+        </h2>
+        {% if article.creationDate == article.updateDate %}
+          <time datetime="{{ article.creationDate }}">Created the {{ article.creationDate | date("F jS, Y") }}</time>
+        {% else %} 
+          <time datetime="{{ article.updateDate }}">Updated the {{ article.updateDate | date("F jS, Y") }}</time>
+        {% endif %}
+      </header>
+      <div>
+        <p class="article__summary">{{ article.summary }}</p>
+      </div>
+    </article>
+  {% endfor %}
+  {% if articles | length == 0 %} 
+    <span>There are no article(s) for the moment.</span>
+  {% endif %}
 {% endblock %}

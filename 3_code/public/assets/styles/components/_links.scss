@@ -1,16 +1,16 @@
 .link {
-    color: $blue;
-    display: inline-block;
-    text-decoration: none;
-    transition: 0.5s;
-    width: fit-content;
+  color: $blue;
+  display: inline-block;
+  text-decoration: none;
+  transition: 0.5s;
+  width: fit-content;
 
-    &:hover {
-        color: $red;
-    }
+  &:hover {
+    color: $red;
+  }
 }
 
-// Inherit
+/* Inherit */
 .link--inherit {
-    color: inherit;
+  color: inherit;
 }

@@ -5,38 +5,38 @@
 
 {% block container_content %}
 {% if message is defined %}
-    <p class="form__message">{{ message | raw }}</p>
+  <p class="form__message">{{ message | raw }}</p>
 {% endif %}
 <form action="#" method="post">
-    <div class="form__row">
-        <span>Leave the fields blank if you do not want to change the value.</span>
-    </div>
-    <div class="form__row">
-        <input class="input__element" disabled id="profil_edit__username" minlength="3" name="profil_edit__username" placeholder="johndoe1" type="text" value="{{ credentials.username }}">
-        <label for="profil_edit__username">Username</label>
-    </div>
-    <div class="form__row">
-        <input class="input__element" disabled id="profil_edit__email" name="profil_edit__email" placeholder="john.doe@me.com" type="email" value="{{ credentials.email }}">
-        <label for="profil_edit__email">Email</label>
-    </div>
-    <div class="form__row">
-        <input class="input__element" id="profil_edit__password" minlength="8" name="profil_edit__password" placeholder="*********" type="password">
-        <label for="profil_edit__password">New password (min 8 characters)</label>
-    </div>
-    <div class="form__row">
-        <input class="input__element" id="profil_edit__current-password" name="profil_edit__current-password" placeholder="*********" required type="password">
-        <label for="profil_edit__current-password">Current password</label>
-    </div>
-    <input name="csrf" type="hidden" value="{{ csrf }}">
-    <div class="form__row form__row--inline">
-        <button class="btn" type="submit">
-            Save
-            <i class="ri-check-line"></i>
-        </button>
-        <a class="btn btn--secondary" href="/member/profil">
-            Back to the profil
-            <i class="ri-arrow-go-back-line"></i>
-        </a>
-    </div>
+  <div class="form__row">
+    <span>Leave the fields blank if you do not want to change the value.</span>
+  </div>
+  <div class="form__row">
+    <input class="input__element" disabled id="profil_edit__username" minlength="3" name="profil_edit__username" placeholder="johndoe1" type="text" value="{{ credentials.username }}">
+    <label for="profil_edit__username">Username</label>
+  </div>
+  <div class="form__row">
+    <input class="input__element" disabled id="profil_edit__email" name="profil_edit__email" placeholder="john.doe@me.com" type="email" value="{{ credentials.email }}">
+    <label for="profil_edit__email">Email</label>
+  </div>
+  <div class="form__row">
+    <input class="input__element" id="profil_edit__password" minlength="8" name="profil_edit__password" placeholder="*********" type="password">
+    <label for="profil_edit__password">New password (min 8 characters)</label>
+  </div>
+  <div class="form__row">
+    <input class="input__element" id="profil_edit__current-password" name="profil_edit__current-password" placeholder="*********" required type="password">
+    <label for="profil_edit__current-password">Current password</label>
+  </div>
+  <input name="csrf" type="hidden" value="{{ csrf }}">
+  <div class="form__row form__row--inline">
+    <button class="btn" type="submit">
+      Save
+      <i class="ri-check-line"></i>
+    </button>
+    <a class="btn btn--secondary" href="/member/profil">
+      Back to the profil
+      <i class="ri-arrow-go-back-line"></i>
+    </a>
+  </div>
 </form>
 {% endblock %}

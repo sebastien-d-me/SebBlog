@@ -5,49 +5,49 @@
 
 {% block container_content %}
 {% if message != "" %}
-    <p class="form__message">{{ message | raw }}</p>
+  <p class="form__message">{{ message | raw }}</p>
 {% endif %}
 <div class="container__datatable">
-    <table class="datatable">
-        <thead class="datatable__head">
-            <tr>
-                <th>Id</th>
-                <th>Content</th>
-                <th>Article ID</th>
-                <th>Member ID</th>
-                <th>Status</th>
-                <th>Change status</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody class="datatable__body">
-            {% for item in datatable %}
-                <tr>
-                    <td>{{ item.idComment}}</td>
-                    <td>{{ item.content }}</td>
-                    <td><a class="link" href="/articles/article?article={{ item.idArticle }}">{{ item.idArticle }}</a></td>
-                    <td><a class="link" href="/member/profil?user={{ item.idMember }}">{{ item.idMember }}</a></td>
+  <table class="datatable">
+    <thead class="datatable__head">
+      <tr>
+        <th>Id</th>
+        <th>Content</th>
+        <th>Article ID</th>
+        <th>Member ID</th>
+        <th>Status</th>
+        <th>Change status</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody class="datatable__body">
+      {% for item in datatable %}
+        <tr>
+          <td>{{ item.idComment}}</td>
+          <td>{{ item.content }}</td>
+          <td><a class="link" href="/articles/article?article={{ item.idArticle }}">{{ item.idArticle }}</a></td>
+          <td><a class="link" href="/member/profil?user={{ item.idMember }}">{{ item.idMember }}</a></td>
 
-                    {% if item.idCommentStatus == 3 %}
-                        <td>Pending</td>
-                        <td class="row--inline">
-                            <a class="btn btn--margin" href="/admin/dashboard/comments/validate?comment={{ item.idComment }}">Validate this comment</a>
-                            <a class="btn btn--margin" href="/admin/dashboard/comments/unvalidate?comment={{ item.idComment }}">Unvalidate this comment</a>
-                        </td>
-                    {% elseif item.idCommentStatus == 1 %}
-                        <td>Validated</td>
-                        <td><a class="btn btn--margin" href="/admin/dashboard/comments/unvalidate?comment={{ item.idComment }}">Unvalidate this comment</a></td>
-                    {% else %}
-                        <td>Invalidated</td>
-                        <td><a class="btn btn--margin" href="/admin/dashboard/comments/validate?comment={{ item.idComment }}">Validate this comment</a></td>
-                    {% endif %}
-                    <td><a class="btn btn--margin btn--secondary" href="/admin/dashboard/comments/delete?comment={{ item.idComment }}">Delete this comment</a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% if datatable | length == 0 %} 
-        <span>No records found</span>
-    {% endif %}
+          {% if item.idCommentStatus == 3 %}
+            <td>Pending</td>
+            <td class="row--inline">
+              <a class="btn btn--margin" href="/admin/dashboard/comments/validate?comment={{ item.idComment }}">Validate this comment</a>
+              <a class="btn btn--margin" href="/admin/dashboard/comments/unvalidate?comment={{ item.idComment }}">Unvalidate this comment</a>
+            </td>
+          {% elseif item.idCommentStatus == 1 %}
+            <td>Validated</td>
+            <td><a class="btn btn--margin" href="/admin/dashboard/comments/unvalidate?comment={{ item.idComment }}">Unvalidate this comment</a></td>
+          {% else %}
+            <td>Invalidated</td>
+            <td><a class="btn btn--margin" href="/admin/dashboard/comments/validate?comment={{ item.idComment }}">Validate this comment</a></td>
+          {% endif %}
+          <td><a class="btn btn--margin btn--secondary" href="/admin/dashboard/comments/delete?comment={{ item.idComment }}">Delete this comment</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if datatable | length == 0 %} 
+    <span>No records found</span>
+  {% endif %}
 </div>
 {% endblock %}

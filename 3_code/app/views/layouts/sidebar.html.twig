@@ -1,68 +1,68 @@
 <aside class="sidebar__block">
-    <h2 class="sidebar__logo">SebBlog</h2>
-    <span class="sidebar__description">Welcome to my blog !</span>
-    <i class="icon__sidebar--close ri-menu-5-line"></i>
+  <h2 class="sidebar__logo">SebBlog</h2>
+  <span class="sidebar__description">Welcome to my blog !</span>
+  <i class="icon__sidebar--close ri-menu-5-line"></i>
 
-    <h2 class="sidebar__category">Pages</h2>
-    <nav>
-        <ul class="sidebar__list">
-            <li>
-                <a class="btn btn--menu{% if route == '/' %} active{% endif %}" href="/">Home</a>
-            </li>
-            <li>
-                <a class="btn btn--menu{% if route == '/articles' %} active{% endif %}" href="/articles">Articles</a>
-            </li>
-            {% if isLogged == false %}
-                <li>
-                    <a class="btn btn--menu{% if route == '/member/login' %} active{% endif %}" href="/member/login">Login</a>
-                </li>
-            {% else %}
-                {% if role == "Administrator" %}
-                        <a class="btn btn--menu{% if route == '/admin/dashboard' %} active{% endif %}" href="/admin/dashboard">Dashboard</a>
-                {% endif %}
-                <li>
-                    <a class="btn btn--menu{% if route == '/member/profil' %} active{% endif %}" href="/member/profil">Profil</a>
-                </li>
-                <li>
-                    <a class="btn btn--menu" href="/member/logout">Logout</a>
-                </li>
-            {% endif %}
-        </ul>
-    </nav>
+  <h2 class="sidebar__category">Pages</h2>
+  <nav>
+    <ul class="sidebar__list">
+      <li>
+        <a class="btn btn--menu{% if route == '/' %} active{% endif %}" href="/">Home</a>
+      </li>
+      <li>
+        <a class="btn btn--menu{% if route == '/articles' %} active{% endif %}" href="/articles">Articles</a>
+      </li>
+      {% if isLogged == false %}
+        <li>
+          <a class="btn btn--menu{% if route == '/member/login' %} active{% endif %}" href="/member/login">Login</a>
+        </li>
+      {% else %}
+        {% if role == "Administrator" %}
+            <a class="btn btn--menu{% if route == '/admin/dashboard' %} active{% endif %}" href="/admin/dashboard">Dashboard</a>
+        {% endif %}
+        <li>
+          <a class="btn btn--menu{% if route == '/member/profil' %} active{% endif %}" href="/member/profil">Profil</a>
+        </li>
+        <li>
+          <a class="btn btn--menu" href="/member/logout">Logout</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
 
-    <div class="sidebar__articles">
-        <h2 class="sidebar__category">Random articles</h2>
-        <ul class="random_articles__list">
-            {% set articlesNumber = 0 %}
-            {% for article in randArticles %}
-                {% if article.idArticleStatus == 1 %}
-                    {% set articlesNumber = articlesNumber + 1 %}
-                {% endif %}
-            {% endfor %}
-            {% for article in randArticles %}
-                {% if article.idArticleStatus == 1 %}
-                    <li class="item__list">
-                        <a class="link" href="/articles/article?article={{article.idArticle}}">{{article.title}}</a>
-                        <time class="random_article__date" datetime="{{article.updateDate}}">{{article.updateDate | date("F jS, Y") }}</time>
-                    </li>
-                {% endif %}
-            {% endfor %}
-            {% if articlesNumber == 0 %}
-                <span>There are no articles found.</span>
-            {% endif %}
-        </ul>
-    </div>
+  <div class="sidebar__articles">
+    <h2 class="sidebar__category">Random articles</h2>
+    <ul class="random_articles__list">
+      {% set articlesNumber = 0 %}
+      {% for article in randArticles %}
+        {% if article.idArticleStatus == 1 %}
+          {% set articlesNumber = articlesNumber + 1 %}
+        {% endif %}
+      {% endfor %}
+      {% for article in randArticles %}
+        {% if article.idArticleStatus == 1 %}
+          <li class="item__list">
+            <a class="link" href="/articles/article?article={{article.idArticle}}">{{article.title}}</a>
+            <time class="random_article__date" datetime="{{article.updateDate}}">{{article.updateDate | date("F jS, Y") }}</time>
+          </li>
+        {% endif %}
+      {% endfor %}
+      {% if articlesNumber == 0 %}
+        <span>There are no articles found.</span>
+      {% endif %}
+    </ul>
+  </div>
 
-    <h2 class="sidebar__category">Follow me</h2>
-    <div class="sidebar__socials">
-        <a class="link link--inherit" href="https://www.frontendmentor.io/profile/sebastien-d-me">
-            <i class="icon__social ri-external-link-line"></i>
-        </a>
-        <a class="link link--inherit" href="https://github.com/sebastien-d-me">
-            <i class="icon__social ri-github-fill"></i>
-        </a>
-        <a class="link link--inherit" href="https://www.npmjs.com/~sebastiend1">
-            <i class="icon__social ri-npmjs-line"></i>
-        </a>
-    </div>
+  <h2 class="sidebar__category">Follow me</h2>
+  <div class="sidebar__socials">
+    <a class="link link--inherit" href="https://www.frontendmentor.io/profile/sebastien-d-me">
+      <i class="icon__social ri-external-link-line"></i>
+    </a>
+    <a class="link link--inherit" href="https://github.com/sebastien-d-me">
+      <i class="icon__social ri-github-fill"></i>
+    </a>
+    <a class="link link--inherit" href="https://www.npmjs.com/~sebastiend1">
+      <i class="icon__social ri-npmjs-line"></i>
+    </a>
+  </div>
 </aside>

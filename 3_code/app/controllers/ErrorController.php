@@ -7,12 +7,16 @@ namespace App\Controllers;
 use App\Controllers\DefaultController;
 
 class ErrorController extends DefaultController {
-    /** Display the error */
-    function index() {
-        $errorCode = isset($_GET["code"]) ? $_GET["code"] : "Unknown";
-
-        $this->twigRender("pages/error.html.twig", [
-            "code" => $errorCode
-        ]);
+  /** Display the error */
+  function index() {
+    if(isset($_GET["code"])) {
+      $errorCode = $_GET["code"];
+    } else {
+      $errorCode = "Unknown";
     }
+
+    $this->twigRender("pages/error.html.twig", [
+      "code" => $errorCode
+    ]);
+  }
 }

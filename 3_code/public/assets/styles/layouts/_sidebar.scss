@@ -1,128 +1,128 @@
 .sidebar__block {
-    background-color: $black;
-    border-right: 1px solid $black_full;
-    padding: 20px 25px;
-    text-align: center;
-    width: 300px;
+  background-color: $black;
+  border-right: 1px solid $black_full;
+  padding: 20px 25px;
+  text-align: center;
+  width: 300px;
 }
 
-// Logo
+/* Logo */
 .sidebar__logo {
-    display: block;
-    font-family: "Dancing Script", sans-serif;
-    font-size: 48px;
-    margin: 0 auto 20px auto;
+  display: block;
+  font-family: "Dancing Script", sans-serif;
+  font-size: 48px;
+  margin: 0 auto 20px auto;
 }
 
-// Icon sidebar
+/* Icon sidebar */
 .icon__sidebar--close {
-    display: none;
+  display: none;
 }
 
-// Category
+/* Category */
 .sidebar__category {
-    align-items: center;
-    background: $sidebar_category;
-    display: flex;
-    font-size: 18px;
-    height: 35px;
-    justify-content: center;
-    margin: 30px 0 20px 0;
-    position: relative;
-    text-transform: uppercase;
+  align-items: center;
+  background: $sidebar_category;
+  display: flex;
+  font-size: 18px;
+  height: 35px;
+  justify-content: center;
+  margin: 30px 0 20px 0;
+  position: relative;
+  text-transform: uppercase;
 
-    &::before {
-        bottom: 0;
-        border-style: solid;
-        border-width: 10px 10px 0 10px;
-        border-color: $sidebar_category transparent transparent transparent;
-        content: "";
-        height: 0;
-        left: 50%;
-        position: absolute;
-        transform: translateX(-50%) translateY(100%);
-        width: 0;
-    }
+  &::before {
+    bottom: 0;
+    border-style: solid;
+    border-width: 10px 10px 0 10px;
+    border-color: $sidebar_category transparent transparent transparent;
+    content: "";
+    height: 0;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%) translateY(100%);
+    width: 0;
+  }
 }
 
-// Pages
+/* Pages */
 .sidebar__list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px 0;
-    list-style: none;
-    padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px 0;
+  list-style: none;
+  padding: 0;
 }
 
-// Articles
+/* Articles */
 .random_articles__list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px 0;
+  list-style: none;
+  padding: 0;
+
+  > .item__list {
     display: flex;
     flex-direction: column;
-    gap: 20px 0;
-    list-style: none;
-    padding: 0;
-
-    > .item__list {
-        display: flex;
-        flex-direction: column;
-        gap: 5px 0;
-    }
+    gap: 5px 0;
+  }
 }
 
 .random_article__date {
-    display: block;
-    text-align: left;
+  display: block;
+  text-align: left;
 }
 
-// Socials
+/* Socials */
 .sidebar__socials {
-    display: flex;
-    justify-content: space-evenly;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .icon__social {
-    align-items: center;
-    border: 1px solid $white;
-    border-radius: 50%;
-    display: flex;
-    font-size: 20px;
-    height: 40px;
-    justify-content: center;
-    transition: 0.5s;
-    width: 40px;
+  align-items: center;
+  border: 1px solid $white;
+  border-radius: 50%;
+  display: flex;
+  font-size: 20px;
+  height: 40px;
+  justify-content: center;
+  transition: 0.5s;
+  width: 40px;
 
-    &:hover {
-        background-color: $red;
-        border-color: $red;
-        color: $white;
-        cursor: pointer;
-    }
+  &:hover {
+    background-color: $red;
+    border-color: $red;
+    color: $white;
+    cursor: pointer;
+  }
 }
 
-/// Responsive
+/** Responsive **/
 @media screen and (max-width: 1200px) {
-    .sidebar__block {
-        display: none;
-        min-height: 100vh;
-        width: 100%;
-        z-index: 1;
-    }
+  .sidebar__block {
+    display: none;
+    min-height: 100vh;
+    width: 100%;
+    z-index: 1;
+  }
 
-    // Description
-    .sidebar__description {
-        display: none;
-    }
+  /* Description */
+  .sidebar__description {
+    display: none;
+  }
 
-    // Menu
-    .icon__sidebar--close {
-        border-bottom: 1px solid $white;
-        display: none;
-        font-size: 30px;
-        padding-bottom: 10px;
-    }
+  /* Menu */
+  .icon__sidebar--close {
+    border-bottom: 1px solid $white;
+    display: none;
+    font-size: 30px;
+    padding-bottom: 10px;
+  }
 
-    // Articles
-    .sidebar__articles {
-        display: none;
-    }
+  /* Articles */
+  .sidebar__articles {
+    display: none;
+  }
 }

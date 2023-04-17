@@ -3,9 +3,9 @@
 
 {% block container %}
 <div class="container__block">
-    <h1 class="container__title">{{ title }}</h1>
-    <div class="container__content" id="{{ title | replace({' ': '_'}) | lower }}">
-        {% block container_content %}{% endblock %}
-    </div>
+  <h1 class="container__title">{{ title }}</h1>
+  <div class="container__content" id="{{ title | replace({' ': '_'}) | lower }}">
+    {% block container_content %}{% endblock %}
+  </div>
 </div>
 {% endblock %}

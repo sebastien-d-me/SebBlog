@@ -5,66 +5,66 @@
 
 {% block container_content %}
 {% if message != "" %}
-    <p class="form__message">{{ message | raw }}</p>
+  <p class="form__message">{{ message | raw }}</p>
 {% endif %}
 <div class="container__datatable">
-    <table class="datatable">
-        <thead class="datatable__head">
-            <tr>
-                <th>Id</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody class="datatable__body">
-            {% for item in datatable %}
-                <tr>
-                    <td>{{ item.idLoginCredentials }}</td>
-                    <td>{{ item.username }}</td>
-                    <td>{{ item.email }}</td>
+  <table class="datatable">
+    <thead class="datatable__head">
+      <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody class="datatable__body">
+      {% for item in datatable %}
+        <tr>
+          <td>{{ item.idLoginCredentials }}</td>
+          <td>{{ item.username }}</td>
+          <td>{{ item.email }}</td>
 
-                    {% if item.idRole == 1 %}
-                        {% if item.idLoginCredentials != idAdmin %}
-                            <td><a class="btn btn--margin" href="/admin/dashboard/members/change-member?user={{ item.idMember }}">Change to member</a></td>
-                        {% else %}
-                            <td>You can't change your own role.</td>
-                        {% endif %}
-                    {% else %}
-                        {% if item.idLoginCredentials != idAdmin %}
-                            <td><a class="btn btn--margin" href="/admin/dashboard/members/change-admin?user={{ item.idMember }}">Change to administrator</a></td>
-                            {% else %}
-                            <td>You can't change your own role.</td>
-                        {% endif %}
-                    {% endif %}
+          {% if item.idRole == 1 %}
+            {% if item.idLoginCredentials != idAdmin %}
+              <td><a class="btn btn--margin" href="/admin/dashboard/members/change-member?user={{ item.idMember }}">Change to member</a></td>
+            {% else %}
+              <td>You can't change your own role.</td>
+            {% endif %}
+          {% else %}
+            {% if item.idLoginCredentials != idAdmin %}
+              <td><a class="btn btn--margin" href="/admin/dashboard/members/change-admin?user={{ item.idMember }}">Change to administrator</a></td>
+              {% else %}
+              <td>You can't change your own role.</td>
+            {% endif %}
+          {% endif %}
 
-                    {% if item.isActive == 1 %}
-                        {% if item.idLoginCredentials != idAdmin %}
-                            <td><a class="btn btn--margin" href="/admin/dashboard/members/desactivate?user={{ item.idMember }}">Desactivate this member</a></td>
-                        {% else %}
-                            <td>You can't desactivate your own account here.</td>
-                        {% endif %}
-                    {% else %}
-                        {% if item.idLoginCredentials != idAdmin %}
-                            <td><a class="btn btn--margin" href="/admin/dashboard/members/activate?user={{ item.idMember }}">Activate this member</a></td>
-                            {% else %}
-                            <td>You can't activate your own account here.</td>
-                        {% endif %}
-                    {% endif %}
+          {% if item.isActive == 1 %}
+            {% if item.idLoginCredentials != idAdmin %}
+              <td><a class="btn btn--margin" href="/admin/dashboard/members/desactivate?user={{ item.idMember }}">Desactivate this member</a></td>
+            {% else %}
+              <td>You can't desactivate your own account here.</td>
+            {% endif %}
+          {% else %}
+            {% if item.idLoginCredentials != idAdmin %}
+              <td><a class="btn btn--margin" href="/admin/dashboard/members/activate?user={{ item.idMember }}">Activate this member</a></td>
+              {% else %}
+              <td>You can't activate your own account here.</td>
+            {% endif %}
+          {% endif %}
 
-                    {% if item.idLoginCredentials != idAdmin %}
-                        <td><a class="btn btn--margin btn--secondary" href="/admin/dashboard/members/delete?user={{ item.idMember }}">Delete this member</a></td>
-                    {% else %}
-                        <td>Use the contact form to delete your own account.</td>
-                    {% endif %}
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% if datatable | length == 0 %} 
-        <span>No records found</span>
-    {% endif %}
+          {% if item.idLoginCredentials != idAdmin %}
+            <td><a class="btn btn--margin btn--secondary" href="/admin/dashboard/members/delete?user={{ item.idMember }}">Delete this member</a></td>
+          {% else %}
+            <td>Use the contact form to delete your own account.</td>
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if datatable | length == 0 %} 
+    <span>No records found</span>
+  {% endif %}
 </div>
 {% endblock %}

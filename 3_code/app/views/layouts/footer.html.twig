@@ -1,16 +1,16 @@
 <footer class="footer__block">
-    <span>
-        © {{ "now"|date("Y") }} SebBlog - Created by <a class="link" href="https://sebastien-d.me">Sébastien D</a>
-    </span>
-    <div>
-        {% if isLogged == false %}
-            <a class="link" href="/member/login">Login</a>
-            <span>|</span>   
-        {% endif %}
-        {% if isLogged == true and role == "Administrator" %}
-            <a class="link{% if route == '/member/dashboard' %} active{% endif %}" href="/member/dashboard">Dashboard</a>
-            <span>|</span>
-        {% endif %}
-        <a class="link" href="/legal-notice">Legal notice</a>
-    </div>
+  <span>
+    © {{ "now"|date("Y") }} SebBlog - Created by <a class="link" href="https://sebastien-d.me">Sébastien D</a>
+  </span>
+  <div>
+    {% if isLogged == false %}
+      <a class="link" href="/member/login">Login</a>
+      <span>|</span>   
+    {% endif %}
+    {% if isLogged == true and role == "Administrator" %}
+      <a class="link{% if route == '/member/dashboard' %} active{% endif %}" href="/member/dashboard">Dashboard</a>
+      <span>|</span>
+    {% endif %}
+    <a class="link" href="/legal-notice">Legal notice</a>
+  </div>
 </footer>

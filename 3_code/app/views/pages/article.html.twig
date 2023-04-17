@@ -4,67 +4,67 @@
 
 {% block container_content %}
 {% if message != "" %}
-    <p class="form__message">{{ message | raw }}</p>
+  <p class="form__message">{{ message | raw }}</p>
 {% endif %}
 <article class="article__element">
-    <header>
-        <h2 class="article__title">{{ article.title }}</h2>
-        <div class="article__meta">
-            <a class="link" href="/member/profil?user={{ article.idMember }}">{{ writer }}</a>
-            <span>|</span>
-            {% if article.creationDate == article.updateDate %}
-                <time datetime="{{ article.creationDate }}">Created the {{ article.creationDate | date("F jS, Y") }}</time>
-            {% else %} 
-                <time datetime="{{ article.updateDate }}">Updated the {{ article.updateDate | date("F jS, Y") }}</time>
-            {% endif %}
-        </div>
-    </header>
-    <div>
-        <p class="article__summary">{{ article.summary }}</p>
-        <p class="article__text">{{ article.content }}</p>
+  <header>
+    <h2 class="article__title">{{ article.title }}</h2>
+    <div class="article__meta">
+      <a class="link" href="/member/profil?user={{ article.idMember }}">{{ writer }}</a>
+      <span>|</span>
+      {% if article.creationDate == article.updateDate %}
+        <time datetime="{{ article.creationDate }}">Created the {{ article.creationDate | date("F jS, Y") }}</time>
+      {% else %} 
+        <time datetime="{{ article.updateDate }}">Updated the {{ article.updateDate | date("F jS, Y") }}</time>
+      {% endif %}
     </div>
-    <footer>
-        {% if isLogged == true %}
-        <form action="#" method="post">
-            <div class="form__row">
-                <textarea class="input__element textarea__element" id="comment__content" name="comment__content" placeholder="Lorem ipsum dolor..." required></textarea>
-                <label for="comment__content">Comment</label>
-            </div>
-            <input name="csrf" type="hidden" value="{{ csrf }}">
-            <div class="form__row">
-                <button class="btn" type="submit">
-                    Leave a comment
-                    <i class="ri-check-line"></i>
-                </button>
-            </div>
-        </form>
-        {% else %}
-            <span>You must be logged to comment.</span>
+  </header>
+  <div>
+    <p class="article__summary">{{ article.summary }}</p>
+    <p class="article__text">{{ article.content }}</p>
+  </div>
+  <footer>
+    {% if isLogged == true %}
+    <form action="#" method="post">
+      <div class="form__row">
+        <textarea class="input__element textarea__element" id="comment__content" name="comment__content" placeholder="Lorem ipsum dolor..." required></textarea>
+        <label for="comment__content">Comment</label>
+      </div>
+      <input name="csrf" type="hidden" value="{{ csrf }}">
+      <div class="form__row">
+        <button class="btn" type="submit">
+          Leave a comment
+          <i class="ri-check-line"></i>
+        </button>
+      </div>
+    </form>
+    {% else %}
+      <span>You must be logged to comment.</span>
+    {% endif %}
+    <div class="comments__list">
+      {% set commentsNumber = 0 %}
+      {% for comments in commentsList %}
+        {% if comments.comment.idCommentStatus == 1 %}
+          {% set commentsNumber = commentsNumber + 1 %}
         {% endif %}
-        <div class="comments__list">
-            {% set commentsNumber = 0 %}
-            {% for comments in commentsList %}
-                {% if comments.comment.idCommentStatus == 1 %}
-                    {% set commentsNumber = commentsNumber + 1 %}
-                {% endif %}
-            {% endfor %}
-            <span>{{ commentsNumber }} comment(s)</span>
-            {% for comments in commentsList %}
-                {% if comments.comment.idCommentStatus == 1 %}
-                    <div class="comment">
-                        <div class="comment__header">
-                            <a class="link" href="/member/profil?user={{ comments.comment.idMember }}">{{ comments.user }}</a>
-                            <span>|</span>
-                            {{ comments.comment.creationDate | date("F jS, Y") }}
-                        </div>
-                        <p>Message : {{ comments.comment.content }}</p>
-                    </div>
-                {% endif %}
-            {% endfor %}
-            {% if commentsNumber == 0 %} 
-                <p>There are no comments.</span>
-            {% endif %}
-        </div>
-    </footer>
+      {% endfor %}
+      <span>{{ commentsNumber }} comment(s)</span>
+      {% for comments in commentsList %}
+        {% if comments.comment.idCommentStatus == 1 %}
+          <div class="comment">
+            <div class="comment__header">
+              <a class="link" href="/member/profil?user={{ comments.comment.idMember }}">{{ comments.user }}</a>
+              <span>|</span>
+              {{ comments.comment.creationDate | date("F jS, Y") }}
+            </div>
+            <p>Message : {{ comments.comment.content }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+      {% if commentsNumber == 0 %} 
+        <p>There are no comments.</span>
+      {% endif %}
+    </div>
+  </footer>
 </article>
 {% endblock %}

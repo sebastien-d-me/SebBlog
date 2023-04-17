@@ -1,36 +1,36 @@
 .input__element {
-    background-color: $white;
-    border: none;
-    border-radius: 8px;
-    height: 40px;
-    padding: 10px;
-    width: 280px;
+  background-color: $white;
+  border: none;
+  border-radius: 8px;
+  height: 40px;
+  padding: 10px;
+  width: 280px;
 
-    &[type="checkbox"] {
-        height: 25px;
-        width: 25px;
-    }
+  &[type="checkbox"] {
+    height: 25px;
+    width: 25px;
+  }
 
-    &[type="radio"] {
-        height: 25px;
-        width: 25px;
-    }
+  &[type="radio"] {
+    height: 25px;
+    width: 25px;
+  }
 
-    &:disabled {
-        background-color: $black;
-        cursor: not-allowed;
-    }
+  &:disabled {
+    background-color: $black;
+    cursor: not-allowed;
+  }
 }
 
-// Textarea
+/* Textarea */
 .textarea__element {
-    min-height: 150px;
-    resize: none;
+  min-height: 150px;
+  resize: none;
 }
 
-// Label
+/* Label */
 .input__element:required + label::after {
-    color: $red;
-    content: "*";
-    margin-left: 5px;
+  color: $red;
+  content: "*";
+  margin-left: 5px;
 }

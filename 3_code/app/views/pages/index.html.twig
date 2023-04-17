@@ -4,49 +4,49 @@
 
 {% block container_content %}
 <div class="home__content--informations">
-    <span class="home__category">Hello, I'm Sébastien DELAHAYE</span>
-    <span class="home__description">IT enthusiast and web developer. I make websites, apps, modules and games.</span>
-    <img alt="Logo of the website" class="home__logo media__responsive" loading="lazy" src="{{assetsFolder}}/images/pages/home/logo.webp">	
-    <p class="home__about_me">
-        Immersed in the world of technology since childhood, I became passionate about web development.
-            <br><br>
-        I spend a good part of my free time working on different projects (websites, games, applications) and learning to always improve myself.
-            <br><br>
-        It would be a pleasure for me to put my knowledge and skills at your disposal!
-    </p>
-    <a class="btn btn--secondary" href="{{publicFolder}}/CV__Sebastien_DELAHAYE.pdf">DOWNLOAD MY CV</a>
+  <span class="home__category">Hello, I'm Sébastien DELAHAYE</span>
+  <span class="home__description">IT enthusiast and web developer. I make websites, apps, modules and games.</span>
+  <img alt="Logo of the website" class="home__logo media__responsive" loading="lazy" src="{{assetsFolder}}/images/pages/home/logo.webp">	
+  <p class="home__about_me">
+    Immersed in the world of technology since childhood, I became passionate about web development.
+      <br><br>
+    I spend a good part of my free time working on different projects (websites, games, applications) and learning to always improve myself.
+      <br><br>
+    It would be a pleasure for me to put my knowledge and skills at your disposal!
+  </p>
+  <a class="btn btn--secondary" href="{{publicFolder}}/CV__Sebastien_DELAHAYE.pdf">DOWNLOAD MY CV</a>
 </div>
 
 <div>
-    <span class="home__category">Contact me</span>
-    {% if message is defined %}
-        <p class="form__message">{{ message | raw }}</p>
-    {% endif %}
-    <form action="#" class="home__form" method="post">
-        <div class="form__row">
-            <input class="input__element" id="contact__name" name="contact__name" placeholder="John DOE" required type="text">
-            <label for="contact__name">Full name</label>
-        </div>
-        <div class="form__row">
-            <input class="input__element" id="contact__email" name="contact__email" placeholder="john.doe@me.com" required type="email">
-            <label for="contact__email">Email</label>
-        </div>
-        <div class="form__row">
-            <input class="input__element" id="contact__subject" name="contact__subject" placeholder="Questions about..." required type="text">
-            <label for="contact__subject">Subject</label>
-        </div>
-        <div class="form__row">
-            <textarea class="input__element textarea__element" id="contact__message" name="contact__message" placeholder="Hello, I want..." required></textarea>
-            <label for="contact__message">Message</label>
-        </div>
-        <div class="form__row hide">
-            <input class="input__element" id="contact__important" name="contact__important" type="checkbox">
-            <label for="contact__important">Check this checkbox.</label>
-        </div>
-        <input name="csrf" type="hidden" value="{{ csrf }}">
-        <div class="form__row">
-            <button class="btn btn--margin" type="submit">Send the message</button>
-        </div>
-    </form>
+  <span class="home__category">Contact me</span>
+  {% if message is defined %}
+    <p class="form__message">{{ message | raw }}</p>
+  {% endif %}
+  <form action="#" class="home__form" method="post">
+    <div class="form__row">
+      <input class="input__element" id="contact__name" name="contact__name" placeholder="John DOE" required type="text">
+      <label for="contact__name">Full name</label>
+    </div>
+    <div class="form__row">
+      <input class="input__element" id="contact__email" name="contact__email" placeholder="john.doe@me.com" required type="email">
+      <label for="contact__email">Email</label>
+    </div>
+    <div class="form__row">
+      <input class="input__element" id="contact__subject" name="contact__subject" placeholder="Questions about..." required type="text">
+      <label for="contact__subject">Subject</label>
+    </div>
+    <div class="form__row">
+      <textarea class="input__element textarea__element" id="contact__message" name="contact__message" placeholder="Hello, I want..." required></textarea>
+      <label for="contact__message">Message</label>
+    </div>
+    <div class="form__row hide">
+      <input class="input__element" id="contact__important" name="contact__important" type="checkbox">
+      <label for="contact__important">Check this checkbox.</label>
+    </div>
+    <input name="csrf" type="hidden" value="{{ csrf }}">
+    <div class="form__row">
+      <button class="btn btn--margin" type="submit">Send the message</button>
+    </div>
+  </form>
 </div>
 {% endblock %}

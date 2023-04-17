@@ -5,19 +5,19 @@
 
 {% block container_content %}
 {% if message is defined %}
-    <p class="form__message">{{ message | raw }}</p>
+  <p class="form__message">{{ message | raw }}</p>
 {% endif %}
 <form action="#" method="post">
-    <div class="form__row">
-        <input class="input__element" id="activation__email" name="activation__email" placeholder="john.doe@mail.com" required type="email">
-        <label for="activation__email">Mail</label>
-    </div>
-    <input name="csrf" type="hidden" value="{{ csrf }}">
-    <div class="form__row">
-        <button class="btn" type="submit">
-            Send
-            <i class="ri-mail-send-line"></i>
-        </button>
-    </div>
+  <div class="form__row">
+    <input class="input__element" id="activation__email" name="activation__email" placeholder="john.doe@mail.com" required type="email">
+    <label for="activation__email">Mail</label>
+  </div>
+  <input name="csrf" type="hidden" value="{{ csrf }}">
+  <div class="form__row">
+    <button class="btn" type="submit">
+      Send
+      <i class="ri-mail-send-line"></i>
+    </button>
+  </div>
 </form>
 {% endblock %}

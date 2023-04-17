@@ -7,8 +7,8 @@ namespace App\Controllers;
 use App\Controllers\DefaultController;
 
 class LegalNoticeController extends DefaultController {
-    /** Show the page */
-    function index() {
-        $this->twigRender("pages/legal-notice.html.twig");
-    }
+  /** Show the page */
+  function index() {
+    $this->twigRender("pages/legal-notice.html.twig");
+  }
 }   

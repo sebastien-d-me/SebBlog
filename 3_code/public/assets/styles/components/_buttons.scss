@@ -1,54 +1,54 @@
 .btn {
-    align-items: center;
-    background-color: $white;
-    border: 1px solid transparent;
-    border-radius: 5px;
-    color: $black;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    transition: 0.5s;
-    width: fit-content;
+  align-items: center;
+  background-color: $white;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: $black;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.5s;
+  width: fit-content;
 
-    &:hover {
-        background-color: $red;
-        border-color: $white;
-        color: $white;
-        cursor: pointer;
-    }
-}
-
-// Secondary
-.btn--secondary {
-    background-color: $black;
+  &:hover {
+    background-color: $red;
     border-color: $white;
     color: $white;
-
-    &:hover {
-        border-color: $red;
-        color: $white;
-    }
+    cursor: pointer;
+  }
 }
 
-// Menu
+/* Secondary */
+.btn--secondary {
+  background-color: $black;
+  border-color: $white;
+  color: $white;
+
+  &:hover {
+    border-color: $red;
+    color: $white;
+  }
+}
+
+/* Menu */
 .btn--menu {
-    text-transform: uppercase;
-    width: 100%;
+  text-transform: uppercase;
+  width: 100%;
 
-    &:hover {
-        background-color: transparent;
-    }
+  &:hover {
+    background-color: transparent;
+  }
 
-    &.active {
-        background-color: $red;
-        color: $white;
-    }
+  &.active {
+    background-color: $red;
+    color: $white;
+  }
 }
 
-// Margin
+/* Margin */
 .btn--margin {
-    margin: auto;
+  margin: auto;
 }

@@ -1,17 +1,17 @@
 html,
 body {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    background-color: $bg_color;
-    color: $white;
-    display: flex;
+  background-color: $bg_color;
+  color: $white;
+  display: flex;
 }
 
-/// Responsive
+/** Responsive **/
 @media screen and (max-width: 1200px) {
-    body {
-        flex-direction: column;
-    }
+  body {
+    flex-direction: column;
+  }
 }
