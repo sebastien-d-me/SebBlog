@@ -30,6 +30,7 @@
                 <textarea class="input__element textarea__element" id="comment__content" name="comment__content" placeholder="Lorem ipsum dolor..." required></textarea>
                 <label for="comment__content">Comment</label>
             </div>
+            <input name="csrf" type="hidden" value="{{ csrf }}">
             <div class="form__row">
                 <button class="btn" type="submit">
                     Leave a comment

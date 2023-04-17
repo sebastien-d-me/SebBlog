@@ -16,7 +16,10 @@ class LoginController extends DefaultController {
             $this->showMessage($_GET["message"]);
             exit();
         } else {
-            $this->twigRender("pages/members/login.html.twig");
+            $_SESSION["csrf"] = bin2hex(random_bytes(32));
+            $this->twigRender("pages/members/login.html.twig", [
+                "csrf" => $_SESSION["csrf"]
+            ]);
         }    
     }
 
@@ -36,6 +39,11 @@ class LoginController extends DefaultController {
     function connect($data) {
         $usernameEmail = $data["login__username_email"];
         $password = $data["login__password"];
+
+        if($data["csrf"] !== $_SESSION["csrf"]) {
+            $this->showMessage("Error please retry.");
+            exit();
+        }
 
         $checkLogin = LoginCredentials::where("username", $usernameEmail)->orWhere("email", $usernameEmail)->first();
         if(!$checkLogin) {
@@ -65,7 +73,9 @@ class LoginController extends DefaultController {
 
     // Display the message
     function showMessage($message) {
+        $_SESSION["csrf"] = bin2hex(random_bytes(32));
         $this->twigRender("pages/members/login.html.twig", [
+            "csrf" => $_SESSION["csrf"],
             "message" => $message
         ]);
     }

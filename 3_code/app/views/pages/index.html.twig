@@ -43,6 +43,7 @@
             <input class="input__element" id="contact__important" name="contact__important" type="checkbox">
             <label for="contact__important">Check this checkbox.</label>
         </div>
+        <input name="csrf" type="hidden" value="{{ csrf }}">
         <div class="form__row">
             <button class="btn btn--margin" type="submit">Send the message</button>
         </div>

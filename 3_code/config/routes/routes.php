@@ -333,6 +333,17 @@ $routes = [
         ]
     ],
 
+    /* Legal notice */
+    "/legal-notice" => [
+        "class" => "LegalNoticeController",
+        "method" => "index",
+        "permissions" => [
+            "Anonymous" => true,
+            "Member" => true,
+            "Administrator" => true
+        ]
+        ],
+
     /* Error */
     "/error" => [
         "class" => "ErrorController",

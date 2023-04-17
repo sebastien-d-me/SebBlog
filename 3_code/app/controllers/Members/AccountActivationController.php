@@ -17,7 +17,10 @@ class AccountActivationController extends DefaultController {
             $this->showMessage($_GET["message"]);
             exit();
         } else {
-            $this->twigRender("pages/members/activation.html.twig");
+            $_SESSION["csrf"] = bin2hex(random_bytes(32));
+            $this->twigRender("pages/members/activation.html.twig", [
+                "csrf" => $_SESSION["csrf"]
+            ]);
         }
     }        
 
@@ -28,6 +31,11 @@ class AccountActivationController extends DefaultController {
         $loginCredentials = LoginCredentials::where("email", htmlspecialchars($email, ENT_QUOTES))->first();
         if($loginCredentials === NULL) {
             $this->showMessage("No account exists with this email address.");
+            exit();
+        }
+
+        if($data["csrf"] !== $_SESSION["csrf"]) {
+            $this->showMessage("Error please retry.");
             exit();
         }
 
@@ -78,7 +86,9 @@ class AccountActivationController extends DefaultController {
 
     // Display the message
     function showMessage($message) {
+        $_SESSION["csrf"] = bin2hex(random_bytes(32));
         $this->twigRender("pages/members/activation.html.twig", [
+            "csrf" => $_SESSION["csrf"],
             "message" => $message
         ]);
     }

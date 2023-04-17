@@ -12,6 +12,7 @@
         <input class="input__element" id="activation__email" name="activation__email" placeholder="john.doe@mail.com" required type="email">
         <label for="activation__email">Mail</label>
     </div>
+    <input name="csrf" type="hidden" value="{{ csrf }}">
     <div class="form__row">
         <button class="btn" type="submit">
             Send

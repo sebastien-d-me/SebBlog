@@ -49,8 +49,11 @@ class ArticlesController extends DefaultController {
             ];
         }
 
+        $_SESSION["csrf"] = bin2hex(random_bytes(32));
+
         $this->twigRender("pages/article.html.twig", [
             "article" => $article,
+            "csrf" => $_SESSION["csrf"],
             "commentsList" => $commentsList,
             "message" => $message,
             "writer" => $writer
@@ -62,13 +65,19 @@ class ArticlesController extends DefaultController {
         $articleId = $_GET["article"];
         if(!empty($data["comment__content"])) {
             $memberId = $_SESSION["member_id"];
+
+            if($data["csrf"] !== $_SESSION["csrf"]) {
+                $message = "Error please retry.";
+                header("Location: /articles/article?article=$articleId&message=$message");
+                exit();
+            }
     
             $comment = new Comment();
-            $comment->setContent($data["comment__content"]);
+            $comment->setContent(htmlspecialchars($data["comment__content"], ENT_QUOTES));
             $comment->setCreationDate(date("Y-m-d"));
-            $comment->setIdMember($memberId);
+            $comment->setIdMember(htmlspecialchars($memberId, ENT_QUOTES));
             $comment->setIdCommentStatus(1);
-            $comment->setIdArticle($articleId);
+            $comment->setIdArticle(htmlspecialchars($articleId, ENT_QUOTES));
             $comment->save();
     
             $message = "Your comment has been submitted for validation.";

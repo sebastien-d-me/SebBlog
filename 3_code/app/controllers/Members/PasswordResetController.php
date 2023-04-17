@@ -14,13 +14,21 @@ class PasswordResetController extends DefaultController {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->check($_POST);
         } else {
-            $this->twigRender("pages/members/password/password_reset.html.twig"); 
+            $_SESSION["csrf"] = bin2hex(random_bytes(32));
+            $this->twigRender("pages/members/password/password_reset.html.twig", [
+                "csrf" => $_SESSION["csrf"]
+            ]); 
         }
     }
 
     // Check the data values
     function check($data) {
         $usernameEmail = htmlspecialchars($data["password_reset__username_email"], ENT_QUOTES);
+
+        if($data["csrf"] !== $_SESSION["csrf"]) {
+            $this->showMessage("Error please retry.");
+            exit();
+        }
 
         $credentials = LoginCredentials::where("username", $usernameEmail)->orWhere("email", $usernameEmail)->first();
         if($credentials === NULL) {
@@ -39,9 +47,9 @@ class PasswordResetController extends DefaultController {
 
     // Save the hash
     function saveHash($credentials, $data) {
-        $username = $data["username"];
-        $email = $data["email"];
-        $idMember = $data["idMember"];
+        $username = htmlspecialchars($data["username"], ENT_QUOTES);
+        $email = htmlspecialchars($data["email"], ENT_QUOTES);
+        $idMember = htmlspecialchars($data["idMember"], ENT_QUOTES);
 
         $hash = new Hash();
         $hash->setHash($username);
@@ -89,12 +97,18 @@ class PasswordResetController extends DefaultController {
             header("Location: /member/login?message=$message");
         }
 
-        $this->twigRender("pages/members/password/password_reset-edit.html.twig");
+        $_SESSION["csrf"] = bin2hex(random_bytes(32));
+
+        $this->twigRender("pages/members/password/password_reset-edit.html.twig", [
+            "csrf" => $_SESSION["csrf"]
+        ]);
     }
 
     // Display the message
     function showMessage($message) {
+        $_SESSION["csrf"] = bin2hex(random_bytes(32));
         $this->twigRender("pages/members/password/password_reset.html.twig", [
+            "csrf" => $_SESSION["csrf"],
             "message" => $message
         ]);
     }
