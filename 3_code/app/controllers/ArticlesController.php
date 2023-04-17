@@ -23,7 +23,6 @@ class ArticlesController extends DefaultController {
     function showArticle() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->saveComment($_POST);
-            exit();
         }
 
         $message = "";
@@ -74,7 +73,6 @@ class ArticlesController extends DefaultController {
             if($data["csrf"] !== $_SESSION["csrf"]) {
                 $message = "Error please retry.";
                 header("Location: /articles/article?article=$articleId&message=$message");
-                exit();
             }
     
             $comment = new Comment();

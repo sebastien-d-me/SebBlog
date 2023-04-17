@@ -10,7 +10,6 @@ require_once("routes.php");
 $currentURL = strtok($_SERVER["REQUEST_URI"], "?");
 if(!array_key_exists($currentURL, $routes)) {
     header("Location: /error?code=404");
-    exit();
 }
 
 // Get the route informations
@@ -30,7 +29,6 @@ $class = new $classPath($isLogged, $role, $currentURL, $twig);
 // Get the user permissions
 if($route["permissions"][$role] !== true) {
     header("Location: /error?code=401");
-    exit();
 }
 
 // Call the method of the class

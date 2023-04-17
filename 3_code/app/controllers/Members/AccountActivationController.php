@@ -15,7 +15,6 @@ class AccountActivationController extends DefaultController {
             $this->check($_POST);
         } else if(isset($_GET["message"])) {
             $this->showMessage($_GET["message"]);
-            exit();
         } else {
             $_SESSION["csrf"] = bin2hex(random_bytes(32));
             $this->twigRender("pages/members/activation.html.twig", [
@@ -31,19 +30,16 @@ class AccountActivationController extends DefaultController {
         $loginCredentials = LoginCredentials::where("email", htmlspecialchars($email, ENT_QUOTES))->first();
         if($loginCredentials === NULL) {
             $this->showMessage("No account exists with this email address.");
-            exit();
         }
 
         if($data["csrf"] !== $_SESSION["csrf"]) {
             $this->showMessage("Error please retry.");
-            exit();
         }
 
         $member = Member::where("idMember", $loginCredentials->getIdMember())->first();
         $hash = Hash::where("idMember", $loginCredentials->getIdMember())->first();
         if($member->getIsActive() === 1) {
             $this->showMessage("Your account is already activated.");
-            exit();
         }
 
         $getHash = $hash->getHash();
@@ -65,7 +61,6 @@ class AccountActivationController extends DefaultController {
 
         if($hash === NULL) {
             $this->showMessage("Your code not work, please retry later.");
-            exit();
         }
 
         $member = Member::where("idMember", $hash->getIdMember())->first();
@@ -79,7 +74,6 @@ class AccountActivationController extends DefaultController {
 
         $message = "Your account is activated.";
         header("Location: /member/login?message=$message");
-        exit();
     }
 
     // Display the message

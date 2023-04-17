@@ -31,30 +31,25 @@ class RegistrationController extends DefaultController {
 
         if($data["csrf"] !== $_SESSION["csrf"]) {
             $this->showMessage("Error please retry.");
-            exit();
         }
 
         foreach($data as $value) {
             if(empty($value)) {
                 $this->showMessage("Some fields are not filled in.");
-                exit();
             }
         }
 
         if (strlen($username) < 3 || !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($password) < 8 || !$accept || $antiBot) {
             $this->showMessage("Please check the value of the fields.");
-            exit();
         }
 
         if(strlen($username) > 50) {
             $this->showMessage("Your username must be lower than 50 characters.");
-            exit();
         }
 
         $checkSameCredentials = LoginCredentials::where("username", $username)->orWhere("email", $email)->first();
         if ($checkSameCredentials) {
             $this->showMessage("The username and/or email address is already in use.");
-            exit();
         }
 
         $this->save($data);

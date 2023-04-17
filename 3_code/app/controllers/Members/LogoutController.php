@@ -12,6 +12,5 @@ class LogoutController extends DefaultController {
         session_destroy();
 
         header("Location: /member/login?message=You have been disconnected.");
-        exit();
     }
 }

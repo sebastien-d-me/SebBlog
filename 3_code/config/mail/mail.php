@@ -24,5 +24,4 @@ function sendMail($values) {
     mail($mailInformations["to"], $mailInformations["subject"], $mailInformations["content"], MAIL_HEADERS);
 
     header("Location: ".$values["header_route"]."?message=".$values["header_message"]);
-    exit();
 }

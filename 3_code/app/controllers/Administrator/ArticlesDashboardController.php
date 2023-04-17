@@ -52,7 +52,6 @@ class ArticlesDashboardController extends DefaultController {
     function create() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->save("new", $_POST);
-            exit();
         }
 
         $administrators = Member::join("logincredentials", "member.idLoginCredentials", "=", "logincredentials.idLoginCredentials");
@@ -72,7 +71,6 @@ class ArticlesDashboardController extends DefaultController {
     function edit() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->save("edit", $_POST);
-            exit();
         }
 
         $articleId = $_GET["article"];

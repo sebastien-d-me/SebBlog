@@ -13,7 +13,6 @@ class HomeController extends DefaultController {
             $this->check($_POST);
         } else if(isset($_GET["message"])) {
             $this->showMessage($_GET["message"]);
-            exit();
         } else {
             $_SESSION["csrf"] = bin2hex(random_bytes(32));
             $this->twigRender("pages/index.html.twig", [
@@ -24,27 +23,21 @@ class HomeController extends DefaultController {
     
     // Check the data values
     function check($data) {
-        $fullName = $data["contact__name"];
         $email = $data["contact__email"];
-        $subject = $data["contact__subject"];
-        $message = $data["contact__message"];
         $antiBot = isset($data["contact__important"]);
 
         if($data["csrf"] !== $_SESSION["csrf"]) {
             $this->showMessage("Error please retry.");
-            exit();
         }
 
         foreach($data as $value) {
             if(empty($value)) {
                 $this->showMessage("Some fields are not filled in.");
-                exit();
             }
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || $antiBot) {
             $this->showMessage("Please check the value of the fields.");
-            exit();
         }
 
         $this->contactSubmit($data);

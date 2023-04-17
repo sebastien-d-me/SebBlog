@@ -15,7 +15,6 @@ class ProfilController extends DefaultController {
         if(!isset($_GET["user"]) && $_SESSION["member_id"] !== NULL) {
             $memberId = $_SESSION["member_id"];
             header("Location: /member/profil?user=$memberId");
-            exit();
         }
 
         $loginCredentials = LoginCredentials::where("idMember", $_GET["user"])->first();
@@ -44,7 +43,6 @@ class ProfilController extends DefaultController {
     function edit() {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->check($_POST);
-            exit();
         }
 
         $loginCredentials = LoginCredentials::where("idMember", $_SESSION["member_id"])->first();
@@ -66,18 +64,15 @@ class ProfilController extends DefaultController {
 
         if($data["csrf"] !== $_SESSION["csrf"]) {
             $this->showMessage("Error please retry.");
-            exit();
         }
 
         if($password !== "" && strlen($password) < 8) {
             $this->showMessage("Your new password is not strong enough.");
-            exit();
         }
 
         $checkPassword = password_verify($currentPassword, $loginCredentials->getPassword());
         if(!$checkPassword || $currentPassword === "") {
             $this->showMessage("Your current password is incorrect.");
-            exit();
         }
 
         $this->save($loginCredentials, $data);
@@ -97,10 +92,8 @@ class ProfilController extends DefaultController {
 
             $message = "Your modification has been saved. Please reconnect.";
             header("Location: /member/login?message=$message");
-            exit();
         } else {
             header("Location: /member/profil");
-            exit();
         }
     }
 
@@ -118,7 +111,6 @@ class ProfilController extends DefaultController {
     
             $message = "Your account has been deleted.";
             header("Location: /member/login?message=$message");
-            exit();
         } else {
             $loginCredentials = LoginCredentials::where("idMember", $_SESSION["member_id"])->first();
 

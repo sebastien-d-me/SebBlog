@@ -27,13 +27,11 @@ class PasswordResetController extends DefaultController {
 
         if($data["csrf"] !== $_SESSION["csrf"]) {
             $this->showMessage("Error please retry.");
-            exit();
         }
 
         $credentials = LoginCredentials::where("username", $usernameEmail)->orWhere("email", $usernameEmail)->first();
         if($credentials === NULL) {
             $this->showMessage("No account exists with this email address.");
-            exit();
         }
 
         $data = [
@@ -48,7 +46,6 @@ class PasswordResetController extends DefaultController {
     // Save the hash
     function saveHash($credentials, $data) {
         $username = htmlspecialchars($data["username"], ENT_QUOTES);
-        $email = htmlspecialchars($data["email"], ENT_QUOTES);
         $idMember = htmlspecialchars($data["idMember"], ENT_QUOTES);
 
         $hash = new Hash();
@@ -76,7 +73,6 @@ class PasswordResetController extends DefaultController {
     function edit() {
         if(!isset($_SESSION["member_reset"])) {
             header("Location: /member/password/password-reset");
-            exit();
         }
 
         if(!empty($_POST)) {

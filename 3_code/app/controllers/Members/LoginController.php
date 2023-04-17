@@ -14,7 +14,6 @@ class LoginController extends DefaultController {
             $this->check($_POST);
         } else if(isset($_GET["message"])) {
             $this->showMessage($_GET["message"]);
-            exit();
         } else {
             $_SESSION["csrf"] = bin2hex(random_bytes(32));
             $this->twigRender("pages/members/login.html.twig", [
@@ -28,7 +27,6 @@ class LoginController extends DefaultController {
         foreach($data as $value) {
             if(empty($value)) {
                 $this->showMessage("Some fields are not filled in.");
-                exit();
             }
         }
 
@@ -42,33 +40,28 @@ class LoginController extends DefaultController {
 
         if($data["csrf"] !== $_SESSION["csrf"]) {
             $this->showMessage("Error please retry.");
-            exit();
         }
 
         $checkLogin = LoginCredentials::where("username", $usernameEmail)->orWhere("email", $usernameEmail)->first();
         if(!$checkLogin) {
             $this->showMessage("Your username or your mail is incorrect.");
-            exit();
         }
 
         $checkPassword = password_verify($password, $checkLogin->getPassword());
         if(!$checkPassword) {
             $this->showMessage("Your password is incorrect.");
-            exit();
         }
 
         $memberId = Member::find($checkLogin->getIdLoginCredentials());
         $memberActive = $memberId->getIsActive();
         if($memberActive === 0) {
             $this->showMessage("Your account is not activated. Click <a class='link' href='/member/activation/send-activation'>here</a> to send an activation email.");
-            exit();
         }
 
         $_SESSION["member_id"] = $checkLogin->getIdLoginCredentials();
         $_SESSION["member_role"] = $memberId->getIdRole() === 1 ? "Administrator" : "Member";
 
         header("Location: /");
-        exit();
     }
 
     // Display the message
