@@ -34,35 +34,35 @@ class ArticlesController extends DefaultController {
         $idArticle = $_GET["article"];
         $article = Article::where("idArticle", $idArticle)->first();
 
-        if($article->getIdArticleStatus() === 1) {
-            $writer = LoginCredentials::find($article->idMember);
-            $writer = $writer->getUsername();
-
-            $comments = Comment::where("idArticle", $idArticle)->get();
-
-            $commentsList = [];
-            foreach($comments as $comment) {
-                $user = LoginCredentials::find($comment->idMember);
-                $user = $user->getUsername();
-
-                $commentsList[] = [
-                    "comment" => $comment,
-                    "user" => $user
-                ];
-            }
-
-            $_SESSION["csrf"] = bin2hex(random_bytes(32));
-
-            $this->twigRender("pages/article.html.twig", [
-                "article" => $article,
-                "csrf" => $_SESSION["csrf"],
-                "commentsList" => $commentsList,
-                "message" => $message,
-                "writer" => $writer
-            ]);
-        } else {
+        if($article === NULL || $article->getIdArticleStatus() !== 1) {
             header("Location: /");
         }
+
+        $writer = LoginCredentials::find($article->idMember);
+        $writer = $writer->getUsername();
+
+        $comments = Comment::where("idArticle", $idArticle)->get();
+
+        $commentsList = [];
+        foreach($comments as $comment) {
+            $user = LoginCredentials::find($comment->idMember);
+            $user = $user->getUsername();
+
+            $commentsList[] = [
+                "comment" => $comment,
+                "user" => $user
+            ];
+        }
+
+        $_SESSION["csrf"] = bin2hex(random_bytes(32));
+
+        $this->twigRender("pages/article.html.twig", [
+            "article" => $article,
+            "csrf" => $_SESSION["csrf"],
+            "commentsList" => $commentsList,
+            "message" => $message,
+            "writer" => $writer
+        ]);
     }
 
     // Save the comment

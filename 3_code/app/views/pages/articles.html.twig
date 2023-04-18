@@ -3,7 +3,7 @@
 
 
 {% block container_content %}
-    {% for article in articles | reverse %}
+    {% for article in articles | sort((a, b) => b.updateDate <=> a.updateDate) %}
         <article class="article__element">
             <header>
                 <h2 class="article__title">
