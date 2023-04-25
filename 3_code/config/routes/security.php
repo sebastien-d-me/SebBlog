@@ -12,13 +12,13 @@ session_start();
 session_regenerate_id(true);
 
 // Manage the error
-/*register_shutdown_function(function(): void {
+register_shutdown_function(function(): void {
     $error = error_get_last();
     if ($error) {
         header("Location: /error?code=500");
         return;
     }
-});*/
+});
 
 // Check if logged
 $isLogged = isset($_SESSION["member_id"]);
