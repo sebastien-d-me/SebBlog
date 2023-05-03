@@ -145,6 +145,7 @@ body {
   background-color: #1D1E20;
   color: #F1F1F1;
   display: flex;
+  min-height: 100vh;
 }
 
 @media screen and (max-width: 1200px) {
