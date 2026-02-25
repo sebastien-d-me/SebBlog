@@ -1,0 +1,16 @@
+.link {
+    color: $blue;
+    display: inline-block;
+    text-decoration: none;
+    transition: 0.5s;
+    width: fit-content;
+
+    &:hover {
+        color: $red;
+    }
+}
+
+// Icons
+.link--reset {
+    color: inherit;
+}

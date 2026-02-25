@@ -1,0 +1,15 @@
+@startuml sequence__change_role
+hide footbox
+skinparam actorStyle awesome
+!theme aws-orange
+skinparam backgroundcolor White
+
+'Titre'
+title Sequence | Change role
+
+'Déroulement'
+Administrator -> Administrator: View the member dashboard
+Administrator -> Administrator: Click on "Change to (role name)"
+System -> System : Saves the modification in the database
+System --> Administrator: Displays an action confirmation message
+@enduml

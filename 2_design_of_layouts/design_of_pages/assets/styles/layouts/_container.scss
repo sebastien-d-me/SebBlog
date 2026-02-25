@@ -1,0 +1,17 @@
+.container__block {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    min-height: calc(100vh - 325px);
+    padding: 20px 75px;
+    width: 100%
+}
+
+
+/// Responsive
+@media screen and (max-width: 1200px) {
+    .container__block {
+        min-height: calc(100vh - 140px);
+        padding: 20px;
+    }
+}

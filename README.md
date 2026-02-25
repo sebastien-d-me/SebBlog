@@ -1,0 +1,11 @@
+### Compétences acquises
+- Assurer le suivi qualité d’un projet
+- Proposer un code propre et facilement évolutif
+- Créer et maintenir l’architecture technique du site
+- Créer une page web permettant de recueillir les informations saisies par un internaute
+- Estimer une tâche et tenir les délais
+- Gérer ses données avec une base de données
+- Rédiger les spécifications détaillées du projet
+- Analyser un cahier des charges
+- Choisir une solution technique adaptée parmi les solutions existantes si cela est pertinent
+- Conceptualiser l'ensemble de son application en décrivant sa structure (Entités / Domain Objects)

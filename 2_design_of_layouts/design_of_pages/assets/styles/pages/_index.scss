@@ -1,0 +1,71 @@
+// Content
+.home__content {
+    align-items: center;
+    display: flex;
+    gap: 20px 50px;
+}
+
+.home__content--informations {
+    align-items: center;
+    border-right: 1px solid $white;
+    display: flex;
+    flex-direction: column;
+    padding-right: 50px;
+}
+
+// Category
+.home__category {
+    font-size: 36px;
+    margin: auto auto 15px auto;
+    text-align: center;
+}
+
+// Logo
+.home__logo {
+    margin: auto;
+    object-fit: cover;
+    max-height: 150px;
+    width: fit-content;
+}
+
+// Sentence
+.home__sentence {
+    text-align: center;
+}
+
+// Text
+.home__about_me {
+    margin: 0 0 10px 0;
+    padding: 20px 0;
+    text-align: center;
+}
+
+// Form
+.home__contact {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/// Responsive
+@media screen and (max-width: 1200px) {
+
+    // Content
+    .home__content {
+        flex-wrap: wrap;
+    }
+
+    .home__content--informations {
+        border-bottom: 1px solid $white;
+        border-right: unset;
+        padding-bottom: 30px;
+        padding-right: unset;
+    }
+
+    .home__content--contact {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+}
